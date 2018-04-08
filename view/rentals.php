@@ -23,22 +23,22 @@
 						<?php
 						foreach ($this->data['rentals'] as $key => $value) {
 						?>
-							<tr style="cursor: pointer;">
-						      <th scope="row" onclick="document.location.href='<?php echo INCL_PATH.'Rentals/'.$value->id; ?>'"><?php echo $key+1; ?></th>
-						      <td onclick="document.location.href='<?php echo INCL_PATH.'Rentals/'.$value->id; ?>'"><?php echo $value->client; ?></td>
-						      <td onclick="document.location.href='<?php echo INCL_PATH.'Rentals/'.$value->id; ?>'"><?php echo $value->totals; ?></td>
-						      <td onclick="document.location.href='<?php echo INCL_PATH.'Rentals/'.$value->id; ?>'"><?php echo $value->created; ?></td>
-						      <td onclick="document.location.href='<?php echo INCL_PATH.'Rentals/'.$value->id; ?>'"><?php echo $value->due; ?></td>
-						      <td onclick="document.location.href='<?php echo INCL_PATH.'Rentals/'.$value->id; ?>'"><?php echo ($value->opened == 0)?'No':'Yes'; ?></td>
+							<tr style="cursor: pointer;" onclick="document.location.href='<?php echo INCL_PATH.'Rentals/'.$value->id; ?>'">
+							    <th scope="row"><?php echo $key+1; ?></th>
+							    <td><?php echo $value->client; ?></td>
+							    <td><?php echo $value->totals; ?></td>
+							    <td><?php echo $value->created; ?></td>
+							    <td><?php echo $value->due; ?></td>
+							    <td><?php echo ($value->opened == 0)?'No':'Yes'; ?></td>
 						    </tr>
 						<?php
 						}
 						?>
 					 </tbody>
 				</table>
-				<nav aria-label="Page navigation example">
+				<nav>
 				    <ul class="pagination justify-content-center">
-					    <li class="page-item disabled">
+					    <li class="page-item">
 					        <a class="page-link" href="#" tabindex="-1">Previous</a>
 					    </li>
 					    <li class="page-item"><a class="page-link" href="#">1</a></li>
