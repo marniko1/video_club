@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title><?php echo $this->data['title']; ?></title>
-		<link rel="stylesheet" type="text/css" href="<?php  echo INCL_PATH.'assets/css/bootstrap.css'?>">
-	</head>
-	<body>
 		<div class="container">
 			<div class="row">
-				<table class="table">
+				<table class="table mt-5">
 					<thead class="thead-dark">
 					    <tr>
 					      <th scope="col">#</th>
@@ -40,7 +33,3 @@
 					<li>Date created: <?php echo $this->data['rental'][0]->created; ?></li>
 					<li>Due: <?php echo $this->data['rental'][0]->due; ?></li>
 				</ul>
-			</div>
-		</div>
-	</body>
-</html>

@@ -5,7 +5,8 @@ class DBRentals extends DB {
 		$data = [];
 		$sql = "select r.id, concat(c.first_name, \" \", c.last_name) as client, r.totals, r.created, r.due, r.opened from 		rentals as r 
 				join clients as c
-				on r.id_client = c.id";
+				on r.id_client = c.id
+				limit 4";
 		$res = self::executeSQL($sql);
 		while ($row = $res->fetch_object()) {
 			array_push($data, $row);
@@ -22,6 +23,19 @@ class DBRentals extends DB {
 				join clients as c 
 				on r.id_client = c.id 
 				where r.id=".$id;
+		$res = self::executeSQL($sql);
+		while ($row = $res->fetch_object()) {
+			array_push($data, $row);
+		}
+		return $data;
+	}
+	public static function getFilteredRentals ($cond_name, $cond) {
+		$data = [];
+		$sql = "select r.id, concat(c.first_name, \" \", c.last_name) as client, r.totals, r.created, r.due, r.opened from 		rentals as r 
+				join clients as c
+				on r.id_client = c.id
+				having $cond_name like '%$cond%'
+				limit 4";
 		$res = self::executeSQL($sql);
 		while ($row = $res->fetch_object()) {
 			array_push($data, $row);

@@ -7,7 +7,10 @@ function my_autoloader($classname) {
     include 'model/' . $classname . '.php';
 }
 spl_autoload_register('my_autoloader');
-// $test = DBRentals::getSingleRental(3);
+// $username = 'marniko';
+// var_dump(DBUsers::getCredentials($username));die;
+// $test = new DBUsers('marniko');
+// $test = DBRentals::getFilteredRentals('client', 'Mitar');
 // var_dump($test);die;
 include 'controller/Controller.php';
-include 'router.php';
+include 'routes.php';

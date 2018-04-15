@@ -5,8 +5,9 @@ class Controller {
 
 	public function show_view($view) {
 		
-		require 'view/header.php';
+		require 'view/includes/header.php';
+		(isset($_SESSION['loged']))?require 'view/includes/navigation.php':false;
 		require 'view/'.$view.'.php';
-		require 'view/footer.php';
+		require 'view/includes/footer.php';
 	}
 }

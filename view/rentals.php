@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title><?php echo $this->data['title']; ?></title>
-		<link rel="stylesheet" type="text/css" href="<?php  echo INCL_PATH.'assets/css/bootstrap.css'?>">
-	</head>
-	<body>
 		<div class="container">
 			<div class="row">
-				<table class="table table-hover"">
+				<form class="mt-2">
+					<input type="text" name="client_filter" placeholder="Filter by client's name" id="client_filter">
+				</form>
+				<table class="table table-hover mt-1">
 					<caption>List of rentals</caption>
 					<thead class="thead-dark">
 					    <tr>
@@ -49,7 +45,3 @@
 					    </li>
 				    </ul>
 				</nav>
-			</div>
-		</div>
-	</body>
-</html>
