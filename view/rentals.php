@@ -3,7 +3,7 @@
 				<form class="mt-2">
 					<input type="text" name="client_filter" placeholder="Filter by client's name" id="client_filter">
 				</form>
-				<table class="table table-hover mt-1">
+				<table class="table table-hover mt-1 text-center">
 					<caption>List of rentals</caption>
 					<thead class="thead-dark">
 					    <tr>
