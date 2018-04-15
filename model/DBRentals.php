@@ -1,12 +1,13 @@
 <?php
 
 class DBRentals extends DB {
-	public static function getAllRentals() {
+	public static function getAllRentals($pg=0) {
 		$data = [];
 		$sql = "select r.id, concat(c.first_name, \" \", c.last_name) as client, r.totals, r.created, r.due, r.opened from 		rentals as r 
 				join clients as c
 				on r.id_client = c.id
-				limit 4";
+				order by client 
+				limit $pg,6";
 		$res = self::executeSQL($sql);
 		while ($row = $res->fetch_object()) {
 			array_push($data, $row);
@@ -35,11 +36,18 @@ class DBRentals extends DB {
 				join clients as c
 				on r.id_client = c.id
 				having $cond_name like '%$cond%'
-				limit 4";
+				order by client
+				limit 6";
 		$res = self::executeSQL($sql);
 		while ($row = $res->fetch_object()) {
 			array_push($data, $row);
 		}
 		return $data;
+	}
+	public static function totalRentalsNum () {
+		$sql = "select count(*) as total_rents from rentals";
+		$res = self::executeSQL($sql);
+		$total_rentals_num = $res->fetch_object();
+		return $total_rentals_num;
 	}
 }

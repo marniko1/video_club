@@ -10,7 +10,7 @@ spl_autoload_register('my_autoloader');
 // $username = 'marniko';
 // var_dump(DBUsers::getCredentials($username));die;
 // $test = new DBUsers('marniko');
-// $test = DBRentals::getFilteredRentals('client', 'Mitar');
+// $test = DBRentals::totalRentalsNum();
 // var_dump($test);die;
 include 'controller/Controller.php';
 include 'routes.php';

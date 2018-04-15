@@ -11,17 +11,23 @@ if (isset($_SESSION['loged'])) {
 				$c = new $controller;
 				$c->$method($id);
 			}
+		} else if (preg_match('/^p[0-9]$/', $_GET['m'])) {
+			$controller = $_GET['c'];
+			include 'controller/'.$controller.'.php';
+			$c = new $controller;
+			$pg = substr($_GET['m'], 1)*6-6;
+			$c->index($pg);
 		} else {
 			$controller = $_GET['c'];
 			$method = $_GET['m'];
 			include 'controller/'.$controller.'.php';
 			$c = new $controller;
-			$c->$method();
+			$c->$method(0);
 		}
 	} else {
 		include 'controller/Rentals.php';
 		$c = new Rentals;
-		$c->index();
+		$c->index(0);
 	}
 } else {
 	$controller = 'Login';
