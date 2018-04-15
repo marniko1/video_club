@@ -15,12 +15,12 @@ window.onload = function() {
 					var html = ``;
 					for (var i = 0; i < response.length; i++) {
 						html += `<tr style="cursor: pointer" onclick="document.location.href='/homework/video_club/Rentals/${response[i].id}'">
-									<th scope="row">${i+1}</th>
-								    <td>${response[i].client}</td>
-								    <td>${response[i].totals}</td>
-								    <td>${response[i].created}</td>
-								    <td>${response[i].due}</td>
-								    <td>${(response[i].due == 0)? 'Yes':'No'}</td>
+									<th scope="row" style="width: 5%">${i+1}</th>
+								    <td style="width: 30%">${response[i].client}</td>
+								    <td style="width: 10%">${response[i].totals}</td>
+								    <td style="width: 25%">${response[i].created}</td>
+								    <td style="width: 25%">${response[i].due}</td>
+								    <td style="width: 5%">${(response[i].due == 0)? 'Yes':'No'}</td>
 								</tr>`
 					}
 					tbody.innerHTML = html;

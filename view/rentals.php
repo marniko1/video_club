@@ -20,12 +20,12 @@
 						foreach ($this->data['rentals'] as $key => $value) {
 						?>
 							<tr style="cursor: pointer;" onclick="document.location.href='<?php echo INCL_PATH.'Rentals/'.$value->id; ?>'">
-							    <th scope="row"><?php echo $key+1; ?></th>
-							    <td><?php echo $value->client; ?></td>
-							    <td><?php echo $value->totals; ?></td>
-							    <td><?php echo $value->created; ?></td>
-							    <td><?php echo $value->due; ?></td>
-							    <td><?php echo ($value->opened == 0)?'No':'Yes'; ?></td>
+							    <th scope="row" style="width: 5%"><?php echo $key+1; ?></th>
+							    <td style="width: 30%"><?php echo $value->client; ?></td>
+							    <td style="width: 10%"><?php echo $value->totals; ?></td>
+							    <td style="width: 25%"><?php echo $value->created; ?></td>
+							    <td style="width: 25%"><?php echo $value->due; ?></td>
+							    <td style="width: 5%"><?php echo ($value->opened == 0)?'No':'Yes'; ?></td>
 						    </tr>
 						<?php
 						}
