@@ -10,7 +10,12 @@ $response = [];
 
 switch ($_POST['ajax_fn']) {
 	case 'client_filter':
-		$response = DBRentals::getFilteredRentals('client', $_POST['search_value']);
+		if (isset($_POST['pg'])) {
+			$pg = $_POST['pg']*6-6;
+		} else {
+			$pg = 0;
+		}
+		$response = DBRentals::getFilteredRentals('client', $_POST['search_value'], $pg);
 		echo json_encode($response);
 		break;
 	

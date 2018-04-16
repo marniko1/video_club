@@ -13,8 +13,13 @@ class Controller {
 	public function preparePaginationLinks($total_num,$pg) {
 		$pg_num = ceil($total_num/6);
 		$links = array();
-		if (substr($_GET['m'], 1) > 1) {
-			array_push($links, ['p'.(substr($_GET['m'], 1)-1), 'Previous']);
+		if (!isset($_GET['m'])) {
+			$method = 0;
+		} else {
+			$method = $_GET['m'];
+		}
+		if (substr($method, 1) > 1) {
+			array_push($links, ['p'.(substr($method, 1)-1), 'Previous']);
 		} else {
 			array_push($links, ['p1', 'Previous']);
 		}
@@ -27,14 +32,14 @@ class Controller {
 				array_push($links, ['p'.$i, $i]);
 			}
 		}
-		if (substr($_GET['m'], 1) < $pg_num) {
-			if($_GET['m'] == 'index') {
+		if (substr($method, 1) < $pg_num) {
+			if($method == 'index') {
 				array_push($links, ['p2', 'Next']);
 			} else {
-				array_push($links, ['p'.(substr($_GET['m'], 1)+1), 'Next']);
+				array_push($links, ['p'.(substr($method, 1)+1), 'Next']);
 			}
 		} else {
-			array_push($links, [$_GET['m'], "Next"]);
+			array_push($links, [$method, "Next"]);
 		}
 		return $links;
 	}

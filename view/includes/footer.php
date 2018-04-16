@@ -2,15 +2,13 @@
 		</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
-		  $('li.active').removeClass('active');
-		  $('a[href="' + location.pathname + '"]').closest('li').addClass('active'); 
+		  	$('li.active').removeClass('active');
+		  	$('a[href="' + location.pathname + '"]').parent('li').addClass('active'); 
 		});
-		// $(document).on('click', '.pagination a', function(e) {
-		//     e.preventDefault();
-		//     var page = $(this).attr("href");
-		//     $('.table-holder').empty();
-		//     $('.table-holder').load('<?php echo INCL_PATH; ?>Rentals/'+ page +' table');
-		// });
+		$(document).ready(function() {
+			var first_pagination_link = document.querySelectorAll('.pagination li a');
+			$(first_pagination_link[1]).parent('li').addClass('active');
+		});
 	</script>
 	</body>
 </html>
