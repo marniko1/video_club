@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="collapse navbar-collapse">
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="<?php echo INCL_PATH; ?>">Video Club App</a>
+	      <a class="navbar-brand" href="<?php echo INCL_PATH.'Rentals/index'; ?>">Video Club App</a>
 	    </div>
 	    <ul class="nav navbar-nav ml-5">
 	      <li class="nav-item"><a href="<?php echo INCL_PATH.'Rentals/index'; ?>"  class="nav-link">Rentals</a></li>

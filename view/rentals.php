@@ -40,7 +40,7 @@
 				    <ul class="pagination justify-content-center">
 				    	<?php
 					    foreach ($this->data['pagination_links'] as $link) {
-					    	echo  '<li class="page-item"><a href="'.$link[0].'" class="page-link">'.$link[1].'</a></li>';
+					    	echo  '<li class="page-item"><a href="'.INCL_PATH.'Rentals/'.$link[0].'" class="page-link">'.$link[1].'</a></li>';
 					    }
 					    ?>
 				    </ul>
