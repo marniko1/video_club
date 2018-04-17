@@ -15,7 +15,7 @@ if (isset($_SESSION['loged'])) {
 			$controller = $_GET['c'];
 			include 'controller/'.$controller.'.php';
 			$c = new $controller;
-			$pg = substr($_GET['m'], 1)*6-6;
+			$pg = substr($_GET['m'], 1)*2-2;
 			$c->index($pg);
 		} else {
 			$controller = $_GET['c'];

@@ -5,17 +5,18 @@ function my_autoloader($classname) {
     include '../../model/' . $classname . '.php';
 }
 spl_autoload_register('my_autoloader');
+include '../../controller/Controller.php';
 
 $response = [];
 
 switch ($_POST['ajax_fn']) {
 	case 'client_filter':
-		if (isset($_POST['pg'])) {
-			$pg = $_POST['pg']*6-6;
-		} else {
-			$pg = 0;
-		}
-		$response = DBRentals::getFilteredRentals('client', $_POST['search_value'], $pg);
+		$pg = $_POST['pg']*2-2;
+
+		$filtered_data = DBRentals::getFilteredRentals('client', $_POST['search_value'], $pg);
+		$total_num = count($filtered_data);
+		$pagination_data = Controller::preparePaginationLinks($total_num, $_POST['pg']);
+		$response = [$filtered_data, $pagination_data];
 		echo json_encode($response);
 		break;
 	

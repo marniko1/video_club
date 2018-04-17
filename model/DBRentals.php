@@ -7,7 +7,7 @@ class DBRentals extends DB {
 				join clients as c
 				on r.id_client = c.id
 				order by client 
-				limit $pg,6";
+				limit $pg,2";
 		$res = self::executeSQL($sql);
 		while ($row = $res->fetch_object()) {
 			array_push($data, $row);
@@ -36,8 +36,8 @@ class DBRentals extends DB {
 				join clients as c
 				on r.id_client = c.id
 				having $cond_name like '%$cond%'
-				order by client
-				limit $pg,6";
+				order by $cond_name
+				limit $pg,2";
 		$res = self::executeSQL($sql);
 		while ($row = $res->fetch_object()) {
 			array_push($data, $row);
