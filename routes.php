@@ -15,14 +15,15 @@ if (isset($_SESSION['loged'])) {
 			$controller = $_GET['c'];
 			include 'controller/'.$controller.'.php';
 			$c = new $controller;
-			$pg = substr($_GET['m'], 1)*2-2;
-			$c->index($pg);
+			$pg = substr($_GET['m'], 1);
+			$skip = substr($_GET['m'], 1)*2-2;
+			$c->index($pg, $skip);
 		} else {
 			$controller = $_GET['c'];
 			$method = $_GET['m'];
 			include 'controller/'.$controller.'.php';
 			$c = new $controller;
-			$c->$method(0);
+			$c->$method(0, 0);
 		}
 	} else {
 		include 'controller/Rentals.php';

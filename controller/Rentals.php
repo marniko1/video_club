@@ -1,9 +1,9 @@
 <?php
 
 class Rentals extends Controller {
-	public function index($pg) {
+	public function index($pg, $skip) {
 		$this->data['title'] = 'Rentals';
-		$this->data['rentals'] = DBRentals::getAllRentals($pg);
+		$this->data['rentals'] = DBRentals::getAllRentals($skip);
 		$total_rents_num = DBRentals::totalRentalsNum();
 		$this->data['pagination_links'] = self::preparePaginationLinks($total_rents_num->total_rents, $pg);
 		$this->show_view('rentals');

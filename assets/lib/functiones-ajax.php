@@ -11,11 +11,18 @@ $response = [];
 
 switch ($_POST['ajax_fn']) {
 	case 'client_filter':
-		$pg = $_POST['pg']*2-2;
+		$pg = $_POST['pg'];
+		$skip = $_POST['pg']*2-2;
+		$search_value = $_POST['search_value'];
+		// if ($search_value != '') {
+		// 	$condition = " having client like '%$search_value%' order by client";
+		// } else {
+		// 	$condition = null;
+		// }
 
-		$filtered_data = DBRentals::getFilteredRentals('client', $_POST['search_value'], $pg);
-		$total_num = count($filtered_data);
-		$pagination_data = Controller::preparePaginationLinks($total_num, $_POST['pg']);
+		$filtered_data = DBRentals::getFilteredRentals('client', $search_value, $skip);
+		$total_rents_num = DBRentals::numberOfRowsInResult('client', $search_value);
+		$pagination_data = Controller::preparePaginationLinks($total_rents_num, $pg);
 		$response = [$filtered_data, $pagination_data];
 		echo json_encode($response);
 		break;

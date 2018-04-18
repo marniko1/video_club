@@ -36,11 +36,9 @@ window.onload = function() {
 			link.onclick = function (e) {
 				e.preventDefault();
 				document.querySelector('.pagination li.active').classList.remove('active');
-				this.parentElement.classList.add('active');
 
 				var httpReq = new XMLHttpRequest ();
 			  	var pg = this.href.slice(-1);
-			  	console.log(pg);
 
 			  	httpReq.open('post', 'http://localhost:8080/homework/video_club/assets/lib/functiones-ajax.php');
 				httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -49,12 +47,9 @@ window.onload = function() {
 				httpReq.onreadystatechange = function(){
 					if (httpReq.readyState == 4){
 						var response = JSON.parse(this.responseText);
-						console.log(response[1]);
 						var tbody = document.getElementsByTagName('tbody')[0];
 						var tbody_html = ``;
-						var pagination_links = document.querySelectorAll('.pagination li a');
-						console.log(pagination_links);
-						var pagination_links_html =``;
+						var pagination = document.querySelector('.pagination');
 						for (var i = 0; i < response[0].length; i++) {
 							tbody_html += `<tr style="cursor: pointer" onclick="document.location.href='/homework/video_club/Rentals/${response[0][i].id}'">
 										<th scope="row">${i+1}</th>
@@ -66,21 +61,18 @@ window.onload = function() {
 									</tr>`
 						}
 						for (var i = 0; i < response[1].length; i++) {
-							pagination_links_html += `<li class="page-item"><a href="${response[1][i][0]}" class="page-link">${response[1][i][1]}</a></li>`;
+							pagination_links[i].href = response[1][i][0];
+							pagination_links[i].innerText = response[1][i][1];
 						}
 						tbody.innerHTML = tbody_html;
-						console.log(pagination_links_html);
+						for (var i = 0; i < pagination_links.length; i++) {
+							if (pagination_links[i].innerText == pg) {
+								pagination_links[i].parentElement.classList.add('active');
+							}
+						}
 					}
 				}
-
-			};
+			}
 		}
-		// $(pagination_links).on('click', function (e) {
-		//     e.preventDefault();
-		//     $('li.active').removeClass('active');
-		//   	$(this).parent('li').addClass('active');
-
-		  	
-		// });
 	}
 }

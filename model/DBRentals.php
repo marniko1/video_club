@@ -1,13 +1,13 @@
 <?php
 
 class DBRentals extends DB {
-	public static function getAllRentals($pg=0) {
+	public static function getAllRentals($skip) {
 		$data = [];
 		$sql = "select r.id, concat(c.first_name, \" \", c.last_name) as client, r.totals, r.created, r.due, r.opened from rentals as r 
 				join clients as c
 				on r.id_client = c.id
 				order by client 
-				limit $pg,2";
+				limit $skip,2";
 		$res = self::executeSQL($sql);
 		while ($row = $res->fetch_object()) {
 			array_push($data, $row);
@@ -30,14 +30,14 @@ class DBRentals extends DB {
 		}
 		return $data;
 	}
-	public static function getFilteredRentals ($cond_name, $cond, $pg=0) {
+	public static function getFilteredRentals ($cond_name, $cond, $skip) {
 		$data = [];
 		$sql = "select r.id, concat(c.first_name, \" \", c.last_name) as client, r.totals, r.created, r.due, r.opened from rentals as r 
 				join clients as c
 				on r.id_client = c.id
 				having $cond_name like '%$cond%'
 				order by $cond_name
-				limit $pg,2";
+				limit $skip,2";
 		$res = self::executeSQL($sql);
 		while ($row = $res->fetch_object()) {
 			array_push($data, $row);
@@ -49,5 +49,13 @@ class DBRentals extends DB {
 		$res = self::executeSQL($sql);
 		$total_rentals_num = $res->fetch_object();
 		return $total_rentals_num;
+	}
+	public static function numberOfRowsInResult ($cond_name, $cond) {
+		$sql = "select r.id, concat(c.first_name, \" \", c.last_name) as client, r.totals, r.created, r.due, r.opened from rentals as r 
+				join clients as c
+				on r.id_client = c.id
+				having $cond_name like '%$cond%'";
+		$num_of_rows = self::executeSQL($sql)->num_rows;
+		return $num_of_rows;
 	}
 }
