@@ -2,16 +2,17 @@ window.onload = function() {
 	var filter_rentals_by_client = document.getElementById('client_filter');
 	if (filter_rentals_by_client) {
 		filter_rentals_by_client.onkeyup = function () {
+			document.querySelector('.pagination li.active').classList.remove('active');
 			var httpReq = new XMLHttpRequest ();
+			var pg = 1;
 
 			httpReq.open('post', 'http://localhost:8080/homework/video_club/assets/lib/functiones-ajax.php');
 			httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			httpReq.send('ajax_fn=client_filter&search_value='+filter_rentals_by_client.value.trim());
+			httpReq.send('ajax_fn=client_filter&search_value='+filter_rentals_by_client.value.trim()  + '&pg=' + pg);
 
 			httpReq.onreadystatechange = function(){
 				if (httpReq.readyState == 4){
 					var response = JSON.parse(this.responseText);
-					console.log(response[1]);
 					var tbody = document.getElementsByTagName('tbody')[0];
 					var html = ``;
 					for (var i = 0; i < response[0].length; i++) {
@@ -24,7 +25,32 @@ window.onload = function() {
 								    <td>${(response[0][i].due == 0)? 'Yes':'No'}</td>
 								</tr>`
 					}
+					if (response[1].length == pagination_links.length) {
+						for (var i = 0; i < response[1].length; i++) {
+							pagination_links[i].classList.remove('d-none');
+							pagination_links[i].href = response[1][i][0];
+							pagination_links[i].innerText = response[1][i][1];
+						}
+					} else {
+						var diff = pagination_links.length - response[1].length;
+						if (diff == 1) {
+							pagination_links[3].classList.remove('d-none');
+							pagination_links[4].classList.add('d-none');
+						} else if (diff == 2) {
+							pagination_links[3].classList.add('d-none');
+							pagination_links[4].classList.add('d-none');
+						}
+						for (var i = 0; i < response[1].length; i++) {
+							pagination_links[i].href = response[1][i][0];
+							pagination_links[i].innerText = response[1][i][1];
+						}
+					}
 					tbody.innerHTML = html;
+					for (var i = 0; i < pagination_links.length; i++) {
+						if (pagination_links[i].innerText == pg) {
+							pagination_links[i].parentElement.classList.add('active');
+						}
+					}
 				}
 			}
 		}
@@ -60,9 +86,25 @@ window.onload = function() {
 									    <td>${(response[0][i].due == 0)? 'Yes':'No'}</td>
 									</tr>`
 						}
-						for (var i = 0; i < response[1].length; i++) {
-							pagination_links[i].href = response[1][i][0];
-							pagination_links[i].innerText = response[1][i][1];
+						if (response[1].length == pagination_links.length) {
+							for (var i = 0; i < response[1].length; i++) {
+								pagination_links[i].classList.remove('d-none');
+								pagination_links[i].href = response[1][i][0];
+								pagination_links[i].innerText = response[1][i][1];
+							}
+						} else {
+							var diff = pagination_links.length - response[1].length;
+							if (diff == 1) {
+								pagination_links[3].classList.remove('d-none');
+								pagination_links[4].classList.add('d-none');
+							} else if (diff == 2) {
+								pagination_links[3].classList.add('d-none');
+								pagination_links[4].classList.add('d-none');
+							}
+							for (var i = 0; i < response[1].length; i++) {
+								pagination_links[i].href = response[1][i][0];
+								pagination_links[i].innerText = response[1][i][1];
+							}
 						}
 						tbody.innerHTML = tbody_html;
 						for (var i = 0; i < pagination_links.length; i++) {
