@@ -14,11 +14,6 @@ switch ($_POST['ajax_fn']) {
 		$pg = $_POST['pg'];
 		$skip = $_POST['pg']*2-2;
 		$search_value = $_POST['search_value'];
-		// if ($search_value != '') {
-		// 	$condition = " having client like '%$search_value%' order by client";
-		// } else {
-		// 	$condition = null;
-		// }
 
 		$filtered_data = DBRentals::getFilteredRentals('client', $search_value, $skip);
 		$total_rents_num = DBRentals::numberOfRowsInResult('client', $search_value);

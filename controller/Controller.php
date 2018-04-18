@@ -10,6 +10,7 @@ class Controller {
 		require 'view/'.$view.'.php';
 		require 'view/includes/footer.php';
 	}
+	// public function preparePaginationLinks($total_num, $pg) {
 	public static function preparePaginationLinks($total_num, $pg) {
 		$pg_num = ceil($total_num/2);
 		$links = array();
