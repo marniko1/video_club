@@ -6,9 +6,9 @@ window.onload = function() {
 			var httpReq = new XMLHttpRequest ();
 			var pg = 1;
 
-			httpReq.open('post', 'http://localhost:8080/homework/video_club/assets/lib/functiones-ajax.php');
+			httpReq.open('post', 'http://localhost:8080/homework/video_club/AjaxCalls/index');
 			httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			httpReq.send('ajax_fn=client_filter&search_value='+filter_rentals_by_client.value.trim()  + '&pg=' + pg);
+			httpReq.send('ajax_fn=clientFilter&search_value='+filter_rentals_by_client.value.trim()  + '&pg=' + pg);
 
 			httpReq.onreadystatechange = function(){
 				if (httpReq.readyState == 4){
@@ -66,16 +66,16 @@ window.onload = function() {
 				var httpReq = new XMLHttpRequest ();
 			  	var pg = this.href.slice(-1);
 
-			  	httpReq.open('post', 'http://localhost:8080/homework/video_club/assets/lib/functiones-ajax.php');
+			  	httpReq.open('post', 'http://localhost:8080/homework/video_club/AjaxCalls/index');
 				httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-				httpReq.send('ajax_fn=client_filter&search_value='+filter_rentals_by_client.value.trim() + '&pg=' + pg);
+				httpReq.send('ajax_fn=clientFilter&search_value='+filter_rentals_by_client.value.trim() + '&pg=' + pg);
 
 				httpReq.onreadystatechange = function(){
 					if (httpReq.readyState == 4){
 						var response = JSON.parse(this.responseText);
 						var tbody = document.getElementsByTagName('tbody')[0];
 						var tbody_html = ``;
-						var pagination = document.querySelector('.pagination');
+						// var pagination = document.querySelector('.pagination');
 						for (var i = 0; i < response[0].length; i++) {
 							tbody_html += `<tr style="cursor: pointer" onclick="document.location.href='/homework/video_club/Rentals/${response[0][i].id}'">
 										<th scope="row">${i+1}</th>

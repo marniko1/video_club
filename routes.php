@@ -2,6 +2,7 @@
 
 if (isset($_SESSION['loged'])) {
 	if (isset($_GET['c']) && isset($_GET['m'])) {
+		// route for single rental view
 		if (preg_match('/^[0-9]$/', $_GET['m'])) {
 			if ($_GET['c'] == 'Rentals') {
 				$controller = $_GET['c'];
@@ -11,6 +12,7 @@ if (isset($_SESSION['loged'])) {
 				$c = new $controller;
 				$c->$method($id);
 			}
+		// route for pagination click - only if there is no ajax calls for pagination, javascript disabled
 		} else if (preg_match('/^p[0-9]$/', $_GET['m'])) {
 			$controller = $_GET['c'];
 			include 'controller/'.$controller.'.php';
@@ -25,11 +27,13 @@ if (isset($_SESSION['loged'])) {
 			$c = new $controller;
 			$c->$method(0, 0);
 		}
+	// route for home page - no $_GET['c'] & $_GET['m'] are setted
 	} else {
 		include 'controller/Rentals.php';
 		$c = new Rentals;
-		$c->index(0);
+		$c->index(0, 0);
 	}
+// if there is no login session always show login view
 } else {
 	$controller = 'Login';
 	include 'controller/Login.php';
