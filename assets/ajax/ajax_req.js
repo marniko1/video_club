@@ -48,7 +48,7 @@ window.onload = function() {
 							}
 						} else {
 							for (var i = pagination_links.length - 1; i >= response[1].length; i--) {
-								console.log('ovde');
+								// console.log('ovde');
 								pagination_links[i-1].classList.remove('d-none');
 								pagination_links[i].classList.add('d-none');
 							}
@@ -87,7 +87,7 @@ window.onload = function() {
 				httpReq.onreadystatechange = function(){
 					if (httpReq.readyState == 4){
 						var response = JSON.parse(this.responseText);
-						console.log(response);
+						// console.log(response);
 						var tbody = document.getElementsByTagName('tbody')[0];
 						var tbody_html = ``;
 						for (var i = 0; i < response[0].length; i++) {
@@ -110,7 +110,7 @@ window.onload = function() {
 							// ??????????????????????????????????????????????????
 							var diff = pagination_links.length - response[1].length;
 							if (diff != 0) {
-								console.log('ovde 2');
+								// console.log('ovde 2');
 								for (var i = pagination_links.length - 1; i >= response[1].length; i--) {
 									pagination_links[i-1].classList.remove('d-none');
 									pagination_links[i].classList.add('d-none');
