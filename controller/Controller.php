@@ -11,7 +11,7 @@ class Controller {
 		require 'view/includes/footer.php';
 	}
 	public function preparePaginationLinks($total_num, $pg) {
-		$pag_links_limit = 3;
+		$pag_links_limit = 4;
 		$num_of_showed_res = 2;
 		$pg_num = ceil($total_num/$num_of_showed_res);
 		$links = array();
@@ -71,7 +71,6 @@ class Controller {
 					}
 				} else if ($after  + $pg > $pg_num) {
 					if ($pg_num - $pag_links_limit >= 1) {
-					// var_dump('trojka');
 						for ($i=$pg - $before; $i <= $pg_num; $i++) { 
 							array_push($links, ['p'.$i, $i]);
 						}
@@ -81,7 +80,8 @@ class Controller {
 						}
 					}
 				} else {
-					for ($i=$before; $i <= $pag_links_limit; $i++) { 
+					// var_dump('trojka');
+					for ($i=$pg - $before; $i <= $pag_links_limit; $i++) { 
 						array_push($links, ['p'.$i, $i]);
 					}
 				}
