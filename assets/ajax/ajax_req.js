@@ -33,13 +33,27 @@ window.onload = function() {
 						}
 					} else {
 						var diff = pagination_links.length - response[1].length;
-						if (diff == 1) {
-							pagination_links[3].classList.remove('d-none');
-							pagination_links[4].classList.add('d-none');
-						} else if (diff == 2) {
-							pagination_links[3].classList.add('d-none');
-							pagination_links[4].classList.add('d-none');
+						var display_none_counter = 0;
+						for (var i = 0; i < pagination_links.length; i++) {
+							if (pagination_links[i].classList.contains('d-none')) {
+								display_none_counter++;
+							}
 						}
+						//?????????????????????????????????????????
+						console.log(display_none_counter);
+						if (response[1].length - (pagination_links.length - display_none_counter) > 0) {	
+							for (var i = pagination_links.length - display_none_counter; i <= response[1].length; i++) {
+								pagination_links[i-1].classList.remove('d-none');
+								pagination_links[i].classList.add('d-none');
+							}
+						} else {
+							for (var i = pagination_links.length - 1; i >= response[1].length; i--) {
+								console.log('ovde');
+								pagination_links[i-1].classList.remove('d-none');
+								pagination_links[i].classList.add('d-none');
+							}
+						}
+						// ????????????????????????????????????????????????????
 						for (var i = 0; i < response[1].length; i++) {
 							pagination_links[i].href = response[1][i][0];
 							pagination_links[i].innerText = response[1][i][1];
@@ -73,6 +87,7 @@ window.onload = function() {
 				httpReq.onreadystatechange = function(){
 					if (httpReq.readyState == 4){
 						var response = JSON.parse(this.responseText);
+						console.log(response);
 						var tbody = document.getElementsByTagName('tbody')[0];
 						var tbody_html = ``;
 						for (var i = 0; i < response[0].length; i++) {
@@ -92,14 +107,16 @@ window.onload = function() {
 								pagination_links[i].innerText = response[1][i][1];
 							}
 						} else {
+							// ??????????????????????????????????????????????????
 							var diff = pagination_links.length - response[1].length;
-							if (diff == 1) {
-								pagination_links[3].classList.remove('d-none');
-								pagination_links[4].classList.add('d-none');
-							} else if (diff == 2) {
-								pagination_links[3].classList.add('d-none');
-								pagination_links[4].classList.add('d-none');
+							if (diff != 0) {
+								console.log('ovde 2');
+								for (var i = pagination_links.length - 1; i >= response[1].length; i--) {
+									pagination_links[i-1].classList.remove('d-none');
+									pagination_links[i].classList.add('d-none');
+								}
 							}
+							// ???????????????????????????????????????????????????
 							for (var i = 0; i < response[1].length; i++) {
 								pagination_links[i].href = response[1][i][0];
 								pagination_links[i].innerText = response[1][i][1];
