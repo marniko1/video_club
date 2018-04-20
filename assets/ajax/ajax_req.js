@@ -75,7 +75,6 @@ window.onload = function() {
 						var response = JSON.parse(this.responseText);
 						var tbody = document.getElementsByTagName('tbody')[0];
 						var tbody_html = ``;
-						// var pagination = document.querySelector('.pagination');
 						for (var i = 0; i < response[0].length; i++) {
 							tbody_html += `<tr style="cursor: pointer" onclick="document.location.href='/homework/video_club/Rentals/${response[0][i].id}'">
 										<th scope="row">${i+1}</th>
@@ -115,6 +114,35 @@ window.onload = function() {
 					}
 				}
 			}
+		}
+	}
+}
+class AjaxCalls {
+	constructor(element_to_listen, event, pg, response_type){
+		this.element_to_listen = element_to_listen;
+		this.event = event;
+		this.pg = pg;
+		this.response_type = response_type;
+	}
+	ajaxRequest() {
+		var httpReq = new XMLHttpRequest ();
+		httpReq.open('post', 'http://localhost:8080/homework/video_club/AjaxCalls/index');
+		httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		httpReq.send('ajax_fn=clientFilter&search_value='+filter_rentals_by_client.value.trim() + '&pg=' + pg);
+	}
+	ajaxStateListener() {
+		httpReq.onreadystatechange = function(){
+			if (httpReq.readyState == 4){
+				var response = this.ajaxResponse();
+				return response;
+			}
+		}
+	}
+	ajaxResponse() {
+		if (this.response_type == 'json') {
+			var response = JSON.parse(this.responseText);
+		} else {
+			var response = this.responseText;		
 		}
 	}
 }

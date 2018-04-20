@@ -5,7 +5,7 @@ class Rentals extends Controller {
 		$this->data['title'] = 'Rentals';
 		$this->data['rentals'] = DBRentals::getAllRentals($skip);
 		$total_rents_num = DBRentals::totalRentalsNum();
-		$this->data['pagination_links'] = self::preparePaginationLinks($total_rents_num->total_rents, $pg);
+		$this->data['pagination_links'] = $this->preparePaginationLinks($total_rents_num->total_rents, $pg);
 		$this->show_view('rentals');
 	}
 	public function singleRental($id) {
