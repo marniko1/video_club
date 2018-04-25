@@ -7,6 +7,7 @@ class filterAndPagination{
 	}
 	ajaxFilter() {
 		var controller = this.controller;
+		var tbody = document.getElementsByTagName('tbody')[0];
 		if (this.filter) {
 			var filter = this.filter;
 			var self = this;
@@ -17,8 +18,8 @@ class filterAndPagination{
 				if (document.querySelector('.pagination li.active')) {
 					document.querySelector('.pagination li.active').classList.remove('active');
 				}
-				var httpReq = new XMLHttpRequest ();
 				var pg = 1;
+				var httpReq = new XMLHttpRequest ();
 
 				httpReq.open('post', 'http://localhost:8080/homework/video_club/AjaxCalls/index');
 				httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -27,16 +28,10 @@ class filterAndPagination{
 				httpReq.onreadystatechange = function(){
 					if (httpReq.readyState == 4){
 						var response = JSON.parse(this.responseText);
-						var tbody = document.getElementsByTagName('tbody')[0];
-						var tbody_html = ``;
 						if (response[0].length > 0) {
-							tbody_html = self.prepareTbodyHTML(controller, response[0]);
+							var tbody_html = self.prepareTbodyHTML(controller, response[0]);
 							if (response[1].length == pagination_links.length) {
-								for (var i = 0; i < response[1].length; i++) {
-									pagination_links[i].classList.remove('d-none');
-									pagination_links[i].href = response[1][i][0];
-									pagination_links[i].innerText = response[1][i][1];
-								}
+								self.paginationLinksChangeIfNoDiff(response[1], pagination_links);
 							} else {
 								// difference begins here
 								var display_none_counter = 0;
@@ -62,12 +57,7 @@ class filterAndPagination{
 								}
 							}
 							// difference ends here
-							tbody.innerHTML = tbody_html;
-							for (var i = 0; i < pagination_links.length; i++) {
-								if (pagination_links[i].innerText == pg) {
-									pagination_links[i].parentElement.classList.add('active');
-								}
-							}
+							self.finalAjaxDOMChanges(pagination_links, pg, tbody_html, tbody)
 							// difference begins here
 						} else {
 							tbody.innerHTML = '<tr><td colspan="6">No search results.</td></tr>';
@@ -88,8 +78,8 @@ class filterAndPagination{
 					document.querySelector('.pagination li.active').classList.remove('active');
 					var filter_value = filter.value.trim();
 
-					var httpReq = new XMLHttpRequest ();
 				  	var pg = this.href.slice(-1);
+					var httpReq = new XMLHttpRequest ();
 
 				  	httpReq.open('post', 'http://localhost:8080/homework/video_club/AjaxCalls/index');
 					httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -98,16 +88,10 @@ class filterAndPagination{
 					httpReq.onreadystatechange = function(){
 						if (httpReq.readyState == 4){
 							var response = JSON.parse(this.responseText);
-							var tbody = document.getElementsByTagName('tbody')[0];
-							var tbody_html = ``;
 							if (response[0].length > 0) {
-								tbody_html = self.prepareTbodyHTML(controller, response[0]);
+								var tbody_html = self.prepareTbodyHTML(controller, response[0]);
 								if (response[1].length == pagination_links.length) {
-									for (var i = 0; i < response[1].length; i++) {
-										pagination_links[i].classList.remove('d-none');
-										pagination_links[i].href = response[1][i][0];
-										pagination_links[i].innerText = response[1][i][1];
-									}
+									self.paginationLinksChangeIfNoDiff(response[1], pagination_links);
 								} else {
 									var diff = pagination_links.length - response[1].length;
 									if (diff != 0) {
@@ -121,12 +105,7 @@ class filterAndPagination{
 										pagination_links[i].innerText = response[1][i][1];
 									}
 								}
-								tbody.innerHTML = tbody_html;
-								for (var i = 0; i < pagination_links.length; i++) {
-									if (pagination_links[i].innerText == pg) {
-										pagination_links[i].parentElement.classList.add('active');
-									}
-								}
+								self.finalAjaxDOMChanges(pagination_links, pg, tbody_html, tbody);
 							} else {
 								pagination_links[1].parentElement.classList.add('active');
 							}
@@ -135,6 +114,28 @@ class filterAndPagination{
 				}
 			}
 		}
+	}
+	finalAjaxDOMChanges(pagination_links, pg, tbody_html, tbody) {
+		this.addActiveToPaginationLink(pagination_links, pg);
+		this.changeTbodyHTML (tbody_html, tbody);
+	}
+	addActiveToPaginationLink(pagination_links, pg) {
+		for (var i = 0; i < pagination_links.length; i++) {
+			if (pagination_links[i].innerText == pg) {
+				pagination_links[i].parentElement.classList.add('active');
+			}
+		}
+	}
+	paginationLinksChangeIfNoDiff(response, pagination_links){
+		for (var i = 0; i < response.length; i++) {
+			pagination_links[i].classList.remove('d-none');
+			pagination_links[i].href = response[i][0];
+			pagination_links[i].innerText = response[i][1];
+		}
+	}
+	changeTbodyHTML (tbody_html, tbody) {
+		var tbody = tbody;
+		tbody.innerHTML = tbody_html;
 	}
 	prepareTbodyHTML(controller, response) {
 		var tbody_html = ``;
