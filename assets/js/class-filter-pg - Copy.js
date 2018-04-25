@@ -38,7 +38,7 @@ class filterAndPagination{
 									pagination_links[i].innerText = response[1][i][1];
 								}
 							} else {
-								// difference begins here
+								var diff = pagination_links.length - response[1].length;
 								var display_none_counter = 0;
 								for (var i = 0; i < pagination_links.length; i++) {
 									if (pagination_links[i].classList.contains('d-none')) {
@@ -61,19 +61,16 @@ class filterAndPagination{
 									pagination_links[i].innerText = response[1][i][1];
 								}
 							}
-							// difference ends here
 							tbody.innerHTML = tbody_html;
 							for (var i = 0; i < pagination_links.length; i++) {
 								if (pagination_links[i].innerText == pg) {
 									pagination_links[i].parentElement.classList.add('active');
 								}
 							}
-							// difference begins here
 						} else {
 							tbody.innerHTML = '<tr><td colspan="6">No search results.</td></tr>';
 							pagination.classList.add('invisible');
 						}
-						// difference ends here
 					}
 				}
 			}
@@ -109,6 +106,7 @@ class filterAndPagination{
 										pagination_links[i].innerText = response[1][i][1];
 									}
 								} else {
+									// difference begins here
 									var diff = pagination_links.length - response[1].length;
 									if (diff != 0) {
 										for (var i = pagination_links.length - 1; i >= response[1].length; i--) {
@@ -121,15 +119,18 @@ class filterAndPagination{
 										pagination_links[i].innerText = response[1][i][1];
 									}
 								}
+								// difference ends here
 								tbody.innerHTML = tbody_html;
 								for (var i = 0; i < pagination_links.length; i++) {
 									if (pagination_links[i].innerText == pg) {
 										pagination_links[i].parentElement.classList.add('active');
 									}
 								}
+								// difference begins here
 							} else {
 								pagination_links[1].parentElement.classList.add('active');
 							}
+							// difference ends here
 						}
 					}
 				}
