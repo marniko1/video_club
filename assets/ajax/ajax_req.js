@@ -1,7 +1,8 @@
 window.onload = function() {
-	var filter_rentals_by_client = document.getElementById('client_filter');
-	if (filter_rentals_by_client) {
-		filter_rentals_by_client.onkeyup = function () {
+	var filter = document.getElementById('filter');
+	var pagination_links = document.querySelectorAll(".pagination li a");
+	if (filter) {
+		filter.onkeyup = function () {
 			var pagination = document.querySelector('.pagination');
 			pagination.classList.remove('invisible');
 			if (document.querySelector('.pagination li.active')) {
@@ -12,7 +13,7 @@ window.onload = function() {
 
 			httpReq.open('post', 'http://localhost:8080/homework/video_club/AjaxCalls/index');
 			httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			httpReq.send('ajax_fn=clientFilter&search_value='+filter_rentals_by_client.value.trim()  + '&pg=' + pg);
+			httpReq.send('ajax_fn=rentalsFilter&search_value='+filter.value.trim()  + '&pg=' + pg);
 
 			httpReq.onreadystatechange = function(){
 				if (httpReq.readyState == 4){
@@ -53,7 +54,6 @@ window.onload = function() {
 								}
 							} else {
 								for (var i = pagination_links.length - 1; i >= response[1].length; i--) {
-									// console.log('ovde');
 									pagination_links[i-1].classList.remove('d-none');
 									pagination_links[i].classList.add('d-none');
 								}
@@ -78,7 +78,6 @@ window.onload = function() {
 			}
 		}
 	}
-	var pagination_links = document.querySelectorAll(".pagination li a");
 	if (pagination_links) {
 		for (var i = 0; i < pagination_links.length; i++) {
 			var link = pagination_links[i];
@@ -91,7 +90,7 @@ window.onload = function() {
 
 			  	httpReq.open('post', 'http://localhost:8080/homework/video_club/AjaxCalls/index');
 				httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-				httpReq.send('ajax_fn=clientFilter&search_value='+filter_rentals_by_client.value.trim() + '&pg=' + pg);
+				httpReq.send('ajax_fn=rentalsFilter&search_value='+filter.value.trim() + '&pg=' + pg);
 
 				httpReq.onreadystatechange = function(){
 					if (httpReq.readyState == 4){
@@ -119,7 +118,6 @@ window.onload = function() {
 								// ??????????????????????????????????????????????????
 								var diff = pagination_links.length - response[1].length;
 								if (diff != 0) {
-									// console.log('ovde 2');
 									for (var i = pagination_links.length - 1; i >= response[1].length; i--) {
 										pagination_links[i-1].classList.remove('d-none');
 										pagination_links[i].classList.add('d-none');
@@ -143,35 +141,6 @@ window.onload = function() {
 					}
 				}
 			}
-		}
-	}
-}
-class AjaxCalls {
-	constructor(element_to_listen, event, pg, response_type){
-		this.element_to_listen = element_to_listen;
-		this.event = event;
-		this.pg = pg;
-		this.response_type = response_type;
-	}
-	ajaxRequest() {
-		var httpReq = new XMLHttpRequest ();
-		httpReq.open('post', 'http://localhost:8080/homework/video_club/AjaxCalls/index');
-		httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		httpReq.send('ajax_fn=clientFilter&search_value='+filter_rentals_by_client.value.trim() + '&pg=' + pg);
-	}
-	ajaxStateListener() {
-		httpReq.onreadystatechange = function(){
-			if (httpReq.readyState == 4){
-				var response = this.ajaxResponse();
-				return response;
-			}
-		}
-	}
-	ajaxResponse() {
-		if (this.response_type == 'json') {
-			var response = JSON.parse(this.responseText);
-		} else {
-			var response = this.responseText;		
 		}
 	}
 }

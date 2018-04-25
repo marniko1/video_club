@@ -1,7 +1,7 @@
 		<div class="container">
 			<div class="row">
 				<form class="mt-2">
-					<input type="text" name="client_filter" placeholder="Filter by client's name" id="client_filter">
+					<input type="text" name="filter" placeholder="Filter by client's name" id="filter">
 				</form>
 				<div  class="table-holder" style="min-height: 450px">
 					<table class="table table-hover mt-1">
@@ -27,7 +27,7 @@
 									    <td><?php echo $value->totals; ?></td>
 									    <td><?php echo $value->created; ?></td>
 									    <td><?php echo $value->due; ?></td>
-									    <td><?php echo ($value->opened == 0)?'No':'Yes'; ?></td>
+									    <td><?php echo $value->opened; ?></td>
 								    </tr>
 								<?php
 								}

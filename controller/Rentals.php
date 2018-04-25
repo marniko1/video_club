@@ -1,6 +1,6 @@
 <?php
 
-class Rentals extends Controller {
+class Rentals extends BaseController {
 	public function index($pg, $skip) {
 		$this->data['title'] = 'Rentals';
 		$this->data['rentals'] = DBRentals::getAllRentals($skip);

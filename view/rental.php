@@ -29,7 +29,7 @@
 				</table>
 				<ul>
 					<li>Client: <?php echo $this->data['rental'][0]->client; ?></li>
-					<li>Active: <?php echo ($this->data['rental'][0]->opened == 0)?'No':'Yes'; ?></li>
+					<li>Active: <?php echo $this->data['rental'][0]->opened; ?></li>
 					<li>Date created: <?php echo $this->data['rental'][0]->created; ?></li>
 					<li>Due: <?php echo $this->data['rental'][0]->due; ?></li>
 				</ul>

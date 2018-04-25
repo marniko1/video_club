@@ -1,6 +1,6 @@
 <?php
 
-class Controller {
+class BaseController {
 	public $data = [];
 
 	public function show_view($view) {

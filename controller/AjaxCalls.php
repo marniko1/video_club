@@ -1,6 +1,6 @@
 <?php
 
-class AjaxCalls extends Controller {
+class AjaxCalls extends BaseController {
 
 	public $method;
 	public $pg;
@@ -19,7 +19,7 @@ class AjaxCalls extends Controller {
 		$this->$method();
 	}
 
-	public function clientFilter () {
+	public function rentalsFilter () {
 
 		$filtered_data = DBRentals::getFilteredRentals('client', $this->search_value, $this->skip);
 		$total_rents_num = DBRentals::numberOfRowsInResult('client', $this->search_value);

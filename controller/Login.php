@@ -1,6 +1,6 @@
 <?php
 
-class Login extends Controller {
+class Login extends BaseController {
 	public function index () {
 		$this->data['title'] = 'Login';
 		$this->show_view('login');

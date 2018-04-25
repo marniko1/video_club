@@ -12,5 +12,5 @@ spl_autoload_register('my_autoloader');
 // $test = new DBUsers('marniko');
 // $test = DBRentals::totalRentalsNum();
 // var_dump($test);die;
-include 'controller/Controller.php';
+include 'controller/BaseController.php';
 include 'routes.php';

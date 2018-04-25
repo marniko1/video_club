@@ -6,6 +6,7 @@
 	    <ul class="nav navbar-nav ml-5">
 	      <li class="nav-item"><a href="<?php echo INCL_PATH.'Rentals/index'; ?>"  class="nav-link">Rentals</a></li>
 	      <li class="nav-item"><a href="<?php echo INCL_PATH.'Films/index'; ?>" class="nav-link">Films</a></li>
+	      <li class="nav-item"><a href="<?php echo INCL_PATH.'Clients/index'; ?>" class="nav-link">Clients</a></li>
 	    </ul>
   	</div>
   	<form method="post" action="<?php echo INCL_PATH.'Login/logoutUser'; ?>">
