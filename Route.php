@@ -21,7 +21,9 @@ class Route {
 		$method = $controller_method_in_arr[1];
 		include 'controller/'.$controller.'.php';
 		$c = new $controller;
-		$c->$method(self::$params);
+		// $c->$method(self::$params);
+		call_user_func_array([$controller, $method], $params);
+		// call_user_func_array([$controller, $action], $params);
 	}
 }
 
