@@ -48,6 +48,8 @@ include 'Route.php';
 // 		$c->index();
 // 	}
 // }
-Route::get('', 'Rentals@index');
-Route::get('Rentals/index', 'Rentals@index');
-Route::get('Rentals/{id}', 'Rentals@singleRental');
+// Route::get('/', 'Rentals@index');
+Route::get('/Rentals/index', 'Rentals@index');
+// Route::get('/Films/index', 'Films@index');
+// Route::get('/Clients/index', 'Clients@index');
+Route::get('/Rentals/{id}', 'Rentals@singleRental');

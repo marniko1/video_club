@@ -1,31 +1,58 @@
 <?php
-// define('INCL_PATH', '/homework/video_club/');
-// define('ROOT_DIR', $_SERVER['DOCUMENT_ROOT'].INCL_PATH);
+
 class Route {
 	public static $controller;
 	public static $method;
 	public static $params = [];
+	public static $instance;
+	public static $c;
 
 	public static function post() {
 
 	}
 	public static function get($url, $controller_method) {
 		$server_url = $_SERVER['REQUEST_URI'];
-		var_dump($url);
-		var_dump(str_replace(INCL_PATH, '', $server_url));
-		if ($url != str_replace(INCL_PATH, '', $server_url)) {
+		$path = str_replace(INCL_PATH, '', $server_url);
+		$path_arr = explode('/', $path);
+		$url = ltrim($url, '/');
+		$url_arr = explode('/', $url);
+		if ($path_arr[0] != $url_arr[0]) {
 			return;
+		} else {
+
+			$controller_method_in_arr = explode('@', $controller_method);
+			self::$controller = $controller_method_in_arr[0];
+			self::$method = $controller_method_in_arr[1];
+			include_once 'controller/'.self::$controller.'.php';
+			self::$controller = new self::$controller;
+			var_dump($path_arr[1]);
+			var_dump($url_arr[1]);
+			if ($path_arr[1] == $url_arr[1]) {
+
+				self::$params = [];
+
+			} else if (preg_match('/^[0-9]$/', $path_arr[1])) {
+				var_dump('ovde');
+				self::$params[] = $path_arr[1];
+			} else if (preg_match('/^p[0-9]$/', $path_arr[1])) {
+				self::$params[] = substr($path_arr[1], 1);
+			} else {
+				return;
+			}
 		}
-		$controller_method_in_arr = explode('@', $controller_method);
-		$controller = $controller_method_in_arr[0];
-		$method = $controller_method_in_arr[1];
-		include 'controller/'.$controller.'.php';
-		$c = new $controller;
-		// $c->$method(self::$params);
-		call_user_func_array([$controller, $method], $params);
-		// call_user_func_array([$controller, $action], $params);
+		call_user_func_array([self::$controller, self::$method], self::$params);
+		// if ($url == '/'.str_replace(INCL_PATH, '', $server_url)) {
+			
+		// } else {
+		// 	return;
+		// }
+		
 	}
 }
+call_user_func(array($controller, $method));
+is_numeric — Finds whether a variable is a number or a numeric string
+
+'/^{+(.*)+}$/'
 
 
 // Route::get('/', 'Rentals@index');
