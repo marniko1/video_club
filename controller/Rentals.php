@@ -1,9 +1,9 @@
 <?php
 
 class Rentals extends BaseController {
-	public function index($pg='') {
+	public function index($pg=0) {
 		$skip = 0;
-		if ($pg != '') {
+		if ($pg !== 0) {
 			$pg = substr($pg, 1);
 			$skip = $pg*2-2;
 		}

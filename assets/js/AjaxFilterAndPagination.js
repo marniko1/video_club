@@ -1,4 +1,4 @@
-class filterAndPagination{
+class FilterAndPagination{
 	constructor(filter, pagination_links, controller) {
 		this.filter = filter;
 		this.pagination_links = pagination_links;
