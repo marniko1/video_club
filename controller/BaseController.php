@@ -11,6 +11,7 @@ class BaseController {
 		require 'view/includes/footer.php';
 	}
 	public function preparePaginationLinks($total_num, $pg) {
+		// var_dump($pg);
 		$pag_links_limit = 3;
 		$num_of_showed_res = 2;
 		$pg_num = ceil($total_num/$num_of_showed_res);
@@ -39,12 +40,13 @@ class BaseController {
 		if ($pg == $pg_num) {
 			array_push($links, ['p'.$pg, "Next"]);
 		} else {
-			if ($pg == 'index') {
+			if ($pg == 'index' || $pg == '') {
 				array_push($links, ['p2', "Next"]);
 			} else {
 				array_push($links, ['p'.($pg+1), "Next"]);
 			}
 		}
+		// var_dump($links);
 		return $links;
 	}
 }
