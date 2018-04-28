@@ -13,4 +13,5 @@
 			<div class="form-group">
 				<input type="submit" name="submit" value="Login" class="btn btn-primary">
 			</div>
+			<?php echo (isset($this->data['msg']['msg1'])) ? "<span class='text-danger'>" . $this->data['msg']['msg1'] . "</span>" : false ?>
 		</form>

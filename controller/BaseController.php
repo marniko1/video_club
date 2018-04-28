@@ -3,6 +3,11 @@
 class BaseController {
 	public $data = [];
 
+	public function __construct() {
+		$this->data['msg'] = Msg::getMessage();
+		Msg::unsetMsgSession();
+	}
+
 	public function show_view($view) {
 		
 		require 'view/includes/header.php';

@@ -11,7 +11,8 @@ class Login extends BaseController {
 			$_SESSION['logged'] = true;
 			header("Location: ".INCL_PATH);
 		} else {
-			echo 'losi kredencijali';
+			Msg::createMessage("msg1", "Wrong user name or password.");
+			header("Location: ".INCL_PATH);
 		}
 	}
 	public function logoutUser () {

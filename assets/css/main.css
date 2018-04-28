@@ -1,3 +1,9 @@
+.form-wrapper {
+	transition: all .5s ease;
+}
+.opacity-5 {
+	opacity: .2;
+}
 .page-link:focus {
 	box-shadow: none;
 }

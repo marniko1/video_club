@@ -8,6 +8,7 @@ define('ROOT_DIR', $_SERVER['DOCUMENT_ROOT'].INCL_PATH);
 
 include 'core/Route.php';
 include 'core/Auth.php';
+include 'core/Msg.php';
 
 function my_autoloader($classname) {
     include 'model/' . $classname . '.php';

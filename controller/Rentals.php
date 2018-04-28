@@ -18,4 +18,7 @@ class Rentals extends BaseController {
 		$this->data['rental'] = DBRentals::getSingleRental($id);
 		$this->show_view('rental');
 	}
+	public function createNewRental() {
+		
+	}
 }

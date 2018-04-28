@@ -2,7 +2,7 @@
 			<div class="row">
 				<div class="col-6 form-wrapper d-flex">
 					<div class="col-12 border border-primary mt-2 rounded">
-						<form class="mt-5" method="post" action="">
+						<form class="mt-5" method="post" action="<?php echo INCL_PATH.'Clients/addNewClient'; ?>">
 							<h5>Add new client</h5>
 							<div class="form-group">
 								<label for="first_name">First name: </label>
@@ -24,9 +24,10 @@
 								<input type="submit" name="submit" value="Submit" class="btn btn-primary">
 							</div>
 						</form>
+						<?php echo (isset($this->data['msg']['msg1'])) ? "<span>" . $this->data['msg']['msg1'] . "</span>" : false ?>
 					</div>
 				</div>
-				<div class="col-3 form-wrapper d-flex">
+				<div class="col-3 form-wrapper d-flex opacity-5">
 					<div class="col-12 border border-secondary mt-2 rounded">
 						<form class="mt-5" method="post" action="">
 							<h5>Add new film</h5>
@@ -46,9 +47,10 @@
 								<input type="submit" name="submit" value="Submit" class="btn btn-primary">
 							</div>
 						</form>
+						<?php echo (isset($this->data['msg']['msg2'])) ? "<span>" . $this->data['msg']['msg2'] . "</span>" : false ?>
 					</div>
 				</div>
-				<div class="col-3 form-wrapper d-flex">
+				<div class="col-3 form-wrapper d-flex opacity-5">
 					<div class="col-12 border border-secondary mt-2 rounded">
 						<form class="mt-5" method="post" action="">
 							<h5>Create new rental</h5>
@@ -68,5 +70,6 @@
 								<input type="submit" name="submit" value="Submit" class="btn btn-primary">
 							</div>
 						</form>
+						<?php echo (isset($this->data['msg']['msg3'])) ? "<span>" . $this->data['msg']['msg3'] . "</span>" : false ?>
 					</div>
 				</div>

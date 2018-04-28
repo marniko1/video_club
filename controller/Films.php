@@ -5,4 +5,7 @@ class Films extends BaseController {
 		$this->data['title'] = 'Films';
 		$this->show_view('films');
 	}
+	public function addNewFilm() {
+		
+	}
 }
