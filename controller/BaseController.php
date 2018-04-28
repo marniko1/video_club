@@ -6,7 +6,7 @@ class BaseController {
 	public function show_view($view) {
 		
 		require 'view/includes/header.php';
-		(isset($_SESSION['loged']))?require 'view/includes/navigation.php':false;
+		(Auth::logged())?require 'view/includes/navigation.php':false;
 		require 'view/'.$view.'.php';
 		require 'view/includes/footer.php';
 	}

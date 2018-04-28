@@ -84,7 +84,7 @@ class Route {
 	}
 
 
-	// auxiliaries
+	// auxiliaries below
 	public static function prepareURL ($url) {
 		$url = ltrim($url, '/');
 		return explode('/', $url);

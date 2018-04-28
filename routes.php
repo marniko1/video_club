@@ -1,11 +1,8 @@
 <?php
 
-include 'core/Route.php';
-include 'core/Auth.php';
-
 
 if (Auth::logged()) {
-	Route::get('/', 'Rentals@index');
+	Route::get('/', 'Home@index');
 	Route::get('/Rentals/index', 'Rentals@index');
 	Route::get('/Films/index', 'Films@index');
 	Route::get('/Clients/index', 'Clients@index');

@@ -8,14 +8,14 @@ class Login extends BaseController {
 	public function loginUser ($username, $password) {
 		$checked_credentials = $this->checkCredentials($username, $password);
 		if ($checked_credentials == true) {
-			$_SESSION['loged'] = true;
-			header("Location: ".INCL_PATH."Rentals/index");
+			$_SESSION['logged'] = true;
+			header("Location: ".INCL_PATH);
 		} else {
 			echo 'losi kredencijali';
 		}
 	}
 	public function logoutUser () {
-		unset($_SESSION['loged']);
+		unset($_SESSION['logged']);
 		header("Location: ".INCL_PATH);
 	}
 	public function checkCredentials ($username, $password) {
