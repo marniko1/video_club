@@ -11,6 +11,12 @@ class Msg {
 		}
 	}
 
+	// public static function getMessageKey() {
+	// 	if (isset($_SESSION['msg'])) {
+	// 		return array_keys($_SESSION['msg']);
+	// 	}
+	// }
+
 	public static function unsetMsgSession() {
 		unset($_SESSION['msg']);
 	}

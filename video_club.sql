@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: video_club
 -- ------------------------------------------------------
--- Server version	5.7.21
+-- Server version 5.7.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,7 +30,7 @@ CREATE TABLE `clients` (
   `address` varchar(45) NOT NULL,
   `stock` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `clients` (
 
 LOCK TABLES `clients` WRITE;
 /*!40000 ALTER TABLE `clients` DISABLE KEYS */;
-INSERT INTO `clients` VALUES (1,'Mitar','Miric','tarmiricmi@zamproduction.com','Batajnicki drum bb',0),(2,'Mile','Kitic','kiticm@grand.com','Put za Ovcu bb',0),(3,'Sinan','Sakic','sinan@tss.com','Marinkova bara',0),(4,'Srecko','Sojic','srele@samsvojgazda.gov.rs','Put za Avalu bb',0),(5,'Miki','Mecava','samodasebeli@lobetina.com','Kolumbijskih polja 2',0);
+INSERT INTO `clients` VALUES (1,'Mitar','Miric','tarmiricmi@zamproduction.com','Batajnicki drum bb',0),(2,'Mile','Kitic','kiticm@grand.com','Put za Ovcu bb',0),(3,'Sinan','Sakic','sinan@tss.com','Marinkova bara',0),(4,'Srecko','Sojic','srele@samsvojgazda.gov.rs','Put za Avalu bb',0),(5,'Miki','Mecava','samodasebeli@lobetina.com','Kolumbijskih polja 2',0),(6,'Zika','Sarenica','zikaseljak@selo.co.rs','Lajkovacka pruga 1',0),(7,'Zeljko','Mitrovic','dirigentwannabe@pink.rs','Simanovci bb',0),(8,'Bili','Piton','ludisesirdzija@maratonci.com','Grobljanska 10',0),(9,'Al','Kapone','maliali@kozanostra.com','Vice Avenue 1',0);
 /*!40000 ALTER TABLE `clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,4 +167,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-25  3:14:36
+-- Dump completed on 2018-04-29 22:24:57
