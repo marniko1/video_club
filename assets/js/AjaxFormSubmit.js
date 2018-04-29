@@ -6,7 +6,7 @@ class FormSubmit {
 
 	}
 	submit() {
-		jQuery('.btn').on('click', function(e){
+		jQuery('.submit').on('click', function(e){
 			e.preventDefault();
 			var self = this;
 			var action_url = $(this).parents('form').attr('action');
