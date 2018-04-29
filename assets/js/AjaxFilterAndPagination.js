@@ -21,7 +21,7 @@ class FilterAndPagination{
 				var pg = 1;
 				var httpReq = new XMLHttpRequest ();
 
-				httpReq.open('post', 'http://localhost:8080/homework/video_club/AjaxCalls/index');
+				httpReq.open('post', root_url + "AjaxCalls/index");
 				httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 				httpReq.send('ajax_fn=' + controller.toLowerCase() + 'Filter&search_value='+ filter_value + '&pg=' + pg);
 
@@ -81,7 +81,7 @@ class FilterAndPagination{
 				  	var pg = this.href.slice(-1);
 					var httpReq = new XMLHttpRequest ();
 
-				  	httpReq.open('post', 'http://localhost:8080/homework/video_club/AjaxCalls/index');
+				  	httpReq.open('post', root_url + "AjaxCalls/index");
 					httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 					httpReq.send('ajax_fn=' + controller.toLowerCase() + 'Filter&search_value='+ filter_value + '&pg=' + pg);
 
@@ -140,7 +140,7 @@ class FilterAndPagination{
 	prepareTbodyHTML(controller, response) {
 		var tbody_html = ``;
 		for (var i = 0; i < response.length; i++) {
-			tbody_html += `<tr style="cursor: pointer" onclick="document.location.href='/homework/video_club/`+controller+`/${response[i].id}'">
+			tbody_html += `<tr style="cursor: pointer" onclick="document.location.href=`+ root_url + controller+`/${response[i].id}'">
 			<th scope="row">${i+1}</th>`;
 			for (var key in response[i]) {
 				if (key != 'id') {

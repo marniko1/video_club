@@ -7,7 +7,7 @@ window.onload = function() {
 	var ajax = new FilterAndPagination(filter, pagination_links, controller);
 
 	// stylize forms on home page
-    if (window.location.pathname == '' || window.location.pathname == '/homework/video_club/') {
+    if (window.location.origin + window.location.pathname == root_url) {
 		var first_input = document.querySelector('input');
 		first_input.focus();
 		jQuery('input').on('click', function(){

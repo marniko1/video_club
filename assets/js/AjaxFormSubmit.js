@@ -23,7 +23,7 @@ class FormSubmit {
 
 			$.ajax({
 				type: "POST",
-				url: "http://localhost:8080/homework/video_club/AjaxCalls/index",
+				url: root_url + "AjaxCalls/index",
 				data: "ajax_fn=submitForm&params=" + JSON.stringify(params) + "&controller=" + controller + "&method=" + method,
 				// dataType: 'json',
 				success: function(data){
