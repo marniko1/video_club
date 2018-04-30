@@ -140,7 +140,7 @@ class FilterAndPagination{
 	prepareTbodyHTML(controller, response) {
 		var tbody_html = ``;
 		for (var i = 0; i < response.length; i++) {
-			tbody_html += `<tr style="cursor: pointer" onclick="document.location.href=`+ root_url + controller+`/${response[i].id}'">
+			tbody_html += `<tr style="cursor: pointer" onclick="document.location.href='`+ root_url + controller+`/${response[i].id}'">
 			<th scope="row">${i+1}</th>`;
 			for (var key in response[i]) {
 				if (key != 'id') {
