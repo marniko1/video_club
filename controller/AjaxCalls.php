@@ -31,6 +31,15 @@ class AjaxCalls extends BaseController {
 		echo json_encode($response);
 	}
 
+	public function filmsFilter () {
+		$filtered_data = DBFilms::getFilteredFilms('title', $this->search_value, $this->skip);
+		$this->prepareShortenedFilmsData($filtered_data);
+		$total_rents_num = DBFilms::numberOfRowsInResult('title', $this->search_value);
+		$pagination_data = $this->preparePaginationLinks($total_rents_num, $this->pg);
+		$response = [$filtered_data, $pagination_data];
+		echo json_encode($response);
+	}
+
 	public function submitForm(){
 		$controller = $_POST['controller'];
 		$method = $_POST['method'];
@@ -39,7 +48,11 @@ class AjaxCalls extends BaseController {
 		include_once "controller/" . $controller . ".php";
 		$controller = new $controller;
 		$response = call_user_func_array([$controller, $method], $this->params);
-		// var_dump($response);
 		echo json_encode($response);
+	}
+	public function prepareShortenedFilmsData ($data_array) {
+		include_once 'controller/Films.php';
+		$c = new Films;
+		$c->prepareShortenedData($data_array);
 	}
 }

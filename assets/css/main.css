@@ -13,3 +13,6 @@ select:-webkit-autofill {
    -webkit-box-shadow: 0 0 0 30px white inset;
    background-color: #fff !important;
 }
+table.clients caption {
+	caption-side: top;
+}
