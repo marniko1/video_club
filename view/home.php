@@ -21,7 +21,7 @@
 								<input type="text" name="address" id="address" class="form-control">
 							</div>
 							<div class="form-group">
-								<input type="submit" name="submit" value="Submit" class="btn btn-primary submit">
+								<input type="submit" value="Submit" class="btn btn-primary submit">
 							</div>
 						</form>
 						<span class="msg-span"><?php echo (isset($this->data['msg']['msg1'])) ? $this->data['msg']['msg1'] : false ?></span>
@@ -44,7 +44,7 @@
 								<input type="text" name="stock" id="stock" class="form-control">
 							</div>
 							<div class="form-group">
-								<input type="submit" name="submit" value="Submit" class="btn btn-primary submit" disabled>
+								<input type="submit" value="Submit" class="btn btn-primary submit" disabled>
 							</div>
 						</form>
 						<span class="msg-span"><?php echo (isset($this->data['msg']['msg2'])) ? $this->data['msg']['msg2'] : false ?></span>
@@ -67,7 +67,7 @@
 								<input type="text" name="stock" id="stock" class="form-control">
 							</div>
 							<div class="form-group">
-								<input type="submit" name="submit" value="Submit" class="btn btn-primary submit" disabled>
+								<input type="submit" value="Submit" class="btn btn-primary submit" disabled>
 							</div>
 						</form>
 						<span class="msg-span"><?php echo (isset($this->data['msg']['msg3'])) ? $this->data['msg']['msg3'] : false ?></span>

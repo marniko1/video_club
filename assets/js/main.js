@@ -13,6 +13,7 @@ window.onload = function() {
 		jQuery('input').on('click', function(){
 			$('div.form-wrapper').removeClass('col-6').addClass('col-3 opacity-5');
 			$('div.form-wrapper span').contents().remove();
+			$('div.form-wrapper span').removeClass('text-danger text-success');
 			$('div.form-wrapper input').not(':input[type=submit]').not($(this).parents('div.form-wrapper').find('input')).val('');
 			var input = $('div.form-wrapper input').not(':input[type=submit]').not($(this).parents('div.form-wrapper').find('input'));
 			console.log(input);
@@ -30,8 +31,10 @@ window.onload = function() {
 		var msg_span = $('div.form-wrapper span');
 		if (msg_span) {
 			if (msg_span.text() == "Success.") {
+				// msg_span.removeClass('text-danger');
 				msg_span.addClass('text-success');
 			} else if (msg_span.text() == "Unsuccess.") {
+				// msg_span.removeClass('text-success');
 				msg_span.addClass('text-danger');
 			}
 		}
