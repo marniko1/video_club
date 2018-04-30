@@ -31,10 +31,8 @@ window.onload = function() {
 		var msg_span = $('div.form-wrapper span');
 		if (msg_span) {
 			if (msg_span.text() == "Success.") {
-				// msg_span.removeClass('text-danger');
 				msg_span.addClass('text-success');
 			} else if (msg_span.text() == "Unsuccess.") {
-				// msg_span.removeClass('text-success');
 				msg_span.addClass('text-danger');
 			}
 		}
