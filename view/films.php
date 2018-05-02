@@ -1,7 +1,7 @@
 		<div class="container">
 			<div class="row">
 				<form class="mt-2">
-					<input type="text" name="filter" placeholder="Filter by client's name" id="filter">
+					<input type="text" name="filter" placeholder="Filter by film's title" id="filter">
 				</form>
 				<div  class="table-holder" style="min-height: 450px">
 					<table class="table table-hover mt-1">
@@ -22,11 +22,11 @@
 								<?php
 								foreach ($this->data['films'] as $key => $value) {
 								?>
-									<tr style="cursor: pointer;" onclick="document.location.href='<?php echo INCL_PATH.'Films/'.$value->id; ?>'">
+									<tr style="cursor: pointer;" onclick="document.location.href='<?php echo INCL_PATH.'Films/'.$value->id.'/p1'; ?>'">
 									    <th scope="row"><?php echo $key+1; ?></th>
 									    <td><?php echo $value->title; ?></td>
 									    <td><?php echo $value->description; ?></td>
-									    <td><?php echo $value->genre; ?></td>
+									    <td title="<?php echo $value->long_genre; ?>"><?php echo $value->genre; ?></td>
 									    <td><?php echo $value->price; ?></td>
 									    <td><?php echo $value->current_stock; ?></td>
 									    <td><?php echo $value->stock; ?></td>

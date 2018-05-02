@@ -7,7 +7,7 @@ class FilterAndPagination{
 	}
 	ajaxFilter() {
 		var controller = this.controller;
-		var tbody = document.getElementsByTagName('tbody')[0];
+		var tbody = document.querySelector('.tbody');
 		if (this.filter) {
 			var filter = this.filter;
 			var self = this;
@@ -76,18 +76,23 @@ class FilterAndPagination{
 				link.onclick = function (e) {
 					e.preventDefault();
 					document.querySelector('.pagination li.active').classList.remove('active');
-					var filter_value = filter.value.trim();
+					var filter_value = '';
+					if (filter) {
+						filter_value = filter.value.trim();
+					}
 
 				  	var pg = this.href.slice(-1);
+				  	var id = window.location.href.split('/').reverse()[1];
 					var httpReq = new XMLHttpRequest ();
 
 				  	httpReq.open('post', root_url + "AjaxCalls/index");
 					httpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-					httpReq.send('ajax_fn=' + controller.toLowerCase() + 'Filter&search_value='+ filter_value + '&pg=' + pg);
+					httpReq.send('ajax_fn=' + controller.toLowerCase() + 'Filter&search_value='+ filter_value + '&pg=' + pg + '&id=' + id);
 
 					httpReq.onreadystatechange = function(){
 						if (httpReq.readyState == 4){
 							var response = JSON.parse(this.responseText);
+							console.log(response[1]);
 							if (response[0].length > 0) {
 								var tbody_html = self.prepareTbodyHTML(controller, response[0]);
 								if (response[1].length == pagination_links.length) {
@@ -100,9 +105,11 @@ class FilterAndPagination{
 											pagination_links[i].classList.add('d-none');
 										}
 									}
+									console.log(pagination_links);
 									for (var i = 0; i < response[1].length; i++) {
+										// console.log(pagination_links[i]);
 										pagination_links[i].href = response[1][i][0];
-										pagination_links[i].innerText = response[1][i][1];
+										jQuery(pagination_links[i]).set('html', response[1][i][1]);
 									}
 								}
 								self.finalAjaxDOMChanges(pagination_links, pg, tbody_html, tbody);
@@ -139,16 +146,36 @@ class FilterAndPagination{
 	}
 	prepareTbodyHTML(controller, response) {
 		var tbody_html = ``;
+		// need this for single film all rentals pagination-----
+		var pg = '';
+		if (document.querySelector('.navbar-collapse li.active > a') && document.querySelector('.navbar-collapse li.active > a').innerText === 'Films') {
+			pg = '/p1';
+		}
+		// -------------
 		for (var i = 0; i < response.length; i++) {
-			tbody_html += `<tr style="cursor: pointer" onclick="document.location.href='`+ root_url + controller+`/${response[i].id}'">
+			if (controller == 'Film') {
+				controller = 'Rentals';
+			}
+			tbody_html += `<tr style="cursor: pointer" onclick="document.location.href='${root_url + controller}/${response[i].id + pg}'">
 			<th scope="row">${i+1}</th>`;
 			for (var key in response[i]) {
-				if (key != 'id') {
-					tbody_html += `<td>${response[i][key]}</td>`;
+				if (key != 'id' && key != 'long_genre' && key != 'total' && key != 'rented') {
+					if (key != 'genre') {
+						tbody_html += `<td>${response[i][key]}</td>`;
+					} else {
+						tbody_html += `<td title="${response[i].long_genre}">${response[i][key]}</td>`
+					}
 				}
 			}
 			tbody_html += `</tr>`
 		}
 		return tbody_html;
 	}
+}
+
+function parseHtmlEnteties(str) {
+    return str.replace(/&#([0-9]{1,3});/gi, function(match, numStr) {
+        var num = parseInt(numStr, 10); // read num as normal number
+        return String.fromCharCode(num);
+    });
 }

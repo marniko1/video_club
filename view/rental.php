@@ -13,19 +13,19 @@
 						foreach ($this->data['rental'] as $key => $value) {
 						?>
 							<tr>
-						      <th scope="row"><?php echo $key+1; ?></th>
-						      <td><?php echo $value->title; ?></td>
-						      <td><?php echo $value->price; ?></td>
+						      	<th scope="row"><?php echo $key+1; ?></th>
+						     	<td><?php echo '<a class="nav-link" href="'.INCL_PATH.'Films/'.$value->id.'/p1">'.$value->title.'</a>'; ?></td>
+						      	<td><?php echo $value->price; ?></td>
 						    </tr>
 						<?php
 						}
 						?>
 					    <tr>
-					      <th scope="row">TOTAL</th>
-					      <td></td>
-					      <td><?php echo $this->data['rental'][0]->totals; ?></td>
+					      	<th scope="row">TOTAL</th>
+					      	<td></td>
+					      	<td><?php echo $this->data['rental'][0]->totals; ?></td>
 					    </tr>
-					 </tbody>
+					</tbody>
 				</table>
 				<ul>
 					<li>Client: <?php echo $this->data['rental'][0]->client; ?></li>

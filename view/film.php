@@ -34,11 +34,11 @@
 					      	<th scope="col" style="width: 30%">Returned</th>
 					      	<th scope="col" style="width: 5%">Active</th>
 						</thead>
-						<tbody>
-					<?php
+						<tbody class="tbody">
+				<?php if ($this->data['film'][0]->client != null):
 					foreach ($this->data['film'] as $key => $value) {
 					?>
-							<tr>
+							<tr style="cursor: pointer;" onclick="document.location.href='<?php echo INCL_PATH.'Rentals/'.$value->id; ?>'">
 								<th scope="row"><?php echo $key + 1; ?></th>
 								<td><?php echo $this->data['film'][$key]->client; ?></td>
 								<td><?php echo $this->data['film'][$key]->created; ?></td>
@@ -47,26 +47,20 @@
 							</tr>
 					<?php
 					}
-					?>
+					else: ?>
+					<tr><td colspan="6">Not rented yet.</td></tr>
+				<?php endif ?>
 						</tbody>
 					</table>
+					<?php if ($this->data['film'][0]->client != null): ?>
 					<nav class="col-12 mt-5" aria-label="...">
 					    <ul class="pagination pagination-sm justify-content-center">
-					    	<li class="page-item">
-						      	<a class="page-link" href="#" aria-label="Previous">
-						        	<span aria-hidden="true">&laquo;</span>
-						        	<span class="sr-only">Previous</span>
-						      	</a>
-						    </li>
-						    <li class="page-item"><a class="page-link" href="#">1</a></li>
-						    <li class="page-item"><a class="page-link" href="#">2</a></li>
-						    <li class="page-item"><a class="page-link" href="#">3</a></li>
-						    <li class="page-item">
-						      	<a class="page-link" href="#" aria-label="Next">
-						        	<span aria-hidden="true">&raquo;</span>
-						        	<span class="sr-only">Next</span>
-						      	</a>
-						    </li>
+					    	<?php
+						    foreach ($this->data['pagination_links'] as $link) {
+						    	echo  '<li class="page-item"><a href="'.$link[0].'" class="page-link">'.$link[1].'</a></li>';
+						    }
+						    ?>
 					    </ul>
 					</nav>
+					<?php endif ?>
 				</div>

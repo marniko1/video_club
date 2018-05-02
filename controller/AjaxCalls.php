@@ -4,6 +4,7 @@ class AjaxCalls extends BaseController {
 
 	public $method;
 	public $pg;
+	public $id;
 	public $skip;
 	public $search_value;
 	public $params = [];
@@ -15,6 +16,9 @@ class AjaxCalls extends BaseController {
 			$this->skip = $_POST['pg']*2-2;
 			$this->search_value = $_POST['search_value'];
 		}
+		if (isset($_POST['id'])) {
+			$this->id = $_POST['id'];
+		}
 	}
 
 	public function index () {
@@ -23,7 +27,6 @@ class AjaxCalls extends BaseController {
 	}
 
 	public function rentalsFilter () {
-
 		$filtered_data = DBRentals::getFilteredRentals('client', $this->search_value, $this->skip);
 		$total_rents_num = DBRentals::numberOfRowsInResult('client', $this->search_value);
 		$pagination_data = $this->preparePaginationLinks($total_rents_num, $this->pg);
@@ -34,8 +37,21 @@ class AjaxCalls extends BaseController {
 	public function filmsFilter () {
 		$filtered_data = DBFilms::getFilteredFilms('title', $this->search_value, $this->skip);
 		$this->prepareShortenedFilmsData($filtered_data);
-		$total_rents_num = DBFilms::numberOfRowsInResult('title', $this->search_value);
+		$total_rents_num = 0;
+		if (isset($filtered_data[0]->total)) {
+			$total_rents_num = $filtered_data[0]->total;
+		}
 		$pagination_data = $this->preparePaginationLinks($total_rents_num, $this->pg);
+		$response = [$filtered_data, $pagination_data];
+		echo json_encode($response);
+	}
+
+	public function filmFilter () {
+		$filtered_data = DBFilms::getSingleFilmRentals($this->id, $this->skip);
+		$total_rents_num = $filtered_data[0]->rented;
+		$pagination_data = $this->preparePaginationLinks($total_rents_num, $this->pg);
+		$pagination_data[0][1] = "<";
+		$pagination_data[count($pagination_data)-1][1] = ">";
 		$response = [$filtered_data, $pagination_data];
 		echo json_encode($response);
 	}
@@ -44,6 +60,16 @@ class AjaxCalls extends BaseController {
 		$controller = $_POST['controller'];
 		$method = $_POST['method'];
 		$this->params = json_decode($_POST['params']);
+		// if there is checkbox in form or not
+		if (!empty(json_decode($_POST['checkbox']))) {
+			$checkbox = json_decode($_POST['checkbox']);
+			$str = '';
+			foreach ($checkbox as $key => $value) {
+				$str .= $value . ', ';
+			}
+			rtrim($str);
+			$this->params[] = rtrim($str, ', ');
+		}
 		$this->params[] = true;
 		include_once "controller/" . $controller . ".php";
 		$controller = new $controller;

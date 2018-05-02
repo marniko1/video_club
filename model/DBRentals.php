@@ -16,7 +16,7 @@ class DBRentals extends DB {
 	}
 	public static function getSingleRental($id) {
 		$data = [];
-		$sql = "select f.title, f.price, r.totals, r.created, r.due, r.opened, concat(c.first_name, \" \", c.last_name) as client from rentals as r 
+		$sql = "select f.id, f.title, f.price, r.totals, r.created, r.due, r.opened, concat(c.first_name, \" \", c.last_name) as client from rentals as r 
 				join rentals_films as rf 
 				on r.id = rf.id_rental 
 				join films as f 

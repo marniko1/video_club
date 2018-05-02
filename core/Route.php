@@ -48,7 +48,6 @@ class Route {
 		if ($path_arr[0] != $url_arr[0] || count($path_arr) != count($url_arr)) {
 			return;
 		} else {
-
 			$action = explode('@', $action);
 			self::$controller = $action[0];
 			self::$method = $action[1];

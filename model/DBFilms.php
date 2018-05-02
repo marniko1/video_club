@@ -3,7 +3,9 @@
 class DBFilms extends DB {
 	public static function getAllFilms($skip) {
 		$data = [];
-		$sql = "select * from films 
+		$sql = "select *,
+				(select count(*) from films) as total 
+				from films 
 				order by title
 				limit $skip,2";
 		$res = self::executeSQL($sql);
@@ -12,16 +14,37 @@ class DBFilms extends DB {
 		}
 		return $data;
 	}
-	public static function getSingleFilm($id) {
+	public static function getSingleFilm($id, $skip) {
 		$data = [];
-		$sql = "select f.*,  concat(c.first_name, \" \", c.last_name) as client, r.created, r.due, r.opened from films as f 
-				join rentals_films as rf 
+		$sql = "select f.*, 
+				(select count(*) from rentals_films where id_film=$id) as rented, 
+				concat(c.first_name, \" \", c.last_name) as client, r.id, r.created, r.due, r.opened from films as f 
+				left join rentals_films as rf 
 				on rf.id_film = f.id 
-				join rentals as r 
+				left join rentals as r 
 				on r.id = rf.id_rental 
-				join clients as c 
+				left join clients as c 
 				on c.id = r.id_client  
-				where f.id=".$id;
+				where f.id=$id 
+				limit $skip,2";
+		$res = self::executeSQL($sql);
+		while ($row = $res->fetch_object()) {
+			array_push($data, $row);
+		}
+		return $data;
+	}
+	public static function getSingleFilmRentals ($id, $skip) {
+		$data = [];
+		$sql = "select (select count(*) from rentals_films where id_film=$id) as rented, 
+				concat(c.first_name, \" \", c.last_name) as client, r.id, r.created, r.due, r.opened from films as f 
+				left join rentals_films as rf 
+				on rf.id_film = f.id 
+				left join rentals as r 
+				on r.id = rf.id_rental 
+				left join clients as c 
+				on c.id = r.id_client  
+				where f.id=$id 
+				limit $skip,2";
 		$res = self::executeSQL($sql);
 		while ($row = $res->fetch_object()) {
 			array_push($data, $row);
@@ -30,7 +53,9 @@ class DBFilms extends DB {
 	}
 	public static function getFilteredFilms ($cond_name, $cond, $skip) {
 		$data = [];
-		$sql = "select * from films 
+		$sql = "select *,
+				(select count(*) from films where $cond_name like '%$cond%') as total 
+				from films 
 				where $cond_name like '%$cond%'
 				order by $cond_name
 				limit $skip,2";
@@ -46,10 +71,9 @@ class DBFilms extends DB {
 		$total_films_num = $res->fetch_object();
 		return $total_films_num;
 	}
-	public static function numberOfRowsInResult ($cond_name, $cond) {
-		$sql = "select * from films
-				where $cond_name like '%$cond%'";
-		$num_of_rows = self::executeSQL($sql)->num_rows;
-		return $num_of_rows;
+	public static function insertFilmIntoDB ($title, $description, $genre, $price, $stock) {
+		$sql = "insert into films values (null, '$title', '$description', '$genre', $price, $stock, $stock)";
+		$req = self::executeSQL($sql);
+		return $req;
 	}
 }

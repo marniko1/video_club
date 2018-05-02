@@ -2,27 +2,30 @@ window.onload = function() {
 
 	// makes ajax for pagination and filter
 	var controller = window.location.href.split('/').reverse()[1];
+	if (controller.match(/(\d+)/)) {
+		controller = 'Film';
+	}
 	var filter = document.getElementById('filter');
 	var pagination_links = document.querySelectorAll(".pagination li a");
+	console.log(pagination_links);
 	var ajax = new FilterAndPagination(filter, pagination_links, controller);
 
 	// stylize forms on home page
     if (window.location.origin + window.location.pathname == root_url) {
 		var first_input = document.querySelector('input');
 		first_input.focus();
-		jQuery('input').on('click', function(){
+		jQuery('input, textarea').on('click', function(){
+			$('.checkbox-holder').addClass('d-none');
 			$('div.form-wrapper').removeClass('col-6').addClass('col-3 opacity-5');
 			$('div.form-wrapper span').contents().remove();
 			$('div.form-wrapper span').removeClass('text-danger text-success');
-			$('div.form-wrapper input').not(':input[type=submit]').not($(this).parents('div.form-wrapper').find('input')).val('');
-			var input = $('div.form-wrapper input').not(':input[type=submit]').not($(this).parents('div.form-wrapper').find('input'));
-			console.log(input);
-			// input.style.setProperty('background-color', '#fff', 'important');;
+			$('div.form-wrapper input').not(':input[type=submit], :input[type=checkbox]').not($(this).parents('div.form-wrapper').find('input')).val('');
 			$('div.form-wrapper input.btn').prop('disabled', true);
 			$('div.border').removeClass('border-primary').addClass('border-secondary');
 			$(this).parents('div.form-wrapper').removeClass('col-3 opacity-5').addClass('col-6');
 			$(this).parents('div.border').removeClass('border-secondary').addClass('border-primary');
 			$(this).parents('div.form-wrapper').find('input.btn').removeAttr('disabled');
+			$(this).parents('div.form-wrapper.col-6').find('.checkbox-holder').removeClass('d-none');
 		});
 
 		// form validate and submit
