@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: video_club
 -- ------------------------------------------------------
--- Server version 5.7.21
+-- Server version	5.7.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -53,11 +53,13 @@ DROP TABLE IF EXISTS `films`;
 CREATE TABLE `films` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(45) NOT NULL,
-  `price` int(11) NOT NULL,
-  `stock` int(11) NOT NULL DEFAULT '0',
+  `description` longtext,
+  `genre` varchar(255) DEFAULT NULL,
+  `price` decimal(13,2) NOT NULL,
   `current_stock` int(11) NOT NULL DEFAULT '0',
+  `stock` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +68,7 @@ CREATE TABLE `films` (
 
 LOCK TABLES `films` WRITE;
 /*!40000 ALTER TABLE `films` DISABLE KEYS */;
-INSERT INTO `films` VALUES (1,'Humanizam i renesansa',220,3,3),(2,'Matriks',260,1,1),(3,'Munje',270,4,4),(4,'Kad porastem bicu kengur',280,4,4),(5,'Peskara',110,4,4),(6,'Belci ne umeju da skacu',215,1,1),(7,'Inception',215,1,1),(8,'Sabirni centar',215,1,1),(9,'Blade runner',285,1,1),(10,'Jumanji: Welcome To The Jungle',220,3,3),(11,'Titan',260,1,1),(12,'Resident Evil',270,4,4),(13,'Jumanji',190,3,3),(14,'Total Recall',150,3,3),(15,'Silent Hill',200,4,4);
+INSERT INTO `films` VALUES (1,'Commando','A retired elite Black Ops Commando launches a one man war against a group of South American criminals who have kidnapped his daughter.','Action, Adventure, Thriller',220.00,3,3),(2,'The Matrix','A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',' Action, Sci-Fi',260.00,1,1),(3,'Munje','Urban comedy, happening during a night in Belgrade.','Comedy',270.00,4,4),(4,'Kad porastem bicu kengur','The film consists of three parallel stories that are interwoven and played in Vozdovac.','Comedy',280.00,4,4),(5,'The Running Man','A wrongly convicted man must try to survive a public execution gauntlet staged as a game show.','Action, Sci-Fi, Thriller',110.00,4,4),(6,'White Men Can\'t Jump','Black and white basketball hustlers join forces to double their chances of winning money on the street courts and in a basketball tournament.',' Comedy, Drama, Sport',215.00,1,1),(7,'Inception','A thief, who steals corporate secrets through the use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.',' Action, Adventure, Sci-Fi',215.00,1,1),(8,'Sabirni Centar','During the excavation of ancient Roman ruins, an old archaeology professor accidentally opens the gate between our world and the world of the dead.',' Comedy, Drama, Fantasy',215.00,1,1),(9,'Blade Runner','A blade runner must pursue and try to terminate four replicants who stole a ship in space and have returned to Earth to find their creator.','Sci-Fi, Thriller',285.00,1,1),(10,'Jumanji: Welcome To The Jungle','Four teenagers are sucked into a magical video game, and the only way they can escape is to work together to finish the game.','Action, Adventure, Comedy',220.00,3,3),(11,'Titan','A military family takes part in a ground-breaking experiment of genetic evolution and space exploration.',' Sci-Fi, Thriller',260.00,1,1),(12,'Resident Evil','A special military unit fights a powerful, out-of-control supercomputer and hundreds of scientists who have mutated into flesh-eating creatures after a laboratory accident.',' Action, Horror, Sci-Fi',270.00,4,4),(13,'Jumanji','When two kids find and play a magical board game, they release a man trapped for decades in it and a host of dangers that can only be stopped by finishing the game.','Adventure, Family, Fantasy',190.00,3,3),(14,'Total Recall','When a man goes for virtual vacation memories of the planet Mars, an unexpected and harrowing series of events forces him to go to the planet for real - or does he?',' Action, Sci-Fi, Thriller',150.00,3,3),(15,'Silent Hill','A woman, Rose, goes in search for her adopted daughter within the confines of a strange, desolate town called Silent Hill.',' Horror',200.00,4,4),(16,'Avatar','A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.','Action, Adventure, Fantasy',200.00,3,3),(17,'I Am Legend','Years after a plague kills most of humanity and transforms the rest into monsters, the sole survivor in New York City struggles valiantly to find a cure.','Sci-Fi, Horror, Drama',199.99,5,5);
 /*!40000 ALTER TABLE `films` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,4 +169,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-29 22:24:57
+-- Dump completed on 2018-05-03  0:47:33
