@@ -13,7 +13,7 @@
 						      	<th scope="col" style="width: 35%">Description</th>
 						      	<th scope="col" style="width: 10%">Genre</th>
 						      	<th scope="col" style="width: 10%">Price</th>
-						      	<th scope="col" style="width: 5%">Current Stock</th>
+						      	<th scope="col" style="width: 5%">CurSt</th>
 						      	<th scope="col" style="width: 5%">Stock</th>
 						    </tr>
 						</thead>

@@ -20,8 +20,8 @@
 								<label for="address">Address: </label>
 								<input type="text" name="address" id="address" class="form-control">
 							</div>
-							<div class="form-group">
-								<input type="submit" value="Submit" class="btn btn-primary submit">
+							<div class="form-group mt-5">
+								<input type="submit" value="Submit" class="btn btn-primary submit mt-5">
 							</div>
 						</form>
 						<span class="msg-span"><?php echo (isset($this->data['msg']['msg1'])) ? $this->data['msg']['msg1'] : false ?></span>
@@ -103,8 +103,8 @@
 								<label for="title">Description: </label>
 								<textarea class="form-control" rows="3" name="description"></textarea>
 							</div>
-							<div class="form-group col-12">
-								<input type="submit" value="Submit" class="btn btn-primary submit mt-2" disabled>
+							<div class="form-group col-12 mt-5">
+								<input type="submit" value="Submit" class="btn btn-primary submit mt-5" disabled>
 							</div>
 						</form>
 						<span class="msg-span"><?php echo (isset($this->data['msg']['msg2'])) ? $this->data['msg']['msg2'] : false ?></span>
@@ -115,16 +115,28 @@
 						<form class="mt-5" method="post" action="">
 							<h5>Create new rental</h5>
 							<div class="form-group">
-								<label for="title">Title: </label>
-								<input type="text" name="title" id="title" class="form-control">
+								<label for="client">Client: </label>
+								<input type="text" name="client" id="client" class="form-control">
 							</div>
 							<div class="form-group">
-								<label for="price">Price: </label>
-								<input type="text" name="price" id="price" class="form-control">
+								<label for="title1">Title1: </label>
+								<input type="text" name="title1" id="title1" class="form-control">
 							</div>
 							<div class="form-group">
-								<label for="stock">Stock: </label>
-								<input type="text" name="stock" id="stock" class="form-control">
+								<label for="title2">Title2: </label>
+								<input type="text" name="title2" id="title2" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="title3">Title3: </label>
+								<input type="text" name="title3" id="title3" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="title4">Title4: </label>
+								<input type="text" name="title4" id="title4" class="form-control">
+							</div>
+							<div class="form-group">
+								<label for="title5">Title5: </label>
+								<input type="text" name="title5" id="title5" class="form-control">
 							</div>
 							<div class="form-group">
 								<input type="submit" value="Submit" class="btn btn-primary submit" disabled>

@@ -1,13 +1,10 @@
 window.onload = function() {
 
 	// makes ajax for pagination and filter
-	console.log(window.location.href);
 	var controller = window.location.href.split('/').reverse()[1];
-	console.log(controller);
 	if (controller.match(/(\d+)/)) {
 		controller = window.location.href.split('/').reverse()[2].slice(0, -1);
 	}
-	console.log(controller);
 	var filter = document.getElementById('filter');
 	var pagination_links = document.querySelectorAll(".pagination li a");
 	var ajax = new FilterAndPagination(filter, pagination_links, controller);

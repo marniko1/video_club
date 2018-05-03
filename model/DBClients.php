@@ -17,7 +17,7 @@ class DBClients extends DB {
 	public static function getSingleClient($id, $skip) {
 		$data = [];
 		$sql = "select c.id, concat(c.first_name, \" \", c.last_name) as client, c.email, c.address, c.stock, f.title, r.id as id_rental, r.created, r.due, r.opened, 
-				(select count(*) from rentals where id_client=$id) as rented from clients as c  
+				(select count(*) from rentals_films where id_rental in (select id from rentals where id_client = $id)) as rented from clients as c  
 				left join rentals as r 
 				on c.id = r.id_client 
 				left join rentals_films as rf 
@@ -35,15 +35,15 @@ class DBClients extends DB {
 	}
 	public static function getSingleClientRentals ($id, $skip) {
 		$data = [];
-		$sql = "select (select count(*) from rentals where id_client=$id) as rented, 
-				concat(c.first_name, \" \", c.last_name) as client, r.id, r.created, r.due, r.opened from films as f 
-				left join rentals_films as rf 
-				on rf.id_film = f.id 
+		$sql = "select c.id, f.title, r.id, r.created, r.due, r.opened,   
+				(select count(*) from rentals_films where id_rental in (select id from rentals where id_client = $id)) as rented from clients as c 
 				left join rentals as r 
+				on r.id_client = c.id 
+				left join rentals_films as rf 
 				on r.id = rf.id_rental 
-				left join clients as c 
-				on c.id = r.id_client  
-				where f.id=$id 
+				left join films as f 
+				on f.id = rf.id_film  
+				where c.id=$id 
 				limit $skip,2";
 		$res = self::executeSQL($sql);
 		while ($row = $res->fetch_object()) {

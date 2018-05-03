@@ -14,7 +14,7 @@
 						?>
 							<tr>
 						      	<th scope="row"><?php echo $key+1; ?></th>
-						     	<td><?php echo '<a class="nav-link" href="'.INCL_PATH.'Films/'.$value->id.'/p1">'.$value->title.'</a>'; ?></td>
+						     	<td><?php echo '<a class="nav-link p-0" href="'.INCL_PATH.'Films/'.$value->id.'/p1">'.$value->title.'</a>'; ?></td>
 						      	<td><?php echo $value->price; ?></td>
 						    </tr>
 						<?php
@@ -28,7 +28,7 @@
 					</tbody>
 				</table>
 				<ul>
-					<li>Client: <?php echo $this->data['rental'][0]->client; ?></li>
+					<li>Client: <?php echo '<a class="nav-link p-0 d-inline" href="'.INCL_PATH.'Clients/'.$this->data['rental'][0]->client_id.'/p1">'.$this->data['rental'][0]->client.'</a>'; ?></li>
 					<li>Active: <?php echo $this->data['rental'][0]->opened; ?></li>
 					<li>Date created: <?php echo $this->data['rental'][0]->created; ?></li>
 					<li>Due: <?php echo $this->data['rental'][0]->due; ?></li>

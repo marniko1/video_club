@@ -11,6 +11,12 @@ class FilterAndPagination{
 		if (this.filter) {
 			var filter = this.filter;
 			var self = this;
+			filter.onkeydown = function (e) {
+				if(event.keyCode == 13) {
+			      e.preventDefault();
+			      return false;
+			    }
+			}
 			filter.onkeyup = function () {
 				var pagination = document.querySelector('.pagination');
 				var filter_value = filter.value.trim();
@@ -28,7 +34,6 @@ class FilterAndPagination{
 				httpReq.onreadystatechange = function(){
 					if (httpReq.readyState == 4){
 						var response = JSON.parse(this.responseText);
-						console.log(response);
 						if (response[0].length > 0) {
 							var tbody_html = self.prepareTbodyHTML(controller, response[0]);
 							if (response[1].length == pagination_links.length) {
@@ -93,7 +98,6 @@ class FilterAndPagination{
 					httpReq.onreadystatechange = function(){
 						if (httpReq.readyState == 4){
 							var response = JSON.parse(this.responseText);
-							// console.log(response);
 							if (response[0].length > 0) {
 								var tbody_html = self.prepareTbodyHTML(controller, response[0]);
 								if (response[1].length == pagination_links.length) {
@@ -147,12 +151,12 @@ class FilterAndPagination{
 		var tbody_html = ``;
 		// need this for single film and single client all rentals pagination-----
 		var pg = '';
-		if (document.querySelector('.navbar-collapse li.active > a') && document.querySelector('.navbar-collapse li.active > a').innerText === 'Films' || document.querySelector('.navbar-collapse li.active > a') && document.querySelector('.navbar-collapse li.active > a').innerText === 'Clients') {
+		if (controller == 'Films' || controller == 'Clients') {
 			pg = '/p1';
 		}
 		// -------------
 		for (var i = 0; i < response.length; i++) {
-			if (controller == 'Film') {
+			if (controller == 'Film' || controller == 'Client') {
 				controller = 'Rentals';
 			}
 			tbody_html += `<tr style="cursor: pointer" onclick="document.location.href='${root_url + controller}/${response[i].id + pg}'">
@@ -170,11 +174,4 @@ class FilterAndPagination{
 		}
 		return tbody_html;
 	}
-}
-
-function parseHtmlEnteties(str) {
-    return str.replace(/&#([0-9]{1,3});/gi, function(match, numStr) {
-        var num = parseInt(numStr, 10); // read num as normal number
-        return String.fromCharCode(num);
-    });
 }
