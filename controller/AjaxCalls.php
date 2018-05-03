@@ -56,6 +56,27 @@ class AjaxCalls extends BaseController {
 		echo json_encode($response);
 	}
 
+	public function clientsFilter () {
+		$filtered_data = DBClients::getFilteredClients('client', $this->search_value, $this->skip);
+		$total_clients_num = 0;
+		if (isset($filtered_data[0]->total)) {
+			$total_clients_num = $filtered_data[0]->total;
+		}
+		$pagination_data = $this->preparePaginationLinks($total_clients_num, $this->pg);
+		$response = [$filtered_data, $pagination_data, $total_clients_num];
+		echo json_encode($response);
+	}
+
+	public function clientFilter () {
+		$filtered_data = DBClients::getSingleClientRentals($this->id, $this->skip);
+		$total_rents_num = $filtered_data[0]->rented;
+		$pagination_data = $this->preparePaginationLinks($total_rents_num, $this->pg);
+		$pagination_data[0][1] = "<";
+		$pagination_data[count($pagination_data)-1][1] = ">";
+		$response = [$filtered_data, $pagination_data];
+		echo json_encode($response);
+	}
+
 	public function submitForm(){
 		$controller = $_POST['controller'];
 		$method = $_POST['method'];

@@ -28,6 +28,7 @@ class FilterAndPagination{
 				httpReq.onreadystatechange = function(){
 					if (httpReq.readyState == 4){
 						var response = JSON.parse(this.responseText);
+						console.log(response);
 						if (response[0].length > 0) {
 							var tbody_html = self.prepareTbodyHTML(controller, response[0]);
 							if (response[1].length == pagination_links.length) {
@@ -92,7 +93,7 @@ class FilterAndPagination{
 					httpReq.onreadystatechange = function(){
 						if (httpReq.readyState == 4){
 							var response = JSON.parse(this.responseText);
-							console.log(response[1]);
+							// console.log(response);
 							if (response[0].length > 0) {
 								var tbody_html = self.prepareTbodyHTML(controller, response[0]);
 								if (response[1].length == pagination_links.length) {
@@ -105,11 +106,9 @@ class FilterAndPagination{
 											pagination_links[i].classList.add('d-none');
 										}
 									}
-									console.log(pagination_links);
 									for (var i = 0; i < response[1].length; i++) {
-										// console.log(pagination_links[i]);
 										pagination_links[i].href = response[1][i][0];
-										jQuery(pagination_links[i]).set('html', response[1][i][1]);
+										pagination_links[i].innerText = response[1][i][1];
 									}
 								}
 								self.finalAjaxDOMChanges(pagination_links, pg, tbody_html, tbody);
@@ -146,9 +145,9 @@ class FilterAndPagination{
 	}
 	prepareTbodyHTML(controller, response) {
 		var tbody_html = ``;
-		// need this for single film all rentals pagination-----
+		// need this for single film and single client all rentals pagination-----
 		var pg = '';
-		if (document.querySelector('.navbar-collapse li.active > a') && document.querySelector('.navbar-collapse li.active > a').innerText === 'Films') {
+		if (document.querySelector('.navbar-collapse li.active > a') && document.querySelector('.navbar-collapse li.active > a').innerText === 'Films' || document.querySelector('.navbar-collapse li.active > a') && document.querySelector('.navbar-collapse li.active > a').innerText === 'Clients') {
 			pg = '/p1';
 		}
 		// -------------

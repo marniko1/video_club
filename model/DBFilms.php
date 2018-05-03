@@ -65,12 +65,12 @@ class DBFilms extends DB {
 		}
 		return $data;
 	}
-	public static function totalFilmsNum () {
-		$sql = "select count(*) as total_films from films";
-		$res = self::executeSQL($sql);
-		$total_films_num = $res->fetch_object();
-		return $total_films_num;
-	}
+	// public static function totalFilmsNum () {
+	// 	$sql = "select count(*) as total_films from films";
+	// 	$res = self::executeSQL($sql);
+	// 	$total_films_num = $res->fetch_object();
+	// 	return $total_films_num;
+	// }
 	public static function insertFilmIntoDB ($title, $description, $genre, $price, $stock) {
 		$sql = "insert into films values (null, '$title', '$description', '$genre', $price, $stock, $stock)";
 		$req = self::executeSQL($sql);

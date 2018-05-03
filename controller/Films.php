@@ -57,11 +57,4 @@ class Films extends BaseController {
 			// return $genre;
 		}
 	}
-	public function changePrevNext($pagination_links) {
-
-		$pagination_links[0][1] = '<';
-		$pagination_links[count($pagination_links)-1][1] = '>';
-
-		return $pagination_links;
-	}
 }
