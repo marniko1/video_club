@@ -81,18 +81,8 @@ class AjaxCalls extends BaseController {
 		$controller = $_POST['controller'];
 		$method = $_POST['method'];
 		$this->params = json_decode($_POST['params']);
-		// if there is checkbox in form or not
-		if (!empty(json_decode($_POST['checkbox']))) {
-			$checkbox = json_decode($_POST['checkbox']);
-			$str = '';
-			foreach ($checkbox as $key => $value) {
-				$str .= $value . ', ';
-			}
-			rtrim($str);
-			$this->params[] = rtrim($str, ', ');
-		}
+		// this is ajax call == true
 		$this->params[] = true;
-		// var_dump($this->params);
 		include_once "controller/" . $controller . ".php";
 		$controller = new $controller;
 		$response = call_user_func_array([$controller, $method], $this->params);

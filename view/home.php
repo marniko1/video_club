@@ -2,7 +2,7 @@
 			<div class="row">
 				<div class="col-6 form-wrapper d-flex">
 					<div class="col-12 border border-primary mt-2 rounded">
-						<form class="mt-5" method="post" action="<?php echo INCL_PATH.'Clients/addNewClient'; ?>">
+						<form class="mt-5" method="post" action="<?php echo INCL_PATH.'Clients/addNewClient';?>">
 							<h5>Add new client</h5>
 							<div class="form-group">
 								<label for="first_name">First name: </label>
@@ -29,7 +29,7 @@
 				</div>
 				<div class="col-3 form-wrapper d-flex opacity-5">
 					<div class="col-12 border border-secondary mt-2 rounded">
-						<form class="mt-5 row" method="post" action="<?php echo INCL_PATH.'Films/addNewFilm'; ?>">
+						<form class="mt-5 row" method="post" action="<?php echo INCL_PATH.'Films/addNewFilm';?>">
 							<h5 class="col-12">Add new film</h5>
 							<div class="form-group col-12">
 								<label for="title">Title: </label>
@@ -37,11 +37,11 @@
 							</div>
 							<div class="form-group col-6">
 								<label for="price">Price: </label>
-								<input type="number" name="price" id="price" class="form-control">
+								<input type="number" step="0.01" name="price" id="price" class="form-control">
 							</div>
 							<div class="form-group col-6">
 								<label for="stock">Stock: </label>
-								<input type="number" step="0.01" name="stock" id="stock" class="form-control">
+								<input type="number" name="stock" id="stock" class="form-control">
 							</div>
 							<div class="col-3 checkbox-holder d-none">
 								<div class="form-check form-check-inline ml-2">									
@@ -112,7 +112,7 @@
 				</div>
 				<div class="col-3 form-wrapper d-flex opacity-5">
 					<div class="col-12 border border-secondary mt-2 rounded">
-						<form class="mt-5" method="post" action="<?php echo INCL_PATH.'Rentals/addNewRental'; ?>">
+						<form class="mt-5" method="post" action="<?php echo INCL_PATH.'Rentals/addNewRental';?>">
 							<h5>Create new rental</h5>
 							<div class="form-group">
 								<label for="client">Client: </label>

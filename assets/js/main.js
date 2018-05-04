@@ -7,7 +7,7 @@ window.onload = function() {
 	}
 	var filter = document.getElementById('filter');
 	var pagination_links = document.querySelectorAll(".pagination li a");
-	var ajax = new FilterAndPagination(filter, pagination_links, controller);
+	// var ajax = new FilterAndPagination(filter, pagination_links, controller);
 
 	// stylize forms on home page
     if (window.location.origin + window.location.pathname == root_url) {

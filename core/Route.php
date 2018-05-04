@@ -42,19 +42,10 @@ class Route {
 
 	// get method of class  Route
 	public static function get($url, $action, $req=[]) {
-		// var_dump($url);
 		$path = self::findServerPath();
-		// $path = 'AjaxCalls/index';
-		var_dump($_SERVER);
-		var_dump($_SERVER['REQUEST_URI']);
 		$url_arr = self::prepareURL($url);
 		$path_arr = self::prepareServerURLPath();
-		// var_dump($url_arr);
-		// var_dump($path_arr);
 		if ($path_arr[0] != $url_arr[0] || count($path_arr) != count($url_arr)) {
-			// var_dump('ovde');
-			// var_dump(count($path_arr));
-			// var_dump(count($url_arr));
 			return;
 		} else {
 			$action = explode('@', $action);
@@ -104,7 +95,6 @@ class Route {
 
 	public static function prepareServerURLPath () {
 		$path = self::findServerPath();
-		// $path = 'AjaxCalls/index';
 		return $path_arr = explode('/', $path);
 	}
 
