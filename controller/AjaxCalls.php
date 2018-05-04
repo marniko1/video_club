@@ -92,6 +92,7 @@ class AjaxCalls extends BaseController {
 			$this->params[] = rtrim($str, ', ');
 		}
 		$this->params[] = true;
+		// var_dump($this->params);
 		include_once "controller/" . $controller . ".php";
 		$controller = new $controller;
 		$response = call_user_func_array([$controller, $method], $this->params);

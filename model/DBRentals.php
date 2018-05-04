@@ -58,4 +58,9 @@ class DBRentals extends DB {
 		$num_of_rows = self::executeSQL($sql)->num_rows;
 		return $num_of_rows;
 	}
+	public static function insertRentalIntoDB ($first_name, $last_name, $email, $address) {
+		$sql = "insert into clients values (null, '$first_name', '$last_name', '$email', '$address', default)";
+		$req = self::executeSQL($sql);
+		return $req;
+	}
 }

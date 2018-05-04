@@ -112,7 +112,7 @@
 				</div>
 				<div class="col-3 form-wrapper d-flex opacity-5">
 					<div class="col-12 border border-secondary mt-2 rounded">
-						<form class="mt-5" method="post" action="">
+						<form class="mt-5" method="post" action="<?php echo INCL_PATH.'Rentals/addNewRental'; ?>">
 							<h5>Create new rental</h5>
 							<div class="form-group">
 								<label for="client">Client: </label>
