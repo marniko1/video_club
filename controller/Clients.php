@@ -27,9 +27,9 @@ class Clients extends BaseController {
 		$this->show_view('client');
 	}
 	public function addNewClient($first_name, $last_name, $email, $address, $is_ajax = false) {
-		// $req = DBClients::insertClientIntoDB($first_name, $last_name, $email, $address);
-		// if ($req) {
-		if (true) {
+		$req = DBClients::insertClientIntoDB($first_name, $last_name, $email, $address);
+		if ($req) {
+		// if (true) {
 			Msg::createMessage("msg1", "Success.");
 		} else {
 			Msg::createMessage("msg1", "Unsuccess.");

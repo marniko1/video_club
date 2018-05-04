@@ -42,9 +42,9 @@ class Films extends BaseController {
 		}
 	}
 	public function addNewFilm($title, $price, $stock, $description, $genre, $is_ajax = false) {
-		// $req = DBFilms::insertFilmIntoDB($title, $description, $genre, $price, $stock);
-		// if ($req) {
-		if (true) {
+		$req = DBFilms::insertFilmIntoDB($title, $description, $genre, $price, $stock);
+		if ($req) {
+		// if (true) {
 			Msg::createMessage("msg2", "Success.");
 		} else {
 			Msg::createMessage("msg2", "Unsuccess.");

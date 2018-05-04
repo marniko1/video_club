@@ -81,7 +81,7 @@ class AjaxCalls extends BaseController {
 		$controller = $_POST['controller'];
 		$method = $_POST['method'];
 		$this->params = json_decode($_POST['params']);
-		// this is ajax call == true
+		// this is ajax == true
 		$this->params[] = true;
 		include_once "controller/" . $controller . ".php";
 		$controller = new $controller;

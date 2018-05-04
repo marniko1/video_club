@@ -87,7 +87,7 @@ class FilterAndPagination{
 						filter_value = filter.value.trim();
 					}
 
-				  	var pg = this.href.slice(-1);
+				  	var pg = this.href.split('/').reverse()[0].replace('p', '');
 				  	var id = window.location.href.split('/').reverse()[1];
 					var httpReq = new XMLHttpRequest ();
 

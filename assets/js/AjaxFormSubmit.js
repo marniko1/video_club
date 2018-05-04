@@ -24,15 +24,14 @@ class FormSubmit {
 					params.push(inputs[i].value);
 				}
 			}
-			// if there is chackboxes, add checked to the params
-			if (checkbox.length != 0) {
-				for (var i = 0; i < checkbox.length; i++) {
-					params.push(checkbox[i]);
-				}
-			}
 			// if there is textarea, add one to the params
 			if ($(this).parents('div.form-wrapper').find('textarea').length != 0) {
 				params.push($('textarea').val());
+			}
+			// if there is checkoboxes, add checked to the params
+			if (checkbox.length != 0) {
+				checkbox = checkbox.toString().replace(/,/g, ', ');
+				params.push(checkbox);
 			}
 			console.log(params);
 			
@@ -47,6 +46,7 @@ class FormSubmit {
 					var msg_span = $('div.form-wrapper span');
 					if (msg_span.text() == "Success.") {
 						$(self).parents('div.form-wrapper').find('input').not(':input[type=submit]').val('');
+						$(self).parents('div.form-wrapper').find('textarea').val('');
 						$('input:checked').prop('checked', false);
 						msg_span.addClass('text-success');
 					} else if (msg_span.text() == "Unsuccess.") {
