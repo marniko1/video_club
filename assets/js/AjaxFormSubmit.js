@@ -33,7 +33,6 @@ class FormSubmit {
 				checkbox = checkbox.toString().replace(/,/g, ', ');
 				params.push(checkbox);
 			}
-			console.log(params);
 			
 			$.ajax({
 				type: "POST",

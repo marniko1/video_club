@@ -63,4 +63,10 @@ class DBRentals extends DB {
 		$req = self::executeSQL($sql);
 		return $req;
 	}
+	public static function numOfFilmsAtClient ($client) {
+		// $sql = "call NUM_OF_FILMS_AT_CLIENT($client)";
+		$sql = "select stock from clients where concat(first_name, \" \", last_name) = '$client'";
+		$res = self::executeSQL($sql);
+		return $res->fetch_object();
+	}
 }
