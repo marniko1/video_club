@@ -9,6 +9,7 @@ if (Auth::logged()) {
 	Route::get('/Rentals/{id}', 'Rentals@singleRental', $req = ['/^[0-9]+$/']);
 	Route::get('/Rentals/{page}', 'Rentals@index', $req = ['/^p[0-9]+$/']);
 	Route::post('/Rentals/addNewRental', 'Rentals@addNewRental');
+	Route::post('/Rentals/closeRental', 'Rentals@closeRental');
 
 	Route::get('/Films/index', 'Films@index');
 	Route::get('/Films/{id}/{page}', 'Films@singleFilm', $req = ['/^[0-9]+$/', '/^p[0-9]+$/']);

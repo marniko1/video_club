@@ -16,7 +16,7 @@ class DBRentals extends DB {
 	}
 	public static function getSingleRental($id) {
 		$data = [];
-		$sql = "select f.id, f.title, f.price, r.totals, r.created, r.due, r.opened, concat(c.first_name, \" \", c.last_name) as client, c.id as client_id from rentals as r 
+		$sql = "select f.id, f.title, f.price, r.id as rental_id, r.totals, r.created, r.due, r.opened, concat(c.first_name, \" \", c.last_name) as client, c.id as client_id from rentals as r 
 				join rentals_films as rf 
 				on r.id = rf.id_rental 
 				join films as f 
@@ -58,8 +58,13 @@ class DBRentals extends DB {
 		$num_of_rows = self::executeSQL($sql)->num_rows;
 		return $num_of_rows;
 	}
-	public static function insertRentalIntoDB ($first_name, $last_name, $email, $address) {
-		$sql = "insert into clients values (null, '$first_name', '$last_name', '$email', '$address', default)";
+	public static function insertRentalIntoDB ($client, $title1, $title2, $title3, $title4, $title5) {
+		$sql = "call INSERT_RENTAL('$client', '$title1', '$title2', '$title3', '$title4', '$title5')";
+		$req = self::executeSQL($sql);
+		return $req;
+	}
+	public static function closeRental ($id_rental, $id_client) {
+		$sql = "call CLOSE_RENTAL($id_rental, $id_client)";
 		$req = self::executeSQL($sql);
 		return $req;
 	}

@@ -39,9 +39,9 @@ class Rentals extends BaseController {
 					$av = 5 - $num_of_films_at_client->stock;
 					throw new Exception("The client can rent " . $av . " more film/s.");
 				}
-				// $req = DBRentals::insertRentalIntoDB($first_name, $last_name, $email, $address);
-				// if ($req) {
-				if (true) {
+				$req = DBRentals::insertRentalIntoDB($client, $title1, $title2, $title3, $title4, $title5);
+				if ($req) {
+				// if (true) {
 					Msg::createMessage("msg3", "Success.");
 				} else {
 					Msg::createMessage("msg3", "Unsuccess.");
@@ -60,5 +60,11 @@ class Rentals extends BaseController {
 			Msg::createMessage("msg3", $e->getMessage());
 			return Msg::getMessage();
 		}		
+	}
+	public function closeRental($id_rental, $id_client, $is_ajax = false) {
+		$req = DBRentals::closeRental(intval($id_rental), intval($id_client));
+		if(!$is_ajax) {
+			header("Location: ".INCL_PATH."Rentals/{$id_rental}");
+		}
 	}
 }
