@@ -31,6 +31,7 @@ class DBClients extends DB {
 		while ($row = $res->fetch_object()) {
 			array_push($data, $row);
 		}
+		// var_dump($data);die;
 		return $data;
 	}
 	public static function getSingleClientRentals ($id, $skip) {
@@ -43,7 +44,8 @@ class DBClients extends DB {
 				on r.id = rf.id_rental 
 				left join films as f 
 				on f.id = rf.id_film  
-				where c.id=$id 
+				where c.id=$id  
+				order by f.title 
 				limit $skip,2";
 		$res = self::executeSQL($sql);
 		while ($row = $res->fetch_object()) {
