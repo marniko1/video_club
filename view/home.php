@@ -116,27 +116,45 @@
 							<h5>Create new rental</h5>
 							<div class="form-group">
 								<label for="client">Client: </label>
-								<input type="text" name="client" id="client" class="form-control">
+								<input type="text" name="client" id="client" class="form-control new-rent-input">
+								<div class="proposals d-none">
+									<ul class="mb-0 pl-0"></ul>
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="title1">Title1: </label>
-								<input type="text" name="title1" id="title1" class="form-control">
+								<input type="text" name="title1" id="title1" class="form-control new-rent-input">
+								<div class="proposals d-none">
+									<ul class="mb-0 pl-0"></ul>
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="title2">Title2: </label>
-								<input type="text" name="title2" id="title2" class="form-control">
+								<input type="text" name="title2" id="title2" class="form-control new-rent-input">
+								<div class="proposals d-none">
+									<ul class="mb-0 pl-0"></ul>
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="title3">Title3: </label>
-								<input type="text" name="title3" id="title3" class="form-control">
+								<input type="text" name="title3" id="title3" class="form-control new-rent-input">
+								<div class="proposals d-none">
+									<ul class="mb-0 pl-0"></ul>
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="title4">Title4: </label>
-								<input type="text" name="title4" id="title4" class="form-control">
+								<input type="text" name="title4" id="title4" class="form-control new-rent-input">
+								<div class="proposals d-none">
+									<ul class="mb-0 pl-0"></ul>
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="title5">Title5: </label>
-								<input type="text" name="title5" id="title5" class="form-control">
+								<input type="text" name="title5" id="title5" class="form-control new-rent-input">
+								<div class="proposals d-none">
+									<ul class="mb-0 pl-0"></ul>
+								</div>
 							</div>
 							<div class="form-group">
 								<input type="submit" value="Submit" class="btn btn-primary submit" disabled>

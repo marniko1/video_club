@@ -26,7 +26,8 @@ window.onload = function() {
 			$(this).parents('div.form-wrapper').find('input.btn').removeAttr('disabled');
 			$(this).parents('div.form-wrapper.col-6').find('.checkbox-holder').removeClass('d-none');
 		});
-
+    	// add new rental proposals filters
+    	var new_rent_prop = new ShowNewRentalProposals;
 		// form validate and submit
 		var form = new FormSubmit();
 		// style for msg span

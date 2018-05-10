@@ -11,9 +11,11 @@ class AjaxCalls extends BaseController {
 
 	public function __construct () {
 		$this->method = $_POST['ajax_fn'];
-		if (isset($_POST['pg']) && isset($_POST['search_value'])) {
+		if (isset($_POST['pg'])) {
 			$this->pg = $_POST['pg'];
 			$this->skip = $_POST['pg']*2-2;
+		}
+		if (isset($_POST['search_value'])) {
 			$this->search_value = $_POST['search_value'];
 		}
 		if (isset($_POST['id'])) {
@@ -88,6 +90,17 @@ class AjaxCalls extends BaseController {
 		$response = call_user_func_array([$controller, $method], $this->params);
 		echo json_encode($response);
 	}
+
+	public function makeNewRentalClientFilter() {
+		$response = DBClients::getFilteredClientsForNewRent($this->search_value);
+		echo json_encode($response);
+	}
+
+	public function makeNewRentalFilmFilter() {
+		$response = DBFilms::getFilteredFilmsForNewRent($this->search_value);
+		echo json_encode($response);
+	}
+
 	public function prepareShortenedFilmsData ($data_array) {
 		include_once 'controller/Films.php';
 		$c = new Films;

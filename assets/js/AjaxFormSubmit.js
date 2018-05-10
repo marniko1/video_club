@@ -24,11 +24,11 @@ class FormSubmit {
 					params.push(inputs[i].value);
 				}
 			}
-			// if there is textarea, add one to the params
+			// if there is textarea, add value of it to the params
 			if ($(this).parents('div.form-wrapper').find('textarea').length != 0) {
 				params.push($('textarea').val());
 			}
-			// if there is checkoboxes, add checked to the params
+			// if there is checkoboxes, add value of checked to the params
 			if (checkbox.length != 0) {
 				checkbox = checkbox.toString().replace(/,/g, ', ');
 				params.push(checkbox);

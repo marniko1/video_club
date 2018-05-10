@@ -17,7 +17,7 @@ create procedure CLOSE_RENTAL (_rental_id int(11), _client_id int(11))
 
 	select count(*) from rentals_films where id_rental = _rental_id into num_of_films_at_rental;
 
-	update rentals set opened = 'no' where id = _rental_id;
+	update rentals set opened = 'no', due = now() where id = _rental_id;
 	update clients set stock = stock - num_of_films_at_rental where id = _client_id;
 	update films set current_stock = current_stock + 1 where id in (select id_film from rentals_films where id_rental = _rental_id);
 

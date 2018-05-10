@@ -65,6 +65,15 @@ class DBFilms extends DB {
 		}
 		return $data;
 	}
+	public static function getFilteredFilmsForNewRent ($cond) {
+		$data = [];
+		$sql = "select title, current_stock from films having title like '%$cond%' order by title limit 6";
+		$res = self::executeSQL($sql);
+		while ($row = $res->fetch_object()) {
+			array_push($data, $row);
+		}
+		return $data;
+	}
 	// public static function totalFilmsNum () {
 	// 	$sql = "select count(*) as total_films from films";
 	// 	$res = self::executeSQL($sql);

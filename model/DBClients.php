@@ -65,6 +65,15 @@ class DBClients extends DB {
 		}
 		return $data;
 	}
+	public static function getFilteredClientsForNewRent ($cond) {
+		$data = [];
+		$sql = "select concat(first_name, \" \", last_name) as client, stock from clients having client like '%$cond%' order by client limit 6";
+		$res = self::executeSQL($sql);
+		while ($row = $res->fetch_object()) {
+			array_push($data, $row);
+		}
+		return $data;
+	}
 	// public static function totalClientsNum () {
 	// 	$sql = "select count(*) as total_rents from clients";
 	// 	$res = self::executeSQL($sql);
