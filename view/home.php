@@ -6,19 +6,19 @@
 							<h5>Add new client</h5>
 							<div class="form-group">
 								<label for="first_name">First name: </label>
-								<input type="text" name="first_name" id="first_name" class="form-control">
+								<input type="text" name="first_name" id="first_name" class="form-control" data-validation-rules="req, minLength=3, maxLength=20">
 							</div>
 							<div class="form-group">
 								<label for="last_name">Last name: </label>
-								<input type="text" name="last_name" id="last_name" class="form-control">
+								<input type="text" name="last_name" id="last_name" class="form-control" data-validation-rules="req, minLength, maxLength">
 							</div>
 							<div class="form-group">
 								<label for="email">Email: </label>
-								<input type="email" name="email" id="email" class="form-control">
+								<input type="email" name="email" id="email" class="form-control" data-validation-rules="req, minLength, maxLength">
 							</div>
 							<div class="form-group">
 								<label for="address">Address: </label>
-								<input type="text" name="address" id="address" class="form-control">
+								<input type="text" name="address" id="address" class="form-control" data-validation-rules="req, minLength, maxLength">
 							</div>
 							<div class="form-group mt-5">
 								<input type="submit" value="Submit" class="btn btn-primary submit mt-5">

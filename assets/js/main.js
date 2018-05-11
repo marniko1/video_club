@@ -11,6 +11,7 @@ window.onload = function() {
 
 	// stylize forms on home page
     if (window.location.origin + window.location.pathname == root_url) {
+    	var frmvalidator = new Validator($('div.col-6.form-wrapper form'));
 		var first_input = document.querySelector('input');
 		first_input.focus();
 		jQuery('input, textarea').on('click', function(){
@@ -25,11 +26,12 @@ window.onload = function() {
 			$(this).parents('div.border').removeClass('border-secondary').addClass('border-primary');
 			$(this).parents('div.form-wrapper').find('input.btn').removeAttr('disabled');
 			$(this).parents('div.form-wrapper.col-6').find('.checkbox-holder').removeClass('d-none');
+			frmvalidator = new Validator($('div.col-6.form-wrapper form'));
 		});
     	// add new rental proposals filters
-    	var new_rent_prop = new ShowNewRentalProposals;
+    	new ShowNewRentalProposals;
 		// form validate and submit
-		var form = new FormSubmit();
+		new FormSubmit();
 		// style for msg span
 		var msg_span = $('div.form-wrapper span');
 		if (msg_span) {
@@ -41,10 +43,8 @@ window.onload = function() {
 		}
 	}
 	// just testing class
-	var frmvalidator1 = new Validator('#new-client');
-	var frmvalidator2 = new Validator('#new-film');
-	var frmvalidator3 = new Validator('#new-rental');
-
-	frmvalidator1.addValidation('#first_name', 'req', 'Neophodno');
-	console.log(frmvalidator1.isValid);
+	// console.log($('div.col-6.form-wrapper form'));
+	
+	// var frmvalidator2 = new Validator('#new-film');
+	// var frmvalidator3 = new Validator('#new-rental');
 }

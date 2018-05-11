@@ -3,11 +3,16 @@ class FormSubmit {
 		this.submit();
 	}
 	validate() {
-
+		return false;
 	}
 	submit() {
+		var validate = this.validate();
 		jQuery('.submit').on('click', function(e){
 			e.preventDefault();
+			if(!validate){
+				console.log(validate);
+				return;
+			}
 			var self = this;
 			var action_url = $(this).parents('form').attr('action');
 			var action_url_arr = action_url.split('/').reverse();
