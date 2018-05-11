@@ -2,7 +2,7 @@
 			<div class="row">
 				<div class="col-6 form-wrapper d-flex">
 					<div class="col-12 border border-primary mt-2 rounded">
-						<form class="mt-5" method="post" action="<?php echo INCL_PATH.'Clients/addNewClient';?>">
+						<form class="mt-5" method="post" action="<?php echo INCL_PATH.'Clients/addNewClient';?>" id="new-client">
 							<h5>Add new client</h5>
 							<div class="form-group">
 								<label for="first_name">First name: </label>
@@ -29,7 +29,7 @@
 				</div>
 				<div class="col-3 form-wrapper d-flex opacity-5">
 					<div class="col-12 border border-secondary mt-2 rounded">
-						<form class="mt-5 row" method="post" action="<?php echo INCL_PATH.'Films/addNewFilm';?>">
+						<form class="mt-5 row" method="post" action="<?php echo INCL_PATH.'Films/addNewFilm';?>" id="new-film">
 							<h5 class="col-12">Add new film</h5>
 							<div class="form-group col-12">
 								<label for="title">Title: </label>
@@ -112,7 +112,7 @@
 				</div>
 				<div class="col-3 form-wrapper d-flex opacity-5">
 					<div class="col-12 border border-secondary mt-2 rounded">
-						<form class="mt-5" method="post" action="<?php echo INCL_PATH.'Rentals/addNewRental';?>">
+						<form class="mt-5" method="post" action="<?php echo INCL_PATH.'Rentals/addNewRental';?>" id="new-rental">
 							<h5>Create new rental</h5>
 							<div class="form-group">
 								<label for="client">Client: </label>

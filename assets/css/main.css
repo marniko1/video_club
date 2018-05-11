@@ -4,6 +4,9 @@
 .opacity-5 {
 	opacity: .2;
 }
+.page-link {
+	transition: background-color .3s ease;
+}
 .page-link:focus {
 	box-shadow: none;
 }

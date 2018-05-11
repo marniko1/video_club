@@ -40,4 +40,11 @@ window.onload = function() {
 			}
 		}
 	}
+	// just testing class
+	var frmvalidator1 = new Validator('#new-client');
+	var frmvalidator2 = new Validator('#new-film');
+	var frmvalidator3 = new Validator('#new-rental');
+
+	frmvalidator1.addValidation('#first_name', 'req', 'Neophodno');
+	console.log(frmvalidator1.isValid);
 }
