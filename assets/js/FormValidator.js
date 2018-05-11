@@ -42,6 +42,9 @@ class Validator {
 	email(field){
 
 	}
+	checked(field){
+
+	}
 	addValidation(field_id, rule, msg){
 
 	}
