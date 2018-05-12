@@ -43,65 +43,69 @@
 								<label for="stock">Stock: </label>
 								<input type="number" name="stock" id="stock" class="form-control">
 							</div>
-							<div class="col-3 checkbox-holder d-none">
-								<div class="form-check form-check-inline ml-2">									
-									<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox1" value="Comedy">
-	  								<label class="form-check-label" for="checkbox1">Comedy</label>
-								</div>
-								<div class="form-check form-check-inline ml-2">
-									<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox2" value="Sci-Fi">
-	  								<label class="form-check-label" for="checkbox2">Sci-Fi</label>
-								</div>
-								<div class="form-check form-check-inline ml-2">
-									<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox3" value="Horror">
-	  								<label class="form-check-label" for="checkbox3">Horror</label>
-								</div>
-							</div>
-							<div class="col-3 checkbox-holder d-none">
-								<div class="form-check form-check-inline ml-2">
-									<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox4" value="Romance">
-	  								<label class="form-check-label" for="checkbox4">Romance</label>
-								</div>
-								<div class="form-check form-check-inline ml-2">
-									<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox5" value="Action">
-	  								<label class="form-check-label" for="checkbox5">Action</label>
-								</div>
-								<div class="form-check form-check-inline ml-2">
-									<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox6" value="Thriller">
-	  								<label class="form-check-label" for="checkbox6">Thriller</label>
-								</div>
-							</div>
-							<div class="col-3 checkbox-holder d-none">
-								<div class="form-check form-check-inline ml-2">
-									<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox7" value="Drama">
-	  								<label class="form-check-label" for="checkbox7">Drama</label>
-								</div>
-								<div class="form-check form-check-inline ml-2">
-									<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox8" value="Mystery">
-	  								<label class="form-check-label" for="checkbox8">Mystery</label>
-								</div>
-								<div class="form-check form-check-inline ml-2">
-									<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox9" value="Crime">
-	  								<label class="form-check-label" for="checkbox9">Crime</label>
-								</div>
-							</div>
-							<div class="col-3 checkbox-holder d-none">
-								<div class="form-check form-check-inline ml-2">
-									<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox10" value="Animation">
-	  								<label class="form-check-label" for="checkbox10">Animation</label>
-								</div>
-								<div class="form-check form-check-inline ml-2">
-									<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox11" value="Adventure">
-	  								<label class="form-check-label" for="checkbox11">Adventure</label>
-								</div>
-								<div class="form-check form-check-inline ml-2">
-									<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox12" value="Fantasy">
-	  								<label class="form-check-label" for="checkbox12">Fantasy</label>
+							<div class="checkbox-wrapper col-12 form-group">
+								<div class="row">
+									<div class="col-3 checkbox-holder d-none">
+										<div class="form-check form-check-inline ml-2">									
+											<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox1" value="Comedy">
+			  								<label class="form-check-label" for="checkbox1">Comedy</label>
+										</div>
+										<div class="form-check form-check-inline ml-2">
+											<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox2" value="Sci-Fi">
+			  								<label class="form-check-label" for="checkbox2">Sci-Fi</label>
+										</div>
+										<div class="form-check form-check-inline ml-2">
+											<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox3" value="Horror">
+			  								<label class="form-check-label" for="checkbox3">Horror</label>
+										</div>
+									</div>
+									<div class="col-3 checkbox-holder d-none">
+										<div class="form-check form-check-inline ml-2">
+											<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox4" value="Romance">
+			  								<label class="form-check-label" for="checkbox4">Romance</label>
+										</div>
+										<div class="form-check form-check-inline ml-2">
+											<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox5" value="Action">
+			  								<label class="form-check-label" for="checkbox5">Action</label>
+										</div>
+										<div class="form-check form-check-inline ml-2">
+											<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox6" value="Thriller">
+			  								<label class="form-check-label" for="checkbox6">Thriller</label>
+										</div>
+									</div>
+									<div class="col-3 checkbox-holder d-none">
+										<div class="form-check form-check-inline ml-2">
+											<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox7" value="Drama">
+			  								<label class="form-check-label" for="checkbox7">Drama</label>
+										</div>
+										<div class="form-check form-check-inline ml-2">
+											<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox8" value="Mystery">
+			  								<label class="form-check-label" for="checkbox8">Mystery</label>
+										</div>
+										<div class="form-check form-check-inline ml-2">
+											<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox9" value="Crime">
+			  								<label class="form-check-label" for="checkbox9">Crime</label>
+										</div>
+									</div>
+									<div class="col-3 checkbox-holder d-none">
+										<div class="form-check form-check-inline ml-2">
+											<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox10" value="Animation">
+			  								<label class="form-check-label" for="checkbox10">Animation</label>
+										</div>
+										<div class="form-check form-check-inline ml-2">
+											<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox11" value="Adventure">
+			  								<label class="form-check-label" for="checkbox11">Adventure</label>
+										</div>
+										<div class="form-check form-check-inline ml-2">
+											<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox12" value="Fantasy">
+			  								<label class="form-check-label" for="checkbox12">Fantasy</label>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="form-group col-12 mt-2">
-								<label for="title">Description: </label>
-								<textarea class="form-control" rows="3" name="description"></textarea>
+								<label for="description">Description: </label>
+								<textarea class="form-control" rows="3" name="description" id="description"></textarea>
 							</div>
 							<div class="form-group col-12 mt-5">
 								<input type="submit" value="Submit" class="btn btn-primary submit mt-5" disabled>

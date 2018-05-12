@@ -1,11 +1,10 @@
 class FormSubmit {
 	constructor(frmvalidator) {
 		this.frmvalidator = frmvalidator;
-		// console.log(this.frmvalidator.isValid);
 		this.submit(frmvalidator);
 	}
-	validate() {
-		return this.frmvalidator.validation();
+	validate(form) {
+		return this.frmvalidator.validation(form);
 		// return false;
 	}
 	submit() {
@@ -13,11 +12,11 @@ class FormSubmit {
 		var that = this;
 		jQuery('.submit').on('click', function(e){
 			e.preventDefault();
-			if(!that.validate()){
-				console.log(that.validate());
+			if(!that.validate($(this).parents('form'))){
+				console.log(that.validate($(this).parents('form')));
 				return;
 			}
-			console.log(that.validate());
+			console.log(that.validate($(this).parents('form')));
 			// var self = this;
 			// var action_url = $(this).parents('form').attr('action');
 			// var action_url_arr = action_url.split('/').reverse();
