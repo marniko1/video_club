@@ -11,14 +11,36 @@ window.onload = function() {
 
 	// stylize forms on home page
     if (window.location.origin + window.location.pathname == root_url) {
+    	// form validation
     	var frmvalidator = new Validator($('div.col-6.form-wrapper form'));
+    	// add validation rules on fields
+    	frmvalidator.addValidation('#first_name', 'req', 'some msg');
+    	frmvalidator.addValidation('#first_name', 'minLength=3', 'Minimum length 3 chars.');
+    	frmvalidator.addValidation('#first_name', 'maxLength=200', 'Maximum length 20 chars.');
+
+    	frmvalidator.addValidation('#last_name', 'req', 'some msg');
+    	frmvalidator.addValidation('#last_name', 'minLength=3', 'Minimum length 3 chars.');
+    	frmvalidator.addValidation('#last_name', 'maxLength=200', 'Maximum length 20 chars.');
+
+    	frmvalidator.addValidation('#email', 'req', 'some msg');
+    	frmvalidator.addValidation('#email', 'email', 'Enter valid email.');
+
+    	frmvalidator.addValidation('#address', 'req', 'some msg');
+    	frmvalidator.addValidation('#address', 'minLength=3', 'Minimum length 3 chars.');
+    	frmvalidator.addValidation('#address', 'maxLength=200', 'Maximum length 20 chars.');
+
+    	// frmvalidator.validation();
+
+
+
+
 		var first_input = document.querySelector('input');
 		first_input.focus();
 		jQuery('input, textarea').on('click', function(){
 			$('.checkbox-holder').addClass('d-none');
 			$('div.form-wrapper').removeClass('col-6').addClass('col-3 opacity-5');
-			$('div.form-wrapper span').contents().remove();
-			$('div.form-wrapper span').removeClass('text-danger text-success');
+			$('div.form-wrapper .msg-span').contents().remove();
+			$('div.form-wrapper .msg-span').removeClass('text-danger text-success');
 			$('div.form-wrapper input').not(':input[type=submit], :input[type=checkbox]').not($(this).parents('div.form-wrapper').find('input')).val('');
 			$('div.form-wrapper input.btn').prop('disabled', true);
 			$('div.border').removeClass('border-primary').addClass('border-secondary');
@@ -31,7 +53,7 @@ window.onload = function() {
     	// add new rental proposals filters
     	new ShowNewRentalProposals;
 		// form validate and submit
-		new FormSubmit();
+		new FormSubmit(frmvalidator);
 		// style for msg span
 		var msg_span = $('div.form-wrapper span');
 		if (msg_span) {
