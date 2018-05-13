@@ -19,15 +19,20 @@ class Rentals extends BaseController {
 		$this->show_view('rental');
 	}
 	public function addNewRental($client, $title1, $title2, $title3, $title4, $title5, $is_ajax = false) {
-		// var_dump(DBRentals::numOfFilmsAtClient($client));
 		$num_of_films_at_client = DBRentals::numOfFilmsAtClient($client);
 		$num_of_films_in_curr_rent = 0;
 		$method_args = func_get_args();
 		unset($method_args[0]);
 		unset($method_args[6]);
-		foreach ($method_args as $value) {
+		$films_av = true;
+		$unav_films = [];
+		foreach ($method_args as $key => $value) {
 			if ($value != '') {
 				$num_of_films_in_curr_rent++;
+				if (!DBFilms::currFilmStock($value)->current_stock > 0) {
+					$films_av = false;
+					$unav_films[$key] = $value;
+				}
 			}
 		}
 		try {
@@ -39,16 +44,28 @@ class Rentals extends BaseController {
 					$av = 5 - $num_of_films_at_client->stock;
 					throw new Exception("The client can rent " . $av . " more film/s.");
 				}
-				$req = DBRentals::insertRentalIntoDB($client, $title1, $title2, $title3, $title4, $title5);
-				if ($req) {
-				// if (true) {
-					Msg::createMessage("msg3", "Success.");
-				} else {
-					Msg::createMessage("msg3", "Unsuccess.");
-				}
-				if(!$is_ajax) {
-					header("Location: ".INCL_PATH);
-				} else {
+				try {
+					if ($films_av == false) {
+						
+						throw new FilmUnaviableException($unav_films);
+					}
+					$req = DBRentals::insertRentalIntoDB($client, $title1, $title2, $title3, $title4, $title5);
+					if ($req) {
+					// if (false) {
+						Msg::createMessage("msg3", "Success.");
+					} else {
+						Msg::createMessage("msg3", "Unsuccess.");
+					}
+					if(!$is_ajax) {
+						header("Location: ".INCL_PATH);
+					} else {
+						return Msg::getMessage();
+					}
+					
+				} catch (FilmUnaviableException $e) {
+					foreach ($e->getData() as $key => $value) {
+						Msg::createMessage("unav_film_msg" . $key, "This film is not aviable for rent.");
+					}
 					return Msg::getMessage();
 				}
 			} catch (Exception $e) {

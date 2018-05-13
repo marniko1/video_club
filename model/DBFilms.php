@@ -80,6 +80,10 @@ class DBFilms extends DB {
 	// 	$total_films_num = $res->fetch_object();
 	// 	return $total_films_num;
 	// }
+	public static function currFilmStock($title) {
+		$sql = "select current_stock from films where title = '$title'";
+		return $res = self::executeSQL($sql)->fetch_object();
+	}
 	public static function insertFilmIntoDB ($title, $description, $genre, $price, $stock) {
 		$sql = "insert into films values (null, '$title', '$description', '$genre', $price, $stock, $stock)";
 		$req = self::executeSQL($sql);

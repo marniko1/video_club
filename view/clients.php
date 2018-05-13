@@ -10,9 +10,9 @@
 						    <tr>
 						      <th scope="col" style="width: 5%">#</th>
 						      <th scope="col" style="width: 30%">Name</th>
-						      <th scope="col" style="width: 15%">Email</th>
-						      <th scope="col" style="width: 25%">Address</th>
-						      <th scope="col" style="width: 25%">Stock</th>
+						      <th scope="col" style="width: 30%">Email</th>
+						      <th scope="col" style="width: 30%">Address</th>
+						      <th scope="col" style="width: 5%">Stock</th>
 						    </tr>
 						</thead>
 						<div class="table-content">

@@ -128,6 +128,7 @@
 							<div class="form-group">
 								<label for="title1">Title1: </label>
 								<input type="text" name="title1" id="title1" class="form-control new-rent-input">
+								<span class="film_err_span text-danger" id="unav_film_msg1"><small><?php echo (isset($this->data['msg']['unav_film_msg1'])) ? $this->data['msg']['unav_film_msg1'] : false ?></small></span>
 								<div class="proposals d-none">
 									<ul class="mb-0 pl-0"></ul>
 								</div>
@@ -135,6 +136,7 @@
 							<div class="form-group">
 								<label for="title2">Title2: </label>
 								<input type="text" name="title2" id="title2" class="form-control new-rent-input">
+								<span class="film_err_span text-danger" id="unav_film_msg2"><small><?php echo (isset($this->data['msg']['unav_film_msg2'])) ? $this->data['msg']['unav_film_msg2'] : false ?></small></span>
 								<div class="proposals d-none">
 									<ul class="mb-0 pl-0"></ul>
 								</div>
@@ -142,6 +144,7 @@
 							<div class="form-group">
 								<label for="title3">Title3: </label>
 								<input type="text" name="title3" id="title3" class="form-control new-rent-input">
+								<span class="film_err_span text-danger" id="unav_film_msg3"><small><?php echo (isset($this->data['msg']['unav_film_msg3'])) ? $this->data['msg']['unav_film_msg3'] : false ?></small></span>
 								<div class="proposals d-none">
 									<ul class="mb-0 pl-0"></ul>
 								</div>
@@ -149,6 +152,7 @@
 							<div class="form-group">
 								<label for="title4">Title4: </label>
 								<input type="text" name="title4" id="title4" class="form-control new-rent-input">
+								<span class="film_err_span text-danger" id="unav_film_msg4"><small><?php echo (isset($this->data['msg']['unav_film_msg4'])) ? $this->data['msg']['unav_film_msg4'] : false ?></small></span>
 								<div class="proposals d-none">
 									<ul class="mb-0 pl-0"></ul>
 								</div>
@@ -156,6 +160,7 @@
 							<div class="form-group">
 								<label for="title5">Title5: </label>
 								<input type="text" name="title5" id="title5" class="form-control new-rent-input">
+								<span class="film_err_span text-danger" id="unav_film_msg5"><small><?php echo (isset($this->data['msg']['unav_film_msg5'])) ? $this->data['msg']['unav_film_msg5'] : false ?></small></span>
 								<div class="proposals d-none">
 									<ul class="mb-0 pl-0"></ul>
 								</div>

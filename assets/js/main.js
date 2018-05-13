@@ -14,7 +14,7 @@ window.onload = function() {
     	// form validation
     	var frmvalidator = new Validator($('div.col-6.form-wrapper form'));
     	// add validation rules on fields
-    	// add new client fields
+    	// add new client fields validation rules
     	frmvalidator.addValidation('#first_name', 'req', 'This field cannot be left blank.');
     	frmvalidator.addValidation('#first_name', 'minLength=3', 'Minimum length 3 chars.');
     	frmvalidator.addValidation('#first_name', 'maxLength=20', 'Maximum length 20 chars.');
@@ -30,7 +30,7 @@ window.onload = function() {
     	frmvalidator.addValidation('#address', 'minLength=3', 'Minimum length 3 chars.');
     	frmvalidator.addValidation('#address', 'maxLength=20', 'Maximum length 20 chars.');
 
-    	// add new film fields
+    	// add new film fields validation rules
     	frmvalidator.addValidation('#title', 'req', 'This field cannot be left blank.');
 
     	frmvalidator.addValidation('#price', 'req', 'This field cannot be left blank.');
@@ -40,6 +40,11 @@ window.onload = function() {
     	frmvalidator.addValidation("input[name='genre[]']", 'checkedOne', 'At list one genre must be selected.');
 
     	frmvalidator.addValidation('#description', 'req', 'This field cannot be left blank.');
+
+    	// add new rental fields validation rules
+    	frmvalidator.addValidation('#client', 'req', 'This field cannot be left blank.');
+
+    	frmvalidator.addValidation('#title1', 'req', 'This field cannot be left blank.');
 
     	
 		// form validate and submit
@@ -51,7 +56,8 @@ window.onload = function() {
 		first_input.focus();
 		jQuery('input, textarea').on('click', function(){
 			$('input, textarea').not($(this).parents('div.form-wrapper').find('input, textarea')).css('box-shadow', 'initial').css('border', '1px solid #ced4da');
-			$('span.text-danger').not($(this).parents('div.form-wrapper').find('span.text-danger')).remove();
+			$('.checkbox-wrapper').not($(this).parents('form').find('.checkbox-wrapper')).css('box-shadow', 'none').css('border', 'none');
+			$('span.val').not($(this).parents('div.form-wrapper').find('span.val')).remove();
 			$('.checkbox-holder').addClass('d-none');
 			$('div.form-wrapper').removeClass('col-6').addClass('col-3 opacity-5');
 			$('div.form-wrapper .msg-span').contents().remove();
@@ -76,9 +82,4 @@ window.onload = function() {
 			}
 		}
 	}
-	// just testing class
-	// console.log($('div.col-6.form-wrapper form'));
-	
-	// var frmvalidator2 = new Validator('#new-film');
-	// var frmvalidator3 = new Validator('#new-rental');
 }

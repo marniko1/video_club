@@ -28,7 +28,7 @@ class Validator {
 							if (!self[v](field)) {
 								$(field).css('box-shadow', '0 0 0 0.2rem rgba(200, 35, 51, 0.25)').css('border', '1px solid red');
 								if ($(field).next('span.text-danger').length == 0) {
-									$(field).after('<span class="text-danger"><small>'+err_msgs[k]+'</small></span>');
+									$(field).after('<span class="val text-danger"><small>'+err_msgs[k]+'</small></span>');
 								}
 								self.isValid = false;
 							}
@@ -36,7 +36,7 @@ class Validator {
 							if (!self[v.split('=')[0]](field, v.split('=')[1])) {
 								$(field).css('box-shadow', '0 0 0 0.2rem rgba(200, 35, 51, 0.25)').css('border', '1px solid red');
 								if ($(field).next('span.text-danger').length == 0) {
-									$(field).after('<span class="text-danger"><small>'+err_msgs[k]+'</small></span>');
+									$(field).after('<span class="val text-danger"><small>'+err_msgs[k]+'</small></span>');
 								}
 								self.isValid = false;
 							}
@@ -64,7 +64,7 @@ class Validator {
 			$.each(this.checkboxes_wrapper_list_with_err, function(key, value){
 				var checkbox = $(value).find(':checkbox')[0];
 				$(value).css('box-shadow', '0 0 0 0.2rem rgba(200, 35, 51, 0.25)').css('border', '1px solid red');
-				$(value).after('<span class="text-danger"><small>'+$(checkbox).data().validationErrMsg+'</small></span>');
+				$(value).after('<span class="val text-danger"><small>'+$(checkbox).data().validationErrMsg+'</small></span>');
 			});
 			return this.checkboxesIsValid;
 		}
@@ -98,6 +98,9 @@ class Validator {
 			return true;
 		}
 		return false;
+	}
+	paternVal(field, rule){
+		
 	}
 	addValidation(field_id, rule, msg){
 		if ($(field_id).attr('data-validation-rules')) {

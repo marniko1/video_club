@@ -2,7 +2,7 @@
 
 class Msg {
 	public static function createMessage($key, $msg) {
-		$_SESSION['msg'] = [$key => $msg];
+		$_SESSION['msg'][$key] = $msg;
 	}
 
 	public static function getMessage() {
