@@ -4,6 +4,15 @@ class Validator {
 		this.isValid;
 		this.checkboxesIsValid;
 		this.checkboxes_wrapper_list_with_err = [];
+		this.fieldsValidation = {};
+		this.valErrMsgs = {
+						'req': 'This field cannot be left blank.',
+						'minLength': 'Minimum length $value chars.',
+						'maxLength': 'Maximum length $value chars.',
+						'email': 'Enter valid email.',
+						'checkedOne': 'At list one genre must be selected.'
+						};
+		this.errMsg = '';
 	}
 
 	validation(form){
@@ -20,54 +29,58 @@ class Validator {
 		$.each(this.fields, function(key, field) {
 			if (!$(field).is(':checkbox')) {
 				$(field).css('box-shadow', 'initial').css('border', '1px solid #ced4da');
-				if ($(field).data().validationRules) {
-					var rules = $(field).data().validationRules.split(',');
-					var err_msgs = $(field).data().validationErrMsg.split(',');
-					$.each(rules, function(k, v){
-						if (v.trim().indexOf('=') == -1) {
-							if (!self[v](field)) {
+				if ($(field).attr('id') in self.fieldsValidation) {
+					var rules = self.fieldsValidation[$(field).attr('id')];
+					$.each(rules, function(k, rule){
+						if (rule.trim().indexOf('=') == -1) {
+							if (!self[rule](field)) {
+								self.errMsg = self.createErrMsg(rule);
 								$(field).css('box-shadow', '0 0 0 0.2rem rgba(200, 35, 51, 0.25)').css('border', '1px solid red');
 								if ($(field).next('span.text-danger').length == 0) {
-									$(field).after('<span class="val text-danger"><small>'+err_msgs[k]+'</small></span>');
+									$(field).after('<span class="val text-danger"><small>' + self.errMsg + '</small></span>');
 								}
 								self.isValid = false;
 							}
 						} else {
-							if (!self[v.split('=')[0]](field, v.split('=')[1])) {
+							if (!self[rule.split('=')[0]](field, rule.split('=')[1])) {
+								self.errMsg = self.createErrMsg(rule.split('=')[0], rule.split('=')[1]);
 								$(field).css('box-shadow', '0 0 0 0.2rem rgba(200, 35, 51, 0.25)').css('border', '1px solid red');
 								if ($(field).next('span.text-danger').length == 0) {
-									$(field).after('<span class="val text-danger"><small>'+err_msgs[k]+'</small></span>');
+									$(field).after('<span class="val text-danger"><small>' + self.errMsg + '</small></span>');
 								}
 								self.isValid = false;
 							}
 						}
 					});
 				}
-			} else if ($(field).is(':checkbox')){
-				if ($(field).data().validationRules) {
-					var rule = $(field).data().validationRules;
-					var err_msg = $(field).data().validationErrMsg;
-					if (self[rule](field)) {
+			} 
+			else if ($(field).is(':checkbox')){
+				if ($(field).attr('name') in self.fieldsValidation) {
+					var rules = self.fieldsValidation[$(field).attr('name')];
+					$.each(rules, function(ke, rule){
+						self.errMsg = self.createErrMsg(rule);
+						if (self[rule](field)) {
 						self.checkboxesIsValid = true;
 						var checkbox_wrapper = $('.checkbox-wrapper').has(field);
-						$.each(self.checkboxes_wrapper_list_with_err, function(k, v){
-							if ($(v).is(checkbox_wrapper)) {
-								self.checkboxes_wrapper_list_with_err.splice(k, 1);
-							}
-						});
-					}
+							$.each(self.checkboxes_wrapper_list_with_err, function(k, v){
+								if ($(v).is(checkbox_wrapper)) {
+									self.checkboxes_wrapper_list_with_err.splice(k, 1);
+								}
+							});
+						}
+					});
+				}
+				if (!self.checkboxesIsValid && $(self.fields).parents('form').has(':checkbox').length != 0) {
+					$.each(self.checkboxes_wrapper_list_with_err, function(k, wrapper){
+						$(wrapper).css('box-shadow', '0 0 0 0.2rem rgba(200, 35, 51, 0.25)').css('border', '1px solid red');
+						if ($(wrapper).next('span.text-danger').length == 0) {
+							$(wrapper).after('<span class="val text-danger"><small>' + self.errMsg + '</small></span>');
+						}
+					});
+					return this.checkboxesIsValid;
 				}
 			}
 		});
-		if (!this.checkboxesIsValid && $(this.fields).parents('form').has(':checkbox').length != 0) {
-			// console.log('ovde');
-			$.each(this.checkboxes_wrapper_list_with_err, function(key, value){
-				var checkbox = $(value).find(':checkbox')[0];
-				$(value).css('box-shadow', '0 0 0 0.2rem rgba(200, 35, 51, 0.25)').css('border', '1px solid red');
-				$(value).after('<span class="val text-danger"><small>'+$(checkbox).data().validationErrMsg+'</small></span>');
-			});
-			return this.checkboxesIsValid;
-		}
 		return this.isValid;
 	}
 	req(field){
@@ -102,16 +115,14 @@ class Validator {
 	paternVal(field, rule){
 		
 	}
-	addValidation(field_id, rule, msg){
-		if ($(field_id).attr('data-validation-rules')) {
-			$(field_id).attr('data-validation-rules', $(field_id).attr('data-validation-rules') + ',' + rule);
+	addValidation(field_id, rules){
+		this.fieldsValidation[field_id] = rules;
+	}
+	createErrMsg(rule, value=0){
+		if (value == 0) {
+			return this.valErrMsgs[rule];
 		} else {
-			$(field_id).attr('data-validation-rules', rule);
-		}
-		if ($(field_id).attr('data-validation-err-msg')) {
-			$(field_id).attr('data-validation-err-msg', $(field_id).attr('data-validation-err-msg') + ',' + msg);
-		} else {
-			$(field_id).attr('data-validation-err-msg', msg);
+			return this.valErrMsgs[rule].replace('$value', value)
 		}
 	}
 }
