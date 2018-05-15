@@ -63,7 +63,7 @@ class FormSubmit {
 						$.each(response, function(key, value){
 							var key_num = key.replace('unav_film_msg', '');
 							$('#title' + key_num).css('box-shadow', '0 0 0 0.2rem rgba(200, 35, 51, 0.25)').css('border', '1px solid red');
-							$('#title' + key_num).after('<span class="val text-danger"><small>'+value+'</small></span>');
+							$('#title' + key_num).after('<span class="val text-danger position-absolute"><small>'+value+'</small></span>');
 						});
 					}
 				},

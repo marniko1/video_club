@@ -15,6 +15,7 @@ window.onload = function() {
     	var frmvalidator = new Validator($('div.col-6.form-wrapper form'));
     	// add validation rules on fields
     	// add new client fields validation rules
+    	// frmvalidator.addValidation('#first_name', ['req', 'minLenth=15']);
     	frmvalidator.addValidation('#first_name', 'req', 'This field cannot be left blank.');
     	frmvalidator.addValidation('#first_name', 'minLength=3', 'Minimum length 3 chars.');
     	frmvalidator.addValidation('#first_name', 'maxLength=20', 'Maximum length 20 chars.');

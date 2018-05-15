@@ -41,3 +41,8 @@ table.clients caption {
 .proposals ul li:hover {
 	background-color: #ced4da;
 }
+
+/*err msg styles*/
+.val {
+	right: 0;
+}

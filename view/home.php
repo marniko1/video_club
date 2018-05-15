@@ -29,22 +29,23 @@
 				</div>
 				<div class="col-3 form-wrapper d-flex opacity-5">
 					<div class="col-12 border border-secondary mt-2 rounded">
-						<form class="mt-5 row" method="post" action="<?php echo INCL_PATH.'Films/addNewFilm';?>" id="new-film">
+						<form class="mt-5 row ml-2 mr-2" method="post" action="<?php echo INCL_PATH.'Films/addNewFilm';?>" id="new-film">
 							<h5 class="col-12">Add new film</h5>
-							<div class="form-group col-12">
+							<div class="form-group col-12 pl-0 pr-0">
 								<label for="title">Title: </label>
 								<input type="text" name="title" id="title" class="form-control">
 							</div>
-							<div class="form-group col-6">
+							<div class="form-group col-5 pl-0 pr-0">
 								<label for="price">Price: </label>
-								<input type="number" step="0.01" name="price" id="price" class="form-control">
+								<input type="number" min="0.01" step="0.01" name="price" id="price" class="form-control">
 							</div>
-							<div class="form-group col-6">
+							<div class="col-2"></div>
+							<div class="form-group col-5 pr-0 pl-0">
 								<label for="stock">Stock: </label>
-								<input type="number" name="stock" id="stock" class="form-control">
+								<input type="number" min="1" name="stock" id="stock" class="form-control">
 							</div>
-							<div class="checkbox-wrapper col-12 form-group">
-								<div class="row">
+							<div class="checkbox-wrapper col-12 form-group mt-3 rounded">
+								<div class="row position-relative">
 									<div class="col-3 checkbox-holder d-none">
 										<div class="form-check form-check-inline ml-2">									
 											<input class="form-check-input" type="checkbox" name="genre[]" id="checkbox1" value="Comedy">
@@ -103,7 +104,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="form-group col-12 mt-2">
+							<div class="form-group col-12 mt-2 pl-0 pr-0">
 								<label for="description">Description: </label>
 								<textarea class="form-control" rows="3" name="description" id="description"></textarea>
 							</div>
