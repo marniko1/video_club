@@ -11,6 +11,7 @@
 		<script type="text/javascript" src="<?php  echo INCL_PATH.'assets/js/AjaxCreateNewRentalFilters.js'?>"></script>
 		<script type="text/javascript" src="<?php  echo INCL_PATH.'assets/js/AjaxFilterAndPagination.js'?>"></script>
 		<script type="text/javascript" src="<?php  echo INCL_PATH.'assets/js/FormValidator.js'?>"></script>
+		<script type="text/javascript" src="<?php  echo INCL_PATH.'assets/js/Edit.js'?>"></script>
 		<script type="text/javascript" src="<?php  echo INCL_PATH.'assets/js/main.js'?>"></script>
 	</head>
 	<body>

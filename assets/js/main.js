@@ -63,4 +63,11 @@ window.onload = function() {
 			}
 		}
 	}
+	// if page url is single film view or single client view, only then prepare for edit button
+	var url = window.location.origin + window.location.pathname;
+	var url_part = url.replace(root_url, '').split('/');
+	if ((url_part[0] == 'Clients' || url_part[0] == 'Films') && url_part[1].match(/^\d+$/)) {
+		// console.log('ovde');
+		new Edit;
+	}
 }

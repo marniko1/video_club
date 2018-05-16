@@ -1,6 +1,6 @@
 		<div class="container">
 			<div class="row">
-				<table class="table mt-5">
+				<table class="table mt-5 main">
 					<thead class="thead-dark">
 					    <tr>
 					      	<th scope="col" style="width: 5%">#</th>
@@ -24,6 +24,9 @@
 					    </tr>
 					</tbody>
 				</table>
+				<form>
+					<input type="button" name="edit" value="Edit" class="btn edit">
+				</form>
 				<div class="col-10 mt-5">
 					<div class="table-wrapper" style="min-height: 200px">
 						<table class="col-10 table table-sm clients">
