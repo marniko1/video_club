@@ -20,7 +20,7 @@ class Validator {
 		this.fields = $(form).find('input, textarea, select').not(':submit');
 		this.isValid = true;
 		var self = this;
-		// presumation that all checkboxes in form are not valid, so put all checkboxes-wrappers in the black list 
+		// presumption that all checkboxes in form are not valid, so put all checkboxes-wrappers in the black list 
 		$.each($(this.fields).parents('form').find('.checkbox-wrapper'), function(key, value){
 			self.checkboxes_wrapper_list_with_err.push(value);
 		});
