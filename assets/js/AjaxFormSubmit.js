@@ -38,7 +38,6 @@ class FormSubmit {
 				checkbox = checkbox.toString().replace(/,/g, ', ');
 				params.push(checkbox);
 			}
-			
 			$.ajax({
 				type: "POST",
 				url: root_url + "AjaxCalls/index",
@@ -71,6 +70,7 @@ class FormSubmit {
 			     	alert("some error"+errorThrown);
 			 	}
 			});
+
 		});
 	}
 }

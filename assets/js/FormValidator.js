@@ -4,73 +4,95 @@ class Validator {
 		this.isValid;
 		this.checkboxesIsValid;
 		this.checkboxes_wrapper_list_with_err = [];
-		// this.rules = {
-		// 	req: This fie....,
-		// };
-		this.fieldsForValidation = [];
+		this.fieldsValidation = {};
+		this.valErrMsgs = {
+						'req': 'This field cannot be left blank.',
+						'minLength': 'Minimum length $value chars.',
+						'maxLength': 'Maximum length $value chars.',
+						'email': 'Enter valid email.',
+						'checkedOne': 'At list one genre must be selected.'
+						};
+		this.errMsg = '';
 	}
 
 	validation(form){
 		this.checkboxes_wrapper_list_with_err = [];
 		this.fields = $(form).find('input, textarea, select').not(':submit');
 		this.isValid = true;
-		this.checkboxesIsValid = false;
-		if ($(this.fields).parents('form').has(':checkbox').length != 0) {
-			$(this.fields).parents('form').find('.checkbox-wrapper').css('box-shadow', 'none').css('border', 'none');
-			this.checkboxes_wrapper_list_with_err.push($(this.fields).parents('form').find('.checkbox-wrapper'));
-		}
 		var self = this;
+		// presumation that all checkboxes in form are not valid, so put all checkboxes-wrappers in the black list 
+		$.each($(this.fields).parents('form').find('.checkbox-wrapper'), function(key, value){
+			self.checkboxes_wrapper_list_with_err.push(value);
+		});
+		// later, bellow, remove each of this elements from black list if checkboxes validation is true
 		$('span.text-danger').remove();
 		$.each(this.fields, function(key, field) {
 			if (!$(field).is(':checkbox')) {
-				$(field).css('box-shadow', 'initial').css('border', '1px solid #ced4da');
-				if ($(field).data().validationRules) {
-					var rules = $(field).data().validationRules.split(',');
-					var err_msgs = $(field).data().validationErrMsg.split(',');
-					$.each(rules, function(k, v){
-						if (v.trim().indexOf('=') == -1) {
-							if (!self[v](field)) {
-								$(field).css('box-shadow', '0 0 0 0.2rem rgba(200, 35, 51, 0.25)').css('border', '1px solid red');
+				$(field).removeClass('err-border');
+				if ($(field).attr('id') in self.fieldsValidation) {
+					var rules = self.fieldsValidation[$(field).attr('id')];
+					$.each(rules, function(k, rule){
+						if (rule.trim().indexOf('=') == -1) {
+							if (!self[rule](field)) {
+								self.errMsg = self.createErrMsg(rule);
+								$(field).addClass('err-border');
 								if ($(field).next('span.text-danger').length == 0) {
-									$(field).after('<span class="val text-danger position-absolute"><small>'+err_msgs[k]+'</small></span>');
+									$(field).after('<span class="val text-danger position-absolute"><small>' + self.errMsg + '</small></span>');
 								}
 								self.isValid = false;
 							}
 						} else {
-							if (!self[v.split('=')[0]](field, v.split('=')[1])) {
-								$(field).css('box-shadow', '0 0 0 0.2rem rgba(200, 35, 51, 0.25)').css('border', '1px solid red');
+							if (!self[rule.split('=')[0]](field, rule.split('=')[1])) {
+								self.errMsg = self.createErrMsg(rule.split('=')[0], rule.split('=')[1]);
+								$(field).addClass('err-border');
 								if ($(field).next('span.text-danger').length == 0) {
-									$(field).after('<span class="val text-danger position-absolute"><small>'+err_msgs[k]+'</small></span>');
+									$(field).after('<span class="val text-danger position-absolute"><small>' + self.errMsg + '</small></span>');
 								}
 								self.isValid = false;
 							}
 						}
 					});
 				}
-			} else if ($(field).is(':checkbox')){
-				if ($(field).data().validationRules) {
-					var rule = $(field).data().validationRules;
-					var err_msg = $(field).data().validationErrMsg;
-					if (self[rule](field)) {
-						self.checkboxesIsValid = true;
-						var checkbox_wrapper = $('.checkbox-wrapper').has(field);
-						$.each(self.checkboxes_wrapper_list_with_err, function(k, v){
-							if ($(v).is(checkbox_wrapper)) {
-								self.checkboxes_wrapper_list_with_err.splice(k, 1);
-							}
-						});
-					}
+			} 
+			else if ($(field).is(':checkbox')){
+				$(field).parents('.checkbox-wrapper').removeClass('err-border');
+				$(field).parents('.checkbox-wrapper').find('span.text-danger').remove();
+				if ($(field).attr('name') in self.fieldsValidation) {
+					var rules = self.fieldsValidation[$(field).attr('name')];
+					$.each(rules, function(ke, rule){
+						self.errMsg = self.createErrMsg(rule);
+						// if checkboxes are valid
+						if (self[rule](field)) {
+							var checkbox_wrapper = $('.checkbox-wrapper').has(field);
+							$.each(self.checkboxes_wrapper_list_with_err, function(k, v){
+								if ($(v).is(checkbox_wrapper)) {
+									// remove checkboxes wrappers from black list
+									self.checkboxes_wrapper_list_with_err.splice(k, 1);
+								}
+							});
+						}
+					});
+				} else {
+					var checkbox_wrapper = $('.checkbox-wrapper').has(field);
+					$.each(self.checkboxes_wrapper_list_with_err, function(k, v){
+						if ($(v).is(checkbox_wrapper)) {
+							self.checkboxes_wrapper_list_with_err.splice(k, 1);
+						}
+					});
+				}
+				if (self.checkboxes_wrapper_list_with_err.length != 0 && $(self.fields).parents('form').has(':checkbox').length != 0) {
+					$.each(self.checkboxes_wrapper_list_with_err, function(k, wrapper){
+						$(wrapper).addClass('err-border');
+						if ($(wrapper).find('div.row').next('span.text-danger').length == 0) {
+							$(wrapper).find('div.row').after('<span class="val text-danger position-absolute"><small>' + self.errMsg + '</small></span>');
+						}
+					});
 				}
 			}
 		});
-		if (!this.checkboxesIsValid && $(this.fields).parents('form').has(':checkbox').length != 0) {
-			// console.log('ovde');
-			$.each(this.checkboxes_wrapper_list_with_err, function(key, value){
-				var checkbox = $(value).find(':checkbox')[0];
-				$(value).css('box-shadow', '0 0 0 0.2rem rgba(200, 35, 51, 0.25)').css('border', '1px solid red');
-				$(value).find('div.row').after('<span class="val text-danger position-absolute"><small>'+$(checkbox).data().validationErrMsg+'</small></span>');
-			});
-			return this.checkboxesIsValid;
+		// if chackboxes wrappers blacklist is empty, checkboxes are valid, skip bellow if
+		if (!$.isEmptyObject(this.checkboxes_wrapper_list_with_err)) {
+			return false;
 		}
 		return this.isValid;
 	}
@@ -106,26 +128,14 @@ class Validator {
 	paternVal(field, rule){
 		
 	}
-	addValidation(field_id, rule, msg){
-
-
-		//  provera da li u html-u postoji input
-		 // -> ako postoji apenduj ga u this.fieldsForValidation
-		 // foreach rule u trenutno input polju
-		// provera da ;li  lookup-u postoji tip validacije
-		// za svaki tip validacije
-
-
-		
-		if ($(field_id).attr('data-validation-rules')) {
-			$(field_id).attr('data-validation-rules', $(field_id).attr('data-validation-rules') + ',' + rule);
+	addValidation(field_id, rules){
+		this.fieldsValidation[field_id] = rules;
+	}
+	createErrMsg(rule, value=0){
+		if (value == 0) {
+			return this.valErrMsgs[rule];
 		} else {
-			$(field_id).attr('data-validation-rules', rule);
-		}
-		if ($(field_id).attr('data-validation-err-msg')) {
-			$(field_id).attr('data-validation-err-msg', $(field_id).attr('data-validation-err-msg') + ',' + msg);
-		} else {
-			$(field_id).attr('data-validation-err-msg', msg);
+			return this.valErrMsgs[rule].replace('$value', value)
 		}
 	}
 }

@@ -46,3 +46,8 @@ table.clients caption {
 .val {
 	right: 0;
 }
+/*input err styles*/
+.err-border{
+	border: 1px solid red !important;
+	box-shadow: 0 0 0 0.2rem rgba(200, 35, 51, 0.25) !important;
+}
