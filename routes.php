@@ -15,11 +15,13 @@ if (Auth::logged()) {
 	Route::get('/Films/{id}/{page}', 'Films@singleFilm', $req = ['/^[0-9]+$/', '/^p[0-9]+$/']);
 	Route::get('/Films/{page}', 'Films@index', $req = ['/^p[0-9]+$/']);
 	Route::post('/Films/addNewFilm', 'Films@addNewFilm');
+	Route::post('/Films/editFilmData', 'Films@editFilmData');
 
 	Route::get('/Clients/index', 'Clients@index');
 	Route::get('/Clients/{id}/{page}', 'Clients@singleClient', $req = ['/^[0-9]+$/', '/^p[0-9]+$/']);
 	Route::get('/Clients/{page}', 'Clients@index', $req = ['/^p[0-9]+$/']);
 	Route::post('/Clients/addNewClient', 'Clients@addNewClient');
+	Route::post('/Clients/editClientData', 'Clients@editClientData');
 
 	Route::get('/AjaxCalls/index', 'AjaxCalls@index');
 

@@ -89,4 +89,7 @@ class DBFilms extends DB {
 		$req = self::executeSQL($sql);
 		return $req;
 	}
+	public static function editFilm() {
+		$sql = "update films set ";
+	}
 }

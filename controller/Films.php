@@ -57,4 +57,10 @@ class Films extends BaseController {
 			// return $genre;
 		}
 	}
+	public function editFilmData($title, $description, $genre, $price, $cur_stock, $stock) {
+		var_dump($title, $description, $genre, $price, $cur_stock, $stock);
+	}
+	public function deleteFilm() {
+		
+	}
 }

@@ -40,4 +40,10 @@ class Clients extends BaseController {
 			return Msg::getMessage();
 		}
 	}
+	public function editClientData($name, $email, $address, $stock) {
+		var_dump($name, $email, $address, $stock);
+	}
+	public function deleteClient() {
+
+	}
 }

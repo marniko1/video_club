@@ -20,7 +20,7 @@ table.clients caption {
 	caption-side: top;
 }
 
-/*styles for proposals divs*/
+/*styles for proposals divs on home page when make new rental*/
 .form-group {
 	position: relative;
 }
@@ -50,4 +50,8 @@ table.clients caption {
 .err-border{
 	border: 1px solid red !important;
 	box-shadow: 0 0 0 0.2rem rgba(200, 35, 51, 0.25) !important;
+}
+/*styles for single film or client main table, just min height*/
+table.main{
+	min-height: 200px;
 }

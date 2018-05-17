@@ -1,27 +1,29 @@
 		<div class="container">
 			<div class="row">
-				<table class="table mt-5 main">
-					<thead class="thead-dark">
-					    <tr>
-					      	<th scope="col" style="width: 5%">#</th>
-						    <th scope="col" style="width: 30%">Name</th>
-					      	<th scope="col" style="width: 30%">Email</th>
-					      	<th scope="col" style="width: 30%">Address</th>
-					      	<th scope="col" style="width: 5%">Stock</th>
-					    </tr>
-					</thead>
-					<tbody>
-						<tr>
-					      	<th scope="row"><?php echo 1; ?></th>
-						    <td><?php echo $this->data['client'][0]->client; ?></td>
-						    <td><?php echo $this->data['client'][0]->email; ?></td>
-						    <td><?php echo $this->data['client'][0]->address; ?></td>
-						    <td><?php echo $this->data['client'][0]->stock; ?></td>
-					    </tr>
-					</tbody>
-				</table>
-				<form>
-					<input type="button" name="edit" value="Edit" class="btn edit">
+				<form method="post" action="<?php echo INCL_PATH.'Clients/editClientData';?>">
+					<table class="table mt-5 main">
+						<thead class="thead-dark">
+						    <tr>
+						      	<th scope="col" style="width: 5%">#</th>
+							    <th scope="col" style="width: 30%">Name</th>
+						      	<th scope="col" style="width: 30%">Email</th>
+						      	<th scope="col" style="width: 30%">Address</th>
+						      	<th scope="col" style="width: 5%">Stock</th>
+						    </tr>
+						</thead>
+						<tbody>
+							<tr>
+						      	<th scope="row"><?php echo 1; ?></th>
+							    <td data-name="client"><?php echo $this->data['client'][0]->client; ?></td>
+							    <td data-name="email"><?php echo $this->data['client'][0]->email; ?></td>
+							    <td data-name="address"><?php echo $this->data['client'][0]->address; ?></td>
+							    <td data-name="stock"><?php echo $this->data['client'][0]->stock; ?></td>
+						    </tr>
+						</tbody>
+					</table>
+					<div class="btn-holder">
+						<input type="button" name="edit" value="Edit" class="btn edit btn-info">
+					</div>
 				</form>
 				<div class="col-10 mt-5">
 					<div class="table-wrapper" style="min-height: 200px">
