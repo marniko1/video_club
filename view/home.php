@@ -108,25 +108,6 @@
 								<label for="description">Description: </label>
 								<textarea class="form-control" rows="3" name="description" id="description"></textarea>
 							</div>
-							<div class="checkbox-wrapper col-12 form-group mt-3 rounded">
-								<div class="row position-relative">
-									
-									<div class="col-3 checkbox-holder d-none">
-										<div class="form-check form-check-inline ml-2">
-											<input class="form-check-input" type="checkbox" name="test[]" id="checkbox10" value="Animation">
-			  								<label class="form-check-label" for="checkbox10">Animation</label>
-										</div>
-										<div class="form-check form-check-inline ml-2">
-											<input class="form-check-input" type="checkbox" name="test[]" id="checkbox11" value="Adventure">
-			  								<label class="form-check-label" for="checkbox11">Adventure</label>
-										</div>
-										<div class="form-check form-check-inline ml-2">
-											<input class="form-check-input" type="checkbox" name="test[]" id="checkbox12" value="Fantasy">
-			  								<label class="form-check-label" for="checkbox12">Fantasy</label>
-										</div>
-									</div>
-								</div>
-							</div>
 							<div class="form-group col-12 mt-5">
 								<input type="submit" value="Submit" class="btn btn-primary submit mt-5" disabled>
 							</div>

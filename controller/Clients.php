@@ -40,8 +40,11 @@ class Clients extends BaseController {
 			return Msg::getMessage();
 		}
 	}
-	public function editClientData($name, $email, $address, $stock) {
-		var_dump($name, $email, $address, $stock);
+	public function editClientData($name, $email, $address, $stock, $id) {
+		$first_name = substr($name, 0, strpos($name, ' '));
+		$last_name =trim(substr($name, strpos($name, ' ')));
+		DBClients::editClient($first_name, $last_name, $email, $address, $stock, $id);
+		header("Location: ".INCL_PATH.'Clients/'.$id.'/p1');
 	}
 	public function deleteClient() {
 

@@ -18,7 +18,7 @@ class DBFilms extends DB {
 		$data = [];
 		$sql = "select f.*, 
 				(select count(*) from rentals_films where id_film=$id) as rented, 
-				concat(c.first_name, \" \", c.last_name) as client, r.id, r.created, r.due, r.opened from films as f 
+				concat(c.first_name, \" \", c.last_name) as client, r.id as rental_id, r.created, r.due, r.opened from films as f 
 				left join rentals_films as rf 
 				on rf.id_film = f.id 
 				left join rentals as r 
@@ -89,7 +89,8 @@ class DBFilms extends DB {
 		$req = self::executeSQL($sql);
 		return $req;
 	}
-	public static function editFilm() {
-		$sql = "update films set ";
+	public static function editFilm($title, $description, $genre, $price, $cur_stock, $stock, $id) {
+		$sql = "update films set title = '$title', description = '$description', genre = '$genre', price = $price, current_stock = $cur_stock, stock = $stock where id = $id";
+		self::executeSQL($sql);
 	}
 }

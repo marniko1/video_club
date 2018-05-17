@@ -87,4 +87,8 @@ class DBClients extends DB {
 		$req = self::executeSQL($sql);
 		return $req;
 	}
+	public static function editClient($first_name, $last_name, $email, $address, $stock, $id) {
+		$sql = "update clients set first_name = '$first_name', last_name = '$last_name', email = '$email', address = '$address', stock = $stock where id = $id";
+		self::executeSQL($sql);
+	}
 }

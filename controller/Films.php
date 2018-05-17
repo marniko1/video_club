@@ -57,8 +57,9 @@ class Films extends BaseController {
 			// return $genre;
 		}
 	}
-	public function editFilmData($title, $description, $genre, $price, $cur_stock, $stock) {
-		var_dump($title, $description, $genre, $price, $cur_stock, $stock);
+	public function editFilmData($title, $description, $genre, $price, $cur_stock, $stock, $id) {
+		DBFilms::editFilm($title, $description, $genre, $price, $cur_stock, $stock, $id);
+		header("Location: ".INCL_PATH.'Films/'.$id.'/p1');
 	}
 	public function deleteFilm() {
 		

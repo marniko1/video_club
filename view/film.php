@@ -25,6 +25,7 @@
 						    </tr>
 						</tbody>
 					</table>
+					<input type="hidden" name="film_id" value="<?php echo $this->data['film'][0]->id; ?>">
 					<div class="btn-holder">
 						<input type="button" name="edit" value="Edit" class="btn edit btn-info">
 					</div>
@@ -44,7 +45,7 @@
 					<?php if ($this->data['film'][0]->client != null):
 						foreach ($this->data['film'] as $key => $value) {
 						?>
-								<tr style="cursor: pointer;" onclick="document.location.href='<?php echo INCL_PATH.'Rentals/'.$value->id; ?>'">
+								<tr style="cursor: pointer;" onclick="document.location.href='<?php echo INCL_PATH.'Rentals/'.$value->rental_id; ?>'">
 									<th scope="row"><?php echo $key + 1; ?></th>
 									<td><?php echo $this->data['film'][$key]->client; ?></td>
 									<td><?php echo $this->data['film'][$key]->created; ?></td>

@@ -21,6 +21,7 @@
 						    </tr>
 						</tbody>
 					</table>
+					<input type="hidden" name="client_id" value="<?php echo $this->data['client'][0]->id; ?>">
 					<div class="btn-holder">
 						<input type="button" name="edit" value="Edit" class="btn edit btn-info">
 					</div>
