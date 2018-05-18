@@ -61,7 +61,8 @@ class Films extends BaseController {
 		DBFilms::editFilm($title, $description, $genre, $price, $cur_stock, $stock, $id);
 		header("Location: ".INCL_PATH.'Films/'.$id.'/p1');
 	}
-	public function deleteFilm() {
-		
+	public function removeFilm($id) {
+		DBFilms::removeFilm($id);
+		header("Location: ".INCL_PATH.'Films/index');
 	}
 }

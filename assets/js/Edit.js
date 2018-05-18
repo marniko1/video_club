@@ -18,12 +18,13 @@ class Edit {
 			});
 			localStorage.removeItem('for_cancel');
 			localStorage.setItem('for_cancel', JSON.stringify(data_to_store));
+			var path = self.makeFormActionPath($(this).parents('form'), 'edit');
+			$(this).parents('form').attr('action', root_url + path);
 			$(this).parent('div.btn-holder').html('<input type="submit" name="submit" value="Save" class="btn edit btn-success"><input type="button" name="cancel" value="Cancel" class="btn edit ml-2 btn-danger">');
 			self.cancel();
 		});
 	}
 	cancel(){
-		// console.log($('[name="cancel"]'));
 		var self = this;
 		jQuery('[name="cancel"]').on('click', function(){
 			var tds_text = JSON.parse(localStorage.getItem('for_cancel'));
@@ -31,12 +32,27 @@ class Edit {
 			$.each(tds, function(key, td){
 				$(td).html(tds_text[$(td).data('name')]);
 			});
-			$(this).parent('div.btn-holder').html('<input type="button" name="edit" value="Edit" class="btn edit btn-info">');
+			var path = self.makeFormActionPath($(this).parents('form'), 'remove');
+			$(this).parents('form').attr('action', root_url + path);
+			$(this).parent('div.btn-holder').html('<input type="button" name="edit" value="Edit" class="btn edit btn-info"><input type="submit" name="delete" value="Remove client" class="btn btn-danger ml-1">');
 			self.tdToInput();
 		});
 	}
+	makeFormActionPath(form, action){
+		var path = '';
+		if ($(form).attr('action').indexOf('Clients') >= 0) {
+			if (action == 'remove') {
+				path =  'Clients/removeClient';
+			} else {
+				path =  'Clients/editClientData';
+			}
+		} else if ($(form).attr('action').indexOf('Films') >= 0) {
+			if (action == 'remove') {
+				path =  'Films/removeFilm';
+			} else {
+				path =  'Films/editFilmData';
+			}
+		}
+		return path;
+	}
 }
-
-// localStorage.setItem(key,value); to set
-
-// localStorage.getItem(key); to get.

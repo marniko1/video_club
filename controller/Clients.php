@@ -46,7 +46,8 @@ class Clients extends BaseController {
 		DBClients::editClient($first_name, $last_name, $email, $address, $stock, $id);
 		header("Location: ".INCL_PATH.'Clients/'.$id.'/p1');
 	}
-	public function deleteClient() {
-
+	public function removeClient($id) {
+		DBClients::removeClient($id);
+		header("Location: ".INCL_PATH.'Clients/index');
 	}
 }

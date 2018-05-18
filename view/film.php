@@ -1,6 +1,6 @@
 		<div class="container">
 			<div class="row">
-				<form method="post" action="<?php echo INCL_PATH.'Films/editFilmData';?>">
+				<form method="post" action="<?php echo INCL_PATH.'Films/removeFilm';?>">
 					<table class="table mt-5 main">
 						<thead class="thead-dark">
 						    <tr>
@@ -28,6 +28,7 @@
 					<input type="hidden" name="film_id" value="<?php echo $this->data['film'][0]->id; ?>">
 					<div class="btn-holder">
 						<input type="button" name="edit" value="Edit" class="btn edit btn-info">
+						<input type="submit" name="delete" value="Remove film" class="btn btn-danger">
 					</div>
 				</form>
 				<div class="col-10 mt-5">

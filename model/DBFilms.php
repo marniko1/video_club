@@ -93,4 +93,8 @@ class DBFilms extends DB {
 		$sql = "update films set title = '$title', description = '$description', genre = '$genre', price = $price, current_stock = $cur_stock, stock = $stock where id = $id";
 		self::executeSQL($sql);
 	}
+	public static function removeFilm($id) {
+		$sql = "delete from films where id = $id";
+		return self::executeSQL($sql);
+	}
 }

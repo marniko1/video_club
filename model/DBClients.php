@@ -91,4 +91,8 @@ class DBClients extends DB {
 		$sql = "update clients set first_name = '$first_name', last_name = '$last_name', email = '$email', address = '$address', stock = $stock where id = $id";
 		self::executeSQL($sql);
 	}
+	public static function removeClient($id) {
+		$sql = "delete from clients where id = $id";
+		return self::executeSQL($sql);
+	}
 }
