@@ -31,7 +31,6 @@ class DBClients extends DB {
 		while ($row = $res->fetch_object()) {
 			array_push($data, $row);
 		}
-		// var_dump($data);die;
 		return $data;
 	}
 	public static function getSingleClientRentals ($id, $skip) {
@@ -69,7 +68,7 @@ class DBClients extends DB {
 	}
 	public static function getFilteredClientsForNewRent ($cond) {
 		$data = [];
-		$sql = "select concat(first_name, \" \", last_name) as client, stock from clients having client like '%$cond%' order by client limit 6";
+		$sql = "select concat(first_name, \" \", last_name) as client, stock from clients where active = 'yes' having client like '%$cond%' order by client limit 6";
 		$res = self::executeSQL($sql);
 		while ($row = $res->fetch_object()) {
 			array_push($data, $row);
@@ -83,7 +82,7 @@ class DBClients extends DB {
 	// 	return $total_rentals_num;
 	// }
 	public static function insertClientIntoDB ($first_name, $last_name, $email, $address) {
-		$sql = "insert into clients values (null, '$first_name', '$last_name', '$email', '$address', default)";
+		$sql = "insert into clients values (null, '$first_name', '$last_name', '$email', '$address', default, default)";
 		$req = self::executeSQL($sql);
 		return $req;
 	}
@@ -93,6 +92,14 @@ class DBClients extends DB {
 	}
 	public static function removeClient($id) {
 		$sql = "delete from clients where id = $id";
+		return self::executeSQL($sql);
+	}
+	public static function makeClientInactive($id) {
+		$sql = "update clients set active = 'no' where id = $id";
+		return self::executeSQL($sql);
+	}
+	public static function checkIfClientHadRentals($id) {
+		$sql = "select * from rentals where id_client = $id";
 		return self::executeSQL($sql);
 	}
 }

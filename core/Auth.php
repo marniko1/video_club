@@ -11,6 +11,9 @@ class Auth {
 	}
 
 	public static function admin() {
-
+		if ($_SESSION['priviledge'] == 'admin') {
+			return true;
+		}
+		return false;
 	}
 }

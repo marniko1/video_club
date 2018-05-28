@@ -10,14 +10,17 @@ class Validator {
 						'minLength': 'Minimum length $value chars.',
 						'maxLength': 'Maximum length $value chars.',
 						'email': 'Enter valid email.',
-						'checkedOne': 'At list one genre must be selected.'
+						'checkedOne': 'At list one genre must be selected.',
+						'positiveNum': 'Value cannot be bellow zero.',
+						'moreThenNull': 'Value must be higher then zero.',
+						'passConfirm': 'Passwords do not match.'
 						};
 		this.errMsg = '';
 	}
 
 	validation(form){
 		this.checkboxes_wrapper_list_with_err = [];
-		this.fields = $(form).find('input, textarea, select').not(':submit');
+		this.fields = $(form).find('input, textarea, select').not(':submit, .btn, :hidden');
 		this.isValid = true;
 		var self = this;
 		// presumption that all checkboxes in form are not valid, so put all checkboxes-wrappers in the black list 
@@ -37,7 +40,7 @@ class Validator {
 								self.errMsg = self.createErrMsg(rule);
 								$(field).addClass('err-border');
 								if ($(field).next('span.text-danger').length == 0) {
-									$(field).after('<span class="val text-danger position-absolute"><small>' + self.errMsg + '</small></span>');
+									$(field).after('<span class="val text-danger position-absolute mt-1"><small>' + self.errMsg + '</small></span>');
 								}
 								self.isValid = false;
 							}
@@ -46,7 +49,7 @@ class Validator {
 								self.errMsg = self.createErrMsg(rule.split('=')[0], rule.split('=')[1]);
 								$(field).addClass('err-border');
 								if ($(field).next('span.text-danger').length == 0) {
-									$(field).after('<span class="val text-danger position-absolute"><small>' + self.errMsg + '</small></span>');
+									$(field).after('<span class="val text-danger position-absolute mt-1"><small>' + self.errMsg + '</small></span>');
 								}
 								self.isValid = false;
 							}
@@ -84,7 +87,7 @@ class Validator {
 					$.each(self.checkboxes_wrapper_list_with_err, function(k, wrapper){
 						$(wrapper).addClass('err-border');
 						if ($(wrapper).find('div.row').next('span.text-danger').length == 0) {
-							$(wrapper).find('div.row').after('<span class="val text-danger position-absolute"><small>' + self.errMsg + '</small></span>');
+							$(wrapper).find('div.row').after('<span class="val text-danger position-absolute mt-1"><small>' + self.errMsg + '</small></span>');
 						}
 					});
 				}
@@ -125,9 +128,33 @@ class Validator {
 		}
 		return false;
 	}
+	positiveNum(field){
+		if ($(field).val().trim() < 0) {
+			return false;
+		}
+		return true;
+	}
+	moreThenNull(field){
+		if ($(field).val().trim() <= 0) {
+			return false;
+		}
+		return true;
+	}
+	passConfirm(field, rule){
+		if ($(field).val() != $(rule).val()) {
+			return false;
+		}
+		return true;
+	}
 	paternVal(field, rule){
 		
 	}
+	// checkClientValue(){
+
+	// }
+	// checkTitleValue(){
+		
+	// }
 	addValidation(field_id, rules){
 		this.fieldsValidation[field_id] = rules;
 	}

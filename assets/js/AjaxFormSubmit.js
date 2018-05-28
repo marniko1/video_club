@@ -44,9 +44,7 @@ class FormSubmit {
 				data: "ajax_fn=submitForm&params=" + JSON.stringify(params) + "&controller=" + controller + "&method=" + method,
 				success: function(data){
 					var response = JSON.parse(data);
-					console.log(response);
 					var keys = Object.keys(response);
-					console.log(keys);
 					if (keys[0].match(/^msg\d$/)) {
 						$(self).parents('div.form-wrapper').find('span.msg-span').text(response[keys[0]]);
 						var msg_span = $('div.form-wrapper span');

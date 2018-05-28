@@ -8,7 +8,7 @@ window.onload = function() {
 	var filter = document.getElementById('filter');
 	var pagination_links = document.querySelectorAll(".pagination li a");
 	var ajax = new FilterAndPagination(filter, pagination_links, controller);
-
+    // *************************************************************************************************
 	// stylize forms on home page
     if (window.location.origin + window.location.pathname == root_url) {
     	// form validation
@@ -22,8 +22,8 @@ window.onload = function() {
     	frmvalidator.addValidation('address', ['req', 'minLength=3', 'maxLength=20']);
     	// add new_film fields validation rules
     	frmvalidator.addValidation('title', ['req']);
-    	frmvalidator.addValidation('price', ['req']);
-    	frmvalidator.addValidation('stock', ['req']);
+    	frmvalidator.addValidation('price', ['req', 'positiveNum']);
+    	frmvalidator.addValidation('stock', ['req', 'moreThenNull']);
     	frmvalidator.addValidation("genre[]", ['checkedOne']);
     	frmvalidator.addValidation('description', ['req']);
     	// add new_rental fields validation rules
@@ -63,11 +63,35 @@ window.onload = function() {
 			}
 		}
 	}
+	// ***********************************************************************************************
 	// if page url is single film view or single client view, only then prepare for edit button
 	var url = window.location.origin + window.location.pathname;
 	var url_part = url.replace(root_url, '').split('/');
 	if ((url_part[0] == 'Clients' || url_part[0] == 'Films') && url_part[1].match(/^\d+$/)) {
-		// console.log('ovde');
-		new Edit;
+		new Edit(url_part[0]);
+	}
+	// ***********************************************************************************************
+	// if page is Admin
+	if (url_part[0] == 'Admin') {
+		new Edit(url_part[0]);
+		var frmvalidator = new Validator($('form#new-user'));
+
+		frmvalidator.addValidation('username', ['req', 'minLength=3', 'maxLength=20']);
+    	frmvalidator.addValidation('full_name', ['req', 'minLength=6', 'maxLength=40']);
+    	frmvalidator.addValidation('password', ['req', 'passConfirm=#co_password']);
+    	frmvalidator.addValidation('co_password', ['req', 'passConfirm=#password']);
+
+    	jQuery('.submit').on('click', function(e){
+    		e.preventDefault();
+    		if (frmvalidator.validation($('form#new-user'))) {
+    			$('form#new-user').submit();
+    		}
+    	});
+    	var msg_span = $('div.form-wrapper span');
+    	if (msg_span.text() == "Success.") {
+			msg_span.addClass('text-success');
+		} else if (msg_span.text() == "Unsuccess.") {
+			msg_span.addClass('text-danger');
+		}
 	}
 }

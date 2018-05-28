@@ -25,13 +25,32 @@ class Rentals extends BaseController {
 		unset($method_args[0]);
 		unset($method_args[6]);
 		$films_av = true;
+		$more_then_one_unav = false;
 		$unav_films = [];
+		// check for each title if there is enough in stock
 		foreach ($method_args as $key => $value) {
 			if ($value != '') {
 				$num_of_films_in_curr_rent++;
 				if (!DBFilms::currFilmStock($value)->current_stock > 0) {
 					$films_av = false;
 					$unav_films[$key] = $value;
+				}
+			}
+		}
+		// check if in rental is same title more then once and if there is enough in stock
+		$count_more_then_one = array_count_values($method_args);
+		foreach ($count_more_then_one as $key => $value) {
+			if ($value > 1 && $key != '') {
+				$film_curr_stock = DBFilms::currFilmStock($key)->current_stock;
+				if (!($film_curr_stock >= $value)) {
+					$films_av = false;
+					$more_then_one_unav = $film_curr_stock;
+					foreach ($method_args as $k => $v) {
+						if ($v == $key) {
+							$unav_films[$k] = $more_then_one_unav;
+						}
+						
+					}
 				}
 			}
 		}
@@ -46,7 +65,6 @@ class Rentals extends BaseController {
 				}
 				try {
 					if ($films_av == false) {
-						
 						throw new FilmUnaviableException($unav_films);
 					}
 					$req = DBRentals::insertRentalIntoDB($client, $title1, $title2, $title3, $title4, $title5);
@@ -64,7 +82,12 @@ class Rentals extends BaseController {
 					
 				} catch (FilmUnaviableException $e) {
 					foreach ($e->getData() as $key => $value) {
-						Msg::createMessage("unav_film_msg" . $key, "This film is not aviable for rent.");
+						if (preg_match('/^\d+$/', $value)) {
+							$msg = "It is possible to have " . $value . " of this title in rental.";
+						} else {
+							$msg = "This film is not aviable for rent.";
+						}
+						Msg::createMessage("unav_film_msg" . $key, $msg);
 					}
 					return Msg::getMessage();
 				}
@@ -78,10 +101,8 @@ class Rentals extends BaseController {
 			return Msg::getMessage();
 		}		
 	}
-	public function closeRental($id_rental, $id_client, $is_ajax = false) {
+	public function closeRental($id_rental, $id_client) {
 		$req = DBRentals::closeRental(intval($id_rental), intval($id_client));
-		if(!$is_ajax) {
-			header("Location: ".INCL_PATH."Rentals/{$id_rental}");
-		}
+		header("Location: ".INCL_PATH."Rentals/{$id_rental}");
 	}
 }

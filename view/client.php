@@ -1,7 +1,7 @@
 		<div class="container">
 			<div class="row">
-				<form method="post" action="<?php echo INCL_PATH.'Clients/removeClient';?>">
-					<table class="table mt-5 main">
+				<form method="post" action="<?php echo INCL_PATH.'Clients/removeClient';?>" class="edit_form">
+					<table class="table mt-5 main  client_film">
 						<thead class="thead-dark">
 						    <tr>
 						      	<th scope="col" style="width: 5%">#</th>
@@ -24,7 +24,7 @@
 					<input type="hidden" name="client_id" value="<?php echo $this->data['client'][0]->id; ?>">
 					<div class="btn-holder">
 						<input type="button" name="edit" value="Edit" class="btn edit btn-info">
-						<input type="submit" name="delete" value="Remove client" class="btn btn-danger">
+						<input type="submit" name="remove" value="Remove" class="btn btn-danger remove">
 					</div>
 				</form>
 				<div class="col-10 mt-5">

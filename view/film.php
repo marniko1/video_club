@@ -1,7 +1,7 @@
 		<div class="container">
 			<div class="row">
-				<form method="post" action="<?php echo INCL_PATH.'Films/removeFilm';?>">
-					<table class="table mt-5 main">
+				<form method="post" action="<?php echo INCL_PATH.'Films/removeFilm';?>" class="edit_form">
+					<table class="table mt-5 main client_film">
 						<thead class="thead-dark">
 						    <tr>
 						      	<th scope="col" style="width: 5%">#</th>
@@ -17,7 +17,7 @@
 							<tr>
 						      	<th scope="row"><?php echo 1; ?></th>
 							    <td data-name="title"><?php echo $this->data['film'][0]->title; ?></td>
-							    <td data-name="descripton"><?php echo $this->data['film'][0]->description; ?></td>
+							    <td data-name="description"><?php echo $this->data['film'][0]->description; ?></td>
 							    <td data-name="genre"><?php echo $this->data['film'][0]->genre; ?></td>
 							    <td data-name="price"><?php echo $this->data['film'][0]->price; ?></td>
 							    <td data-name="current_stock"><?php echo $this->data['film'][0]->current_stock; ?></td>
@@ -28,7 +28,7 @@
 					<input type="hidden" name="film_id" value="<?php echo $this->data['film'][0]->id; ?>">
 					<div class="btn-holder">
 						<input type="button" name="edit" value="Edit" class="btn edit btn-info">
-						<input type="submit" name="delete" value="Remove film" class="btn btn-danger">
+						<input type="submit" name="remove" value="Remove" class="btn btn-danger remove">
 					</div>
 				</form>
 				<div class="col-10 mt-5">

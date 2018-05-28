@@ -6,7 +6,7 @@ class DBRentals extends DB {
 		$sql = "select r.id, concat(c.first_name, \" \", c.last_name) as client, r.totals, r.created, r.due, r.opened from rentals as r 
 				join clients as c
 				on r.id_client = c.id
-				order by client 
+				order by created desc
 				limit $skip,2";
 		$res = self::executeSQL($sql);
 		while ($row = $res->fetch_object()) {
@@ -36,7 +36,7 @@ class DBRentals extends DB {
 				join clients as c
 				on r.id_client = c.id
 				having $cond_name like '%$cond%'
-				order by $cond_name
+				order by created desc
 				limit $skip,2";
 		$res = self::executeSQL($sql);
 		while ($row = $res->fetch_object()) {

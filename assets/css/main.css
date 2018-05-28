@@ -43,8 +43,9 @@ table.clients caption {
 }
 
 /*err msg styles*/
-.val {
+span.val {
 	right: 0;
+	background-color: #fff;
 }
 /*input err styles*/
 .err-border{
@@ -52,6 +53,9 @@ table.clients caption {
 	box-shadow: 0 0 0 0.2rem rgba(200, 35, 51, 0.25) !important;
 }
 /*styles for single film or client main table, just min height*/
-table.main{
+table.client_film{
 	min-height: 200px;
+}
+table.main tr td div {
+	margin-bottom: 0;
 }

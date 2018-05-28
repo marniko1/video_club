@@ -8,6 +8,7 @@
 	      <li class="nav-item"><a href="<?php echo INCL_PATH.'Rentals/index'; ?>"  class="nav-link">Rentals</a></li>
 	      <li class="nav-item"><a href="<?php echo INCL_PATH.'Films/index'; ?>" class="nav-link">Films</a></li>
 	      <li class="nav-item"><a href="<?php echo INCL_PATH.'Clients/index'; ?>" class="nav-link">Clients</a></li>
+	      <?php echo (Auth::admin()) ? '<li class="nav-item"><a href="'.INCL_PATH.'Admin/index" class="nav-link">Admin</a></li>' : false ?>
 	    </ul>
   	</div>
   	<form method="post" action="<?php echo INCL_PATH.'Login/logoutUser'; ?>">

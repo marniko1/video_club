@@ -47,7 +47,15 @@ class Clients extends BaseController {
 		header("Location: ".INCL_PATH.'Clients/'.$id.'/p1');
 	}
 	public function removeClient($id) {
-		DBClients::removeClient($id);
+		$client_had_rentals = DBClients::checkIfClientHadRentals($id);
+		try {
+			if ($client_had_rentals) {
+				throw new Exception();
+			}
+			DBClients::removeClient($id);
+		} catch (Exception $e) {
+			DBClients::makeClientInactive($id);
+		}
 		header("Location: ".INCL_PATH.'Clients/index');
 	}
 }
