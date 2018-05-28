@@ -53,7 +53,7 @@ class DBFilms extends DB {
 	}
 	public static function getFilteredFilms ($cond_name, $cond, $skip) {
 		$data = [];
-		$sql = "select *,
+		$sql = "select id, title, description, genre, price, current_stock, stock,
 				(select count(*) from films where $cond_name like '%$cond%') as total 
 				from films 
 				where $cond_name like '%$cond%'
